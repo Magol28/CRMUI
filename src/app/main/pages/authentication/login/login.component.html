@@ -10,7 +10,7 @@
 
             <div class="title">LOGIN TO YOUR ACCOUNT</div>
 
-            <form name="loginForm" [formGroup]="loginForm" novalidate>
+            <form name="loginForm" (submit)="logIn()" [formGroup]="loginForm" novalidate>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
@@ -19,8 +19,7 @@
                     <mat-error *ngIf="loginForm.get('email').hasError('required')">
                         Email is required
                     </mat-error>
-                    <mat-error
-                        *ngIf="!loginForm.get('email').hasError('required') &&
+                    <mat-error *ngIf="!loginForm.get('email').hasError('required') &&
                                 loginForm.get('email').hasError('email')">
                         Please enter a valid email address
                     </mat-error>
@@ -35,8 +34,7 @@
                     </mat-error>
                 </mat-form-field>
 
-                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
-                     fxLayoutAlign="space-between center">
+                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
                     <mat-checkbox class="remember-me" aria-label="Remember Me">
                         Remember Me
                     </mat-checkbox>
@@ -46,24 +44,14 @@
                     </a>
                 </div>
 
-                <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN"
-                        [disabled]="loginForm.invalid">
+                <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" [disabled]="loginForm.invalid">
                     LOGIN
                 </button>
 
             </form>
 
-            <div class="separator">
-                <span class="text">OR</span>
-            </div>
 
-            <button mat-raised-button class="google">
-                Log in with Google
-            </button>
 
-            <button mat-raised-button class="facebook">
-                Log in with Facebook
-            </button>
 
             <div class="register" fxLayout="column" fxLayoutAlign="center center">
                 <span class="text">Don't have an account?</span>

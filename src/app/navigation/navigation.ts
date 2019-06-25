@@ -39,8 +39,8 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id       : 'e-commerce',
-                title    : 'E-Commerce',
-                translate: 'NAV.ECOMMERCE',
+                title    : 'PRODUCTS',
+                translate: 'NAV.PRODUCTS',
                 type     : 'collapsable',
                 icon     : 'shopping_cart',
                 children : [

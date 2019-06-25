@@ -12,7 +12,7 @@ import 'hammerjs';
 
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
-import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
+import { FuseProgressBarModule, FuseSidebarModule } from '@fuse/components';
 
 import { fuseConfig } from 'app/fuse-config';
 
@@ -22,6 +22,7 @@ import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
 
 const appRoutes: Routes = [
+
     {
         path        : 'apps',
         loadChildren: './main/apps/apps.module#AppsModule'
@@ -76,7 +77,6 @@ const appRoutes: Routes = [
         FuseProgressBarModule,
         FuseSharedModule,
         FuseSidebarModule,
-        FuseThemeOptionsModule,
 
         // App modules
         LayoutModule,
