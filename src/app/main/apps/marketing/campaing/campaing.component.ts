@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
+
+import { FormControl } from "@angular/forms";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
@@ -21,7 +23,32 @@ export class CampaingComponent implements OnInit, OnDestroy {
     order: Order;
     orderStatuses: any;
     statusForm: FormGroup;
-
+    toppings = new FormControl();
+    toppingList: string[] = [
+        "Azuay",
+        "Bolívar",
+        "Cañar",
+        "Carchi",
+        "Chimborazo",
+        "Cotopaxi",
+        "El Oro",
+        "Esmeraldas",
+        "Galápagos",
+        "Guayas",
+        "Imbabura",
+        "Loja",
+        "Los Ríos",
+        "Morona Santiago",
+        "Napo",
+        "Orellana",
+        "Pastaza",
+        "Pichincha",
+        "Santa Elena",
+        "Santo Domingo de los Tsáchilas",
+        "Sucumbíos",
+        "Tungurahua",
+        "Zamora Chinchipe"
+    ];
     // Private
     private _unsubscribeAll: Subject<any>;
 

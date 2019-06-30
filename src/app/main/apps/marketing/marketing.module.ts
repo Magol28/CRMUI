@@ -19,7 +19,7 @@ import { MatSliderModule } from "@angular/material/slider";
 
 import { FuseSharedModule } from "@fuse/shared.module";
 import { FuseWidgetModule } from "@fuse/components/widget/widget.module";
-
+import { MatRadioModule } from "@angular/material/radio";
 import { EcommerceOrdersComponent } from "app/main/apps/e-commerce/orders/orders.component";
 import { EcommerceOrdersService } from "app/main/apps/e-commerce/orders/orders.service";
 import { EcommerceOrderComponent } from "app/main/apps/e-commerce/order/order.component";
@@ -44,7 +44,7 @@ const routes: Routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
-
+        MatRadioModule,
         MatButtonModule,
         MatChipsModule,
         MatExpansionModule,
