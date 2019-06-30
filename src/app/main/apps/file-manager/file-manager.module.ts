@@ -5,6 +5,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule } from '@fuse/components';
@@ -14,13 +15,18 @@ import { FileManagerComponent } from 'app/main/apps/file-manager/file-manager.co
 import { FileManagerDetailsSidebarComponent } from 'app/main/apps/file-manager/sidebars/details/details.component';
 import { FileManagerFileListComponent } from 'app/main/apps/file-manager/file-list/file-list.component';
 import { FileManagerMainSidebarComponent } from 'app/main/apps/file-manager/sidebars/main/main.component';
+import { SharedComponent } from './sidebars/shared/shared.component';
+import { VersionComponent } from './sidebars/version/version.component';
+import { FileDropDirective } from './directive/file-drop.directive';
+import { UploadFormComponent } from './componets/upload-form/upload-form.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 const routes: Routes = [
     {
-        path     : '**',
+        path: '**',
         component: FileManagerComponent,
-        children : [],
-        resolve  : {
+        children: [],
+        resolve: {
             files: FileManagerService
         }
     }
@@ -31,11 +37,15 @@ const routes: Routes = [
         FileManagerComponent,
         FileManagerFileListComponent,
         FileManagerMainSidebarComponent,
-        FileManagerDetailsSidebarComponent
+        FileManagerDetailsSidebarComponent,
+        SharedComponent,
+        VersionComponent,
+        FileDropDirective,
+        UploadFormComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
-
+        MatFormFieldModule,
         MatButtonModule,
         MatIconModule,
         MatRippleModule,
@@ -43,12 +53,12 @@ const routes: Routes = [
         MatTableModule,
 
         FuseSharedModule,
-        FuseSidebarModule
+        FuseSidebarModule,
+        NgxFileDropModule
     ],
-    providers   : [
+    providers: [
         FileManagerService
     ]
 })
-export class FileManagerModule
-{
+export class FileManagerModule {
 }

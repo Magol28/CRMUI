@@ -16,8 +16,7 @@
             <div class="toolbar w-100-p" fxFlex fxLayout="row" fxLayoutAlign="space-between start">
 
                 <div class="left-side" fxLayout="row">
-                    <button mat-icon-button class="sidebar-toggle"
-                            (click)="toggleSidebar('file-manager-main-sidebar')">
+                    <button mat-icon-button class="sidebar-toggle" (click)="toggleSidebar('file-manager-main-sidebar')">
                         <mat-icon>menu</mat-icon>
                     </button>
                 </div>
@@ -32,7 +31,7 @@
 
             <!-- BREADCRUMB -->
             <div class="breadcrumb text-truncate h1 pl-72" fxLayout="row" fxLayoutAlign="start center"
-                 [@animate]="{value:'*',params:{x:'50px'}}">
+                [@animate]="{value:'*',params:{x:'50px'}}">
                 <div *ngFor="let path of pathArr; last  as isLast" fxLayout="row" fxLayoutAlign="start center">
                     <span>{{path}}</span>
                     <mat-icon *ngIf="!isLast" class="separator">chevron_right</mat-icon>
@@ -42,16 +41,13 @@
 
             <!-- ADD FILE BUTTON -->
             <div class="file-uploader">
-                <input hidden type="file" #fileInput/>
-                <button mat-fab
-                        color="warn"
-                        class="add-file-button"
-                        (click)="fileInput.click()"
-                        aria-label="Add file"
-                        [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                <input hidden type="file" #fileInput />
+                <button mat-fab color="warn" class="add-file-button" (click)="fileInput.click()" aria-label="Add file"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
+
             <!-- / ADD FILE BUTTON -->
 
         </div>
@@ -59,6 +55,13 @@
 
         <!-- CONTENT -->
         <div class="content" fusePerfectScrollbar>
+            <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event)"
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                <ng-template let-openFileSelector="openFileSelector">
+                    Optional custom content that replaces the the entire default content.
+                    <button type="button" (click)="openFileSelector()">Browse Files</button>
+                </ng-template>
+            </ngx-file-drop>
             <file-list></file-list>
         </div>
         <!-- / CONTENT -->
@@ -68,7 +71,7 @@
 
     <!-- SIDEBAR -->
     <fuse-sidebar class="sidebar details-sidebar" name="file-manager-details-sidebar" position="right"
-                  lockedOpen="gt-md">
+        lockedOpen="gt-md">
         <file-manager-details-sidebar></file-manager-details-sidebar>
     </fuse-sidebar>
     <!-- / SIDEBAR -->

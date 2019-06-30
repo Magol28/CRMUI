@@ -77,6 +77,14 @@
                 <td>{{selected.created}}</td>
             </tr>
         </table>
+        <button mat-fab color="warn" class="add-file-button" (click)="fileInput.click()" aria-label="Add file"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-fab color="warn" class="add-file-button" (click)="fileInput.click()" aria-label="Add file"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                    <mat-icon>add</mat-icon>
+                </button>
     </div>
 
 </div>
