@@ -1,3 +1,30 @@
+<ng-template #template>
+        
+        <div class="modal-body">
+            <label>Name</label>
+            <input type="text" class="form-control" /><br/>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary pull-right" (click)="modalRef.hide()">
+                Close
+            </button>
+        </div>
+    </ng-template>
+    
+<ng-template #template1>
+        
+        <div class="modal-body">
+            <label>Dos</label>
+            <input type="text" class="form-control" /><br/>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary pull-right" (click)="modalRef.hide()">
+                Close
+            </button>
+        </div>
+    </ng-template>
 <mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
 
     <!-- Type Column -->

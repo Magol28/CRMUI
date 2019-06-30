@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
+import{BsModalService,BsModalRef} from 'ngx-bootstrap/modal';
 import { fuseAnimations } from '@fuse/animations';
 
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
@@ -15,6 +15,7 @@ import { FileManagerService } from 'app/main/apps/file-manager/file-manager.serv
 export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy
 {
     selected: any;
+    modalRef:BsModalRef;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -25,7 +26,8 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy
      * @param {FileManagerService} _fileManagerService
      */
     constructor(
-        private _fileManagerService: FileManagerService
+        private _fileManagerService: FileManagerService,
+        private modalService:BsModalService
     )
     {
         // Set the private defaults
@@ -35,7 +37,9 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
-
+public openModal(template:TemplateRef<any>){
+    this.modalRef=this.modalService.show(template);
+}
     /**
      * On init
      */

@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule } from '@fuse/components';
-
+import {ModalModule} from 'ngx-bootstrap/modal';
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
 import { FileManagerComponent } from 'app/main/apps/file-manager/file-manager.component';
 import { FileManagerDetailsSidebarComponent } from 'app/main/apps/file-manager/sidebars/details/details.component';
@@ -48,6 +48,7 @@ const routes: Routes = [
         MatFormFieldModule,
         MatButtonModule,
         MatIconModule,
+        ModalModule.forRoot(),
         MatRippleModule,
         MatSlideToggleModule,
         MatTableModule,
