@@ -20,7 +20,6 @@ import { ContactsContactListComponent } from 'app/main/apps/contacts/contact-lis
 import { ContactsSelectedBarComponent } from 'app/main/apps/contacts/selected-bar/selected-bar.component';
 import { ContactsMainSidebarComponent } from 'app/main/apps/contacts/sidebars/main/main.component';
 import { ContactsContactFormDialogComponent } from 'app/main/apps/contacts/contact-form/contact-form.component';
-
 const routes: Routes = [
     {
         path     : '**',
@@ -37,7 +36,8 @@ const routes: Routes = [
         ContactsContactListComponent,
         ContactsSelectedBarComponent,
         ContactsMainSidebarComponent,
-        ContactsContactFormDialogComponent
+        ContactsContactFormDialogComponent,
+        
     ],
     imports        : [
         RouterModule.forChild(routes),

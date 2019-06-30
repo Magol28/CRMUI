@@ -14,8 +14,8 @@
             <div fxLayout="row" fxLayoutAlign="start center">
 
                 <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/e-commerce/products'">
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
+                  <mat-icon>arrow_back</mat-icon>
+              </button>
 
                 <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
                     <img *ngIf="product.images[0]" [src]="product.images[0].url">
@@ -37,12 +37,12 @@
             <!-- / APP TITLE -->
 
             <button mat-raised-button class="save-product-button" [disabled]="productForm.invalid" *ngIf="pageType ==='new'" (click)="addProduct()">
-                <span>ADD</span>
-            </button>
+              <span>ADD</span>
+          </button>
 
             <button mat-raised-button class="save-product-button" [disabled]="productForm.invalid || productForm.pristine" *ngIf="pageType ==='edit'" (click)="saveProduct()">
-                <span>SAVE</span>
-            </button>
+              <span>SAVE</span>
+          </button>
         </div>
         <!-- / HEADER -->
 
@@ -68,7 +68,7 @@
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
                                     <mat-label>Product Description</mat-label>
                                     <textarea matInput placeholder="Product Description" name="description" formControlName="description" rows="5">
-                                    </textarea>
+                                  </textarea>
                                 </mat-form-field>
 
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">

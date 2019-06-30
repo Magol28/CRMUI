@@ -51,6 +51,15 @@ const routes = [
     {
         path        : 'scrumboard',
         loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
+    },
+    {
+        path: 'client',
+        loadChildren: './clients/client.module#AppClientModule'
+    }
+    ,
+    {
+        path: 'security',
+        loadChildren: './security/security.module#SecurityModule'
     }
 ];
 
