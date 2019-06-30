@@ -43,88 +43,7 @@
                 </div>
                 <!-- / LABELS -->
 
-                <!-- MEMBERS -->
-                <div class="members" fxFlex="0 1 auto">
-
-                    <button mat-icon-button class="" [matMenuTriggerFor]="membersMenu">
-                        <mat-icon>account_circle</mat-icon>
-                    </button>
-
-                    <mat-menu #membersMenu="matMenu" [overlapTrigger]="false">
-                        <div fxFlex fxLayout="column" class="scrumboard-members-menu"
-                             (click)="$event.stopPropagation()">
-                            <mat-checkbox class="member px-16" [checked]="card.idMembers.indexOf(member.id) > -1"
-                                          *ngFor="let member of board.members"
-                                          (change)="toggleInArray(member.id, card.idMembers);updateCard()">
-                                <div fxLayout="row" fxLayoutAlign="start center">
-                                    <img [alt]="member.name" [src]=" member.avatar" class="avatar"/>
-                                    <p class="member-name">{{ member.name }}</p>
-                                </div>
-                            </mat-checkbox>
-                        </div>
-                    </mat-menu>
-
-                </div>
-                <!-- / MEMBERS -->
-
-                <!-- ATTACHMENT -->
-                <button mat-icon-button aria-label="Attachment">
-                    <mat-icon>attachment</mat-icon>
-                </button>
-                <!-- / ATTACHMENT -->
-
-                <!-- CHECKLIST -->
-                <div class="due-date " fxFlex="0 1 auto">
-
-                    <button mat-icon-button class="" [matMenuTriggerFor]="checklistMenu"
-                            #checklistMenuTrigger="matMenuTrigger" (menuOpened)="onChecklistMenuOpen()">
-                        <mat-icon>check_box</mat-icon>
-                    </button>
-
-                    <mat-menu #checklistMenu="matMenu" [overlapTrigger]="false">
-
-                        <form class="px-16 py-8" #newChecklistForm="ngForm" (submit)="addChecklist(newChecklistForm)"
-                              (click)="$event.stopPropagation()"
-                              fxLayout="column" fxLayoutAlign="start end">
-
-                            <mat-form-field appearance="outline" (click)="$event.stopPropagation()" fxFlex>
-                                <mat-label>Checklist title</mat-label>
-                                <input #newCheckListTitleField matInput ngModel #checklistTitle="ngModel"
-                                       name="checklistTitle" required>
-                            </mat-form-field>
-
-                            <button mat-raised-button class="mat-accent" aria-label="Add Checklist"
-                                    [disabled]="!newChecklistForm.valid">Add Checklist
-                            </button>
-
-                        </form>
-
-                    </mat-menu>
-
-                </div>
-                <!-- / CHECKLIST -->
-
-                <!-- SUBSCRIBE -->
-                <div class="subscribe " fxFlex="0 1 auto">
-
-                    <button mat-icon-button [matMenuTriggerFor]="subscribeMenu">
-                        <mat-icon *ngIf="card.subscribed">visibility</mat-icon>
-                        <mat-icon *ngIf="!card.subscribed">visibility_off</mat-icon>
-                    </button>
-
-                    <mat-menu #subscribeMenu="matMenu" [overlapTrigger]="false">
-                        <button *ngIf="card.subscribed" mat-menu-item (click)="toggleSubscribe()">
-                            Unsubscribe
-                        </button>
-                        <button *ngIf="!card.subscribed" mat-menu-item (click)="toggleSubscribe()">
-                            Subscribe
-                        </button>
-                    </mat-menu>
-
-                </div>
-                <!-- / SUBSCRIBE -->
-
-                <!-- OPTIONS -->
+                               <!-- OPTIONS -->
                 <div class="options " fxFlex="0 1 auto">
 
                     <button mat-icon-button class="" [matMenuTriggerFor]="optionsMenu">
@@ -138,7 +57,19 @@
                     </mat-menu>
 
                 </div>
-                <!-- / OPTIONS -->
+                <!-- / OPTIONS -->      
+
+                <!-- DIALOG -->
+                <div class="options " fxFlex="0 1 auto">
+
+                        <button mat-icon-button class=""  (click)="openCard(1)">
+                            <mat-icon>check_box</mat-icon>
+                        </button>
+    
+    
+                    </div>
+                    <!-- / OPTIONS -->
+
 
             </div>
 
@@ -173,16 +104,16 @@
             </div>
             <!-- / NAME -->
 
-            <!-- DUE DATE -->
+            <!-- CREATION DATE -->
             <div *ngIf="card.due" class="due-date px-24 pl-0" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field appearance="outline" class="w-100-p">
-                    <mat-label>Due Date</mat-label>
+                    <mat-label>Creation Date</mat-label>
                     <input matInput [matDatepicker]="picker" [(ngModel)]="card.due">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </div>
-            <!-- / DUE DATE -->
+            <!-- / CREATION DATE -->
 
         </div>
 
@@ -196,10 +127,37 @@
         </div>
         <!-- / DESCRIPTION -->
 
+  
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <!-- ESTADO -->
+        <div class="card-name px-24" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field appearance="outline" class="w-100-p">                
+                <mat-label>Estado</mat-label>
+                <select matNativeControl required>
+                    <option value="activo">Activo</option>
+                    <option value="cerrado">Cerrado</option>
+                </select>
+            </mat-form-field>
+        </div>
+        <!-- / ESTADO -->
+    
+        <!-- DIEDLINE DATE -->
+        <div *ngIf="card.due" class="due-date px-24 pl-0" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field appearance="outline" class="w-100-p">
+            <mat-label>Deadline</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="card.due">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+            <!-- / DIEDLINE DATE -->
+    </div>
+
         <!-- SECTIONS -->
         <div class="sections">
 
-            <!-- LABELS & MEMBERS SECTION -->
+        
+            <!-- LABELS & MEMBERS SECTION 
             <div *ngIf="card.idLabels[0] || card.idMembers[0]" class="section"
                  fxLayout="column" fxLayout.gt-xs="row">
 
@@ -243,7 +201,8 @@
                 </div>
 
             </div>
-            <!-- / LABELS & MEMBERS SECTION -->
+             / LABELS & MEMBERS SECTION -->
+        
 
             <!-- ATTACHMENTS SECTION -->
             <div *ngIf="card.attachments[0]" class="section">

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 
+
 const routes = [
     {
         path        : 'dashboards/analytics',
@@ -51,6 +52,10 @@ const routes = [
     {
         path        : 'scrumboard',
         loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
+    },
+    {
+        path        : 'dashboards/project',
+        loadChildren: './dashboards/project/project.module#ProjectDashboardModule'
     }
 ];
 
@@ -58,7 +63,8 @@ const routes = [
     imports     : [
         RouterModule.forChild(routes),
         FuseSharedModule
-    ]
+    ],
+    
 })
 export class AppsModule
 {
