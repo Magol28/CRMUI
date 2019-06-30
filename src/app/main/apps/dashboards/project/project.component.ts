@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as shape from 'd3-shape';
@@ -7,6 +7,11 @@ import { fuseAnimations } from '@fuse/animations';
 
 import { ProjectDashboardService } from 'app/main/apps/dashboards/project/project.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
+//import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ScrumboardCardDialogComponent } from 'app/main/apps/scrumboard/board/dialogs/card/card.component';
 
 @Component({
     selector     : 'project-dashboard',
@@ -17,8 +22,12 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 })
 export class ProjectDashboardComponent implements OnInit
 {
+    nom : String;
     projects: any[];
     selectedProject: any;
+    
+    dialogRef: any;
+
 
     widgets: any;
     widget5: any = {};
@@ -30,6 +39,9 @@ export class ProjectDashboardComponent implements OnInit
 
     dateNow = Date.now();
 
+    @Input()
+    list;
+
     /**
      * Constructor
      *
@@ -38,7 +50,10 @@ export class ProjectDashboardComponent implements OnInit
      */
     constructor(
         private _fuseSidebarService: FuseSidebarService,
-        private _projectDashboardService: ProjectDashboardService
+        private _projectDashboardService: ProjectDashboardService,
+        private router : ActivatedRoute,
+        private router2 : Router,
+        //private _matDialog: MatDialog
     )
     {
         /**
@@ -163,11 +178,16 @@ export class ProjectDashboardComponent implements OnInit
         this.widget11.onContactsChanged = new BehaviorSubject({});
         this.widget11.onContactsChanged.next(this.widgets.widget11.table.rows);
         this.widget11.dataSource = new FilesDataSource(this.widget11);
+
+        this.router.params.subscribe(data => {
+            this.nom = data['id'];
+        });
     }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
+    
 
     /**
      * Toggle the sidebar
@@ -178,6 +198,13 @@ export class ProjectDashboardComponent implements OnInit
     {
         this._fuseSidebarService.getSidebar(name).toggleOpen();
     }
+
+    informacionCard(id: number){
+        this.router2.navigate(['/apps/dashboards/project/info','Silvi']);
+    };
+    
+    
+
 }
 
 export class FilesDataSource extends DataSource<any>
@@ -208,5 +235,8 @@ export class FilesDataSource extends DataSource<any>
     disconnect(): void
     {
     }
+
+    
+
 }
 

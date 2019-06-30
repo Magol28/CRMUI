@@ -3,6 +3,7 @@ import { RouterModule } from "@angular/router";
 
 import { FuseSharedModule } from "@fuse/shared.module";
 
+
 const routes = [
     {
         path: "dashboards/analytics",
@@ -47,13 +48,20 @@ const routes = [
         loadChildren: "./security/security.module#SecurityModule"
     },
     {
-        path: "marketing",
-        loadChildren: "./marketing/marketing.module#MarketingModule"
+        path        : 'scrumboard',
+        loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
+    },
+    {
+        path        : 'dashboards/project',
+        loadChildren: './dashboards/project/project.module#ProjectDashboardModule'
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), FuseSharedModule],
-    declarations: []
+    imports     : [
+        RouterModule.forChild(routes),
+        FuseSharedModule
+    ],
+    
 })
 export class AppsModule {}

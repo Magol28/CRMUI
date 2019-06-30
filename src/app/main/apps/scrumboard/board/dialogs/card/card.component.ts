@@ -9,6 +9,13 @@ import { FuseUtils } from '@fuse/utils';
 
 import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
+export interface Estado {
+    value: string;
+    viewValue: string;
+  }
+  
 
 @Component({
     selector     : 'scrumboard-board-card-dialog',
@@ -33,6 +40,10 @@ export class ScrumboardCardDialogComponent implements OnInit, OnDestroy
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    estados: Estado[] = [
+        {value: 'activo-0', viewValue: 'Activo'},
+        {value: 'cerrado-1', viewValue: 'Cerrado'}
+      ];
 
     /**
      * Constructor
@@ -46,7 +57,8 @@ export class ScrumboardCardDialogComponent implements OnInit, OnDestroy
         public matDialogRef: MatDialogRef<ScrumboardCardDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private _data: any,
         private _matDialog: MatDialog,
-        private _scrumboardService: ScrumboardService
+        private _scrumboardService: ScrumboardService,
+        private router : Router
     )
     {
         // Set the private defaults
@@ -307,6 +319,13 @@ export class ScrumboardCardDialogComponent implements OnInit, OnDestroy
             }
         });
     }
+
+    openCard(id: number){
+        this.matDialogRef.close();
+        this.router.navigate(['/apps/dashboards/project/info','Silvi']);
+    };
+
+
 
     /**
      * Update card

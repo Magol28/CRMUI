@@ -9,8 +9,16 @@
             <div fxLayout="row" fxLayoutAlign="space-between start">
 
                 <span class="mat-display-1 my-0 my-sm-24 welcome-message"
-                      [@animate]="{value:'*',params:{x:'50px'}}">Welcome back, Charlie!
+                      [@animate]="{value:'*',params:{x:'50px'}}">{{nom}}!
                 </span>
+
+                <button mat-raised-button class="header-boards-button"
+                        
+                (click)="openCardDialog(cardId)"
+                        aria-label="boards button">
+                        <mat-icon class="mr-8">assessment</mat-icon>
+                    <span>Ver Más</span>
+                </button>
 
                 <button mat-icon-button class="sidebar-toggle mr-8" fxHide.gt-md
                         (click)="toggleSidebar('project-dashboard-right-sidebar-1')">
