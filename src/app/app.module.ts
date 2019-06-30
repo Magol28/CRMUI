@@ -77,7 +77,6 @@ const appRoutes: Routes = [
         FuseProgressBarModule,
         FuseSharedModule,
         FuseSidebarModule,
-
         // App modules
         LayoutModule,
         AppStoreModule
