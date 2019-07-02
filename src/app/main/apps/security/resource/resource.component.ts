@@ -164,7 +164,7 @@ export class ResourceComponent implements OnInit, OnDestroy
                 });
 
                 // Change the location with new one
-                this._location.go('apps/e-commerce/products/' + this.product.id + '/' + this.product.handle);
+           //     this._location.go('apps/e-commerce/products/' + this.product.id + '/' + this.product.handle);
             });
     }
 }

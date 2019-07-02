@@ -46,7 +46,7 @@
 
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <p class="text-truncate">{{product.id}}</p>
                     </mat-cell>
@@ -54,7 +54,7 @@
 
                 <!-- Image Column -->
                 <ng-container matColumnDef="name3">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef> Imagen</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <img class="product-image" [alt]="product.name" [src]="'assets/images/ecommerce/product-image-placeholder.png'" />
                     </mat-cell>

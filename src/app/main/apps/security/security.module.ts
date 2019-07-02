@@ -16,39 +16,82 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgmCoreModule } from '@agm/core';
 
+import {HttpClientModule} from '@angular/common/http';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 
 import { ResourcesComponent } from './resources/resources.component';
-import { EcommerceProductsService } from '../e-commerce/products/products.service';
-import { EcommerceProductService } from '../e-commerce/product/product.service';
-import { EcommerceOrdersService } from '../e-commerce/orders/orders.service';
-import { EcommerceOrderService } from '../e-commerce/order/order.service';
 import { ResourceComponent } from './resource/resource.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfilesComponent } from './profiles/profiles.component';
+
+import { MatListModule } from '@angular/material/list';
+import { ResourceService } from './services/resource.service';
+import { ProfileService } from 'app/main/pages/profile/profile.service';
+import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { UserComponent } from './user/user.component';
+import { UsersComponent } from './users/users.component';
 const routes: Routes = [
     {
         path     : 'resources',
-        component: ResourcesComponent,
-        resolve: {
-            data: EcommerceProductsService
-        }
+        component: ResourcesComponent
     },
     {
         path     : 'resource/:id',
         component: ResourcesComponent,
-        resolve  : {
-            data: EcommerceProductService
-        }
+    },
+    {
+        path     : 'profile',
+        component: ProfileComponent
+    },
+    {
+        path     : 'profiles',
+        component: ProfilesComponent,
+     
+       
+    },
+    {
+        path     : 'employee',
+        component: EmployeeComponent,
+     
+       
+    },
+    {
+        path     : 'employees',
+        component: EmployeesComponent,
+     
+       
     }
+    ,
+    {
+        path     : 'user',
+        component: UserComponent,
+     
+       
+    },
+    {
+        path     : 'users',
+        component: UsersComponent,
+     
+       
+    }
+    
 ];
 @NgModule({
     declarations: [
         ResourcesComponent,
-        ResourceComponent
+        ResourceComponent,
+        ProfileComponent,
+        ProfilesComponent,
+        EmployeesComponent,
+        EmployeeComponent,
+        UserComponent,
+        UsersComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
-
+        HttpClientModule,
         MatButtonModule,
         MatChipsModule,
         MatExpansionModule,
@@ -62,7 +105,7 @@ const routes: Routes = [
         MatSnackBarModule,
         MatTableModule,
         MatTabsModule,
-
+        MatListModule,
         NgxChartsModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8'
@@ -70,11 +113,10 @@ const routes: Routes = [
         FuseSharedModule,
         FuseWidgetModule
     ],
-    providers   : [
-        EcommerceProductsService,
-        EcommerceProductService,
-        EcommerceOrdersService,
-        EcommerceOrderService
+    providers:
+        [
+        ResourceService,
+        ProfileService
     ]
 })
 export class SecurityModule
