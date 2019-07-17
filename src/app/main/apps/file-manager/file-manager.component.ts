@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-
+import { FileService } from '../file-manager/services/file.service';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 
 
@@ -31,10 +31,13 @@ export class FileManagerComponent implements OnInit, OnDestroy
      *
      * @param {FileManagerService} _fileManagerService
      * @param {FuseSidebarService} _fuseSidebarService
+     * @param {FileService} _fileService
      */
     constructor(
         private _fileManagerService: FileManagerService,
-        private _fuseSidebarService: FuseSidebarService
+        private _fuseSidebarService: FuseSidebarService,
+        private _fileService: FileService
+
     )
     {
         // Set the private defaults
@@ -94,10 +97,10 @@ export class FileManagerComponent implements OnInit, OnDestroy
           fileEntry.file((file: File) => {
    
             // Here you can access the real file
-            console.log(droppedFile.relativePath, file);
+          //  console.log(droppedFile.relativePath, file);
           this.file=file;
           this.dt = new Date(file.lastModified);
-        
+          this._fileService.postTrack(file,droppedFile.relativePath);
             /**
             // You could upload it like this:
             const formData = new FormData()

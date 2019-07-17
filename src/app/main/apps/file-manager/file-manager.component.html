@@ -10,7 +10,7 @@
     <div class="center" fxFlex>
 
         <!-- HEADER -->
-        <div class="header accent p-24" fxLayout="column" fxLayoutAlign="space-between start">
+        <div class="header accent p-24" fxLayout="column" fxLayoutAlign="space-between start" >
 
             <!-- TOOLBAR -->
             <div class="toolbar w-100-p" fxFlex fxLayout="row" fxLayoutAlign="space-between start">
@@ -54,9 +54,12 @@
         <!-- / HEADER -->
 
         <!-- CONTENT -->
+
         <div class="content" fusePerfectScrollbar>
             <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event)"
-                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"
+                >
+                
                 <ng-template let-openFileSelector="openFileSelector">
                     Optional custom content that replaces the the entire default content.
                     <button type="button" (click)="openFileSelector()">Browse Files</button>

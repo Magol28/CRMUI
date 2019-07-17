@@ -7,6 +7,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
+import { FileService } from '../services/file.service';
 
 @Component({
     selector     : 'file-list',
@@ -33,7 +34,8 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy
      */
     constructor(
         private _fileManagerService: FileManagerService,
-        private _fuseSidebarService: FuseSidebarService
+        private _fuseSidebarService: FuseSidebarService,
+        private _file:FileService
     )
     {
         // Set the private defaults
@@ -47,6 +49,12 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy
     /**
      * On init
      */
+    /*archivos():void{
+        this._file.postTrack('asdasd').subscribe(data=>
+            {
+                
+            })
+    }*/
     ngOnInit(): void
     {
         this.dataSource = new FilesDataSource(this._fileManagerService);
