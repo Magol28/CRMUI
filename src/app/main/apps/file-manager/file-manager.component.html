@@ -10,7 +10,7 @@
     <div class="center" fxFlex>
 
         <!-- HEADER -->
-        <div class="header accent p-24" fxLayout="column" fxLayoutAlign="space-between start" >
+        <div class="header accent p-24" fxLayout="column" fxLayoutAlign="space-between start">
 
             <!-- TOOLBAR -->
             <div class="toolbar w-100-p" fxFlex fxLayout="row" fxLayoutAlign="space-between start">
@@ -40,33 +40,53 @@
             <!-- / BREADCRUMB -->
 
             <!-- ADD FILE BUTTON -->
-            <div class="file-uploader">
-                <input hidden type="file" #fileInput />
-                <button mat-fab color="warn" class="add-file-button" (click)="fileInput.click()" aria-label="Add file"
-                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </div>
+
 
             <!-- / ADD FILE BUTTON -->
 
         </div>
         <!-- / HEADER -->
-
+        <div>
+            <input hidden type="file" #fileInput />
+            <mat-form-field>
+                <mat-select placeholder="CrearArchivo">
+                    <mat-option (click)="show=true">Carpeta</mat-option>
+                    
+                    <mat-option (click)="show=false" value="center">Documento</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <!-- CONTENT -->
 
-        <div class="content" fusePerfectScrollbar>
-            <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event)"
-                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"
-                >
+        <div *ngIf="show; else notShow" class="content" fusePerfectScrollbar>
+
+           <form name="loginForm" (submit)="dropped()" [formGroup]="loginForm" novalidate>
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Name</mat-label>
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <input name="name" formControlName="name" matInput required>
+                </mat-form-field>
                 
-                <ng-template let-openFileSelector="openFileSelector">
-                    Optional custom content that replaces the the entire default content.
-                    <button type="button" (click)="openFileSelector()">Browse Files</button>
-                </ng-template>
-            </ngx-file-drop>
+                <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" [disabled]="loginForm.invalid">
+                        GUARDAR
+                    </button>
+                
+            </form>
             <file-list></file-list>
         </div>
+        
+        <ng-template #notShow>
+            
+            <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event)"
+            (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+
+            <ng-template let-openFileSelector="openFileSelector">
+                Optional custom content that replaces the the entire default content.
+                <button type="button" (click)="openFileSelector()">Browse Files</button>
+            </ng-template>
+        </ngx-file-drop>
+        <file-list></file-list>
+          </ng-template>
         <!-- / CONTENT -->
 
     </div>

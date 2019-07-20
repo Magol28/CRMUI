@@ -10,17 +10,17 @@ import { FileManagerService } from 'app/main/apps/file-manager/file-manager.serv
 import { FileService } from '../services/file.service';
 
 @Component({
-    selector     : 'file-list',
-    templateUrl  : './file-list.component.html',
-    styleUrls    : ['./file-list.component.scss'],
+    selector     : 'papelera',
+    templateUrl  : './papelera.component.html',
+    styleUrls    : ['./papelera.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
-export class FileManagerFileListComponent implements OnInit, OnDestroy
+export class FileManagerPapeleraComponent implements OnInit, OnDestroy
 {
     files: any;
     dataSource: FilesDataSource | null;
-    displayedColumns = [ 'NAME','TYPE', 'USERID', 'CREATION_DATE' ];
+    displayedColumns = ['icon', 'name', 'type', 'owner', 'size', 'modified', 'detail-button'];
     selected: any;
 
     // Private
@@ -63,7 +63,6 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(files => {
                 this.files = files;
-                console.log(this.files );
             });
 
         this._fileManagerService.onFileSelected
