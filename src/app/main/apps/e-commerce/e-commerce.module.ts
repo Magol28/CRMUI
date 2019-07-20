@@ -27,6 +27,7 @@ import { EcommerceOrdersComponent } from 'app/main/apps/e-commerce/orders/orders
 import { EcommerceOrdersService } from 'app/main/apps/e-commerce/orders/orders.service';
 import { EcommerceOrderComponent } from 'app/main/apps/e-commerce/order/order.component';
 import { EcommerceOrderService } from 'app/main/apps/e-commerce/order/order.service';
+import { TeleMarketingComponent } from './marketing/tele-marketing/tele-marketing.component';
 
 const routes: Routes = [
     {
@@ -71,7 +72,8 @@ const routes: Routes = [
         EcommerceProductsComponent,
         EcommerceProductComponent,
         EcommerceOrdersComponent,
-        EcommerceOrderComponent
+        EcommerceOrderComponent,
+        TeleMarketingComponent
     ],
     imports     : [
         RouterModule.forChild(routes),

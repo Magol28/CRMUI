@@ -25,6 +25,12 @@ import { EcommerceOrdersService } from "app/main/apps/e-commerce/orders/orders.s
 import { EcommerceOrderComponent } from "app/main/apps/e-commerce/order/order.component";
 import { EcommerceOrderService } from "app/main/apps/e-commerce/order/order.service";
 import { CampaingComponent } from "./campaing/campaing.component";
+import { TeleMarketingComponent } from "./tele-marketing/tele-marketing.component";
+import { MatStepperModule } from "@angular/material";
+import { Campaing2Component } from "./campaing2/campaing2.component";
+import { ReportCampaingComponent } from "./report-campaing/report-campaing.component";
+import { ClientCampaingComponent } from "./client-campaing/client-campaing.component";
+import { StateCampaingComponent } from "./state-campaing/state-campaing.component";
 
 const routes: Routes = [
     {
@@ -33,6 +39,18 @@ const routes: Routes = [
         resolve: {
             data: EcommerceOrderService
         }
+    },
+    {
+        path: "telemarketing",
+        component: TeleMarketingComponent
+    },
+    {
+        path: "campaing",
+        component: Campaing2Component
+    },
+    {
+        path: "clientCampaing",
+        component: ClientCampaingComponent
     }
 ];
 
@@ -40,7 +58,12 @@ const routes: Routes = [
     declarations: [
         CampaingComponent,
         EcommerceOrdersComponent,
-        EcommerceOrderComponent
+        EcommerceOrderComponent,
+        TeleMarketingComponent,
+        Campaing2Component,
+        ReportCampaingComponent,
+        ClientCampaingComponent,
+        StateCampaingComponent
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -60,6 +83,7 @@ const routes: Routes = [
         MatTabsModule,
         MatSliderModule,
         NgxChartsModule,
+        MatStepperModule,
         AgmCoreModule.forRoot({
             apiKey: "AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8"
         }),
