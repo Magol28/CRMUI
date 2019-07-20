@@ -59,7 +59,14 @@ export class EmployeeComponent implements OnInit {
       const cedula = params['id'];
       if (cedula !== 'new') {
         const data = this._employee.getByCedula(cedula).subscribe(arg => {
-      console.log(arg);
+          this.form.setValue({
+            cedula: arg.cedula,
+            nombre: arg.nombre,
+            fecha_nacimiento: arg.fechaNacimiento,
+            email: arg.email,
+            direccion: arg.direccion,
+            telefono: arg.telefono
+          });
       
       });
       
