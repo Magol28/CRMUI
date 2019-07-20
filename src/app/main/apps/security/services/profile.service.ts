@@ -7,28 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class ProfileService {
     
-  constructor(public http: HttpClient) { }
   // tslint:disable-next-line:typedef
-  getAll() {
-
-      const test = [
-          {
-              id: '1',
-              name: '2',
-              name1: '2',
-              name2: '2',
-              name3: '2',
-
-          },
-          {
-            id: '2',
-            name: '2',
-            name1: '2',
-            name2: '2',
-            name3: '2',
-
-        }
-      ];
-      return  test;
+  url = 'https://restcountries.eu/rest/v2/all';
+  constructor(public http: HttpClient) { }
+  getAll(): any {
+    return this.http.get(this.url);
   }
   }
