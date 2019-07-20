@@ -32,6 +32,8 @@ import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
+import { EmployeeService } from './services/employee.service';
+import { UserService } from './services/user.service';
 const routes: Routes = [
     {
         path     : 'resources',
@@ -39,7 +41,7 @@ const routes: Routes = [
     },
     {
         path     : 'resource/:id',
-        component: ResourcesComponent,
+        component: ResourcesComponent
     },
     {
         path     : 'profile',
@@ -47,34 +49,24 @@ const routes: Routes = [
     },
     {
         path     : 'profiles',
-        component: ProfilesComponent,
-     
-       
+        component: ProfilesComponent 
     },
     {
-        path     : 'employee',
-        component: EmployeeComponent,
-     
-       
+        path     : 'employee/:id',
+        component: EmployeeComponent
     },
     {
         path     : 'employees',
-        component: EmployeesComponent,
-     
-       
+        component: EmployeesComponent
     }
     ,
     {
         path     : 'user',
-        component: UserComponent,
-     
-       
+        component: UserComponent 
     },
     {
         path     : 'users',
-        component: UsersComponent,
-     
-       
+        component: UsersComponent
     }
     
 ];
@@ -116,7 +108,9 @@ const routes: Routes = [
     providers:
         [
         ResourceService,
-        ProfileService
+        ProfileService,
+        EmployeeService,
+        UserService
     ]
 })
 export class SecurityModule

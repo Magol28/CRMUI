@@ -1,45 +1,44 @@
 @import "src/@fuse/scss/fuse";
-app-profiles {
-    #products {
-        .top-bg {
-            @include media-breakpoint('lt-md') {
-                height: 256px;
+.top-bg {
+    @include media-breakpoint('lt-md') {
+        height: 256px;
+    }
+}
+
+.center {
+    >.header {
+        .search-wrapper {
+            width: 100%;
+            max-width: 480px;
+            border-radius: 28px;
+            overflow: hidden;
+            @include mat-elevation(1);
+            @include media-breakpoint('xs') {
+                width: 100%;
+            }
+            .search {
+                width: 100%;
+                height: 48px;
+                line-height: 48px;
+                padding: 0 18px;
+                input {
+                    width: 100%;
+                    background-color: white;
+                    color: black;
+                    height: 48px;
+                    min-height: 48px;
+                    max-height: 48px;
+                    padding: 0 16px;
+                    border: none;
+                    outline: none;
+                }
             }
         }
-        >.center {
-            >.header {
-                .search-wrapper {
-                    width: 100%;
-                    max-width: 480px;
-                    border-radius: 28px;
-                    overflow: hidden;
-                    @include mat-elevation(1);
-                    @include media-breakpoint('xs') {
-                        width: 100%;
-                    }
-                    .search {
-                        width: 100%;
-                        height: 48px;
-                        line-height: 48px;
-                        padding: 0 18px;
-                        input {
-                            width: 100%;
-                            height: 48px;
-                            min-height: 48px;
-                            max-height: 48px;
-                            padding: 0 16px;
-                            border: none;
-                            outline: none;
-                        }
-                    }
-                }
-                @include media-breakpoint('lt-md') {
-                    padding: 8px 0;
-                    height: 192px !important;
-                    min-height: 192px !important;
-                    max-height: 192px !important;
-                }
-            }
+        @include media-breakpoint('lt-md') {
+            padding: 8px 0;
+            height: 192px !important;
+            min-height: 192px !important;
+            max-height: 192px !important;
         }
     }
     .products-table {
@@ -99,4 +98,8 @@ app-profiles {
             border-radius: 50%;
         }
     }
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: #777;
 }
