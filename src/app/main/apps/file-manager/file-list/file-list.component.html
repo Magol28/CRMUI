@@ -1,36 +1,38 @@
-
 <mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
 
-    
+    <!-- Type Column -->
+    <ng-container matColumnDef="icon">
+            <mat-header-cell *matHeaderCellDef fxFlex="64px"></mat-header-cell>
+            <mat-cell *matCellDef="let row" fxFlex="64px">
+                <mat-icon class="type-icon" [ngClass]="selected.INFO.TYPE=='DOC' ? 'document' : 'folder'"></mat-icon>
+            </mat-cell>
+        </ng-container>
     <!-- NAME Column -->
     <ng-container matColumnDef="NAME">
-            <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.INFO.NAME}}</mat-cell>
-        </ng-container>
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.INFO.NAME}}</mat-cell>
+    </ng-container>
 
-<!-- TYPE Column -->
-<ng-container matColumnDef="TYPE">
+    <!-- TYPE Column -->
+    <ng-container matColumnDef="TYPE">
         <mat-header-cell *matHeaderCellDef>Tipo</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.INFO.TYPE}}</mat-cell>
     </ng-container>
-<!-- USERID Column -->
+    <!-- USERID Column -->
     <ng-container matColumnDef="USERID">
         <mat-header-cell *matHeaderCellDef>Usuario</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.INFO.USERID}}</mat-cell>
     </ng-container>
     <!-- CREATION_DATE Column -->
     <ng-container matColumnDef="CREATION_DATE">
-            <mat-header-cell *matHeaderCellDef>Fecha de Creacion</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.INFO.CREATION_DATE}}</mat-cell>
-        </ng-container>
+        <mat-header-cell *matHeaderCellDef>Fecha de Creacion</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.INFO.CREATION_DATE}}</mat-cell>
+    </ng-container>
 
-    
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"
-             (click)="onSelect(row)"
-             [ngClass]="{'selected' : row == selected}"
-             matRipple [@animate]="{value:'*',params:{y:'100%'}}"
-    >
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)"
+        [ngClass]="{'selected' : row == selected}" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
 </mat-table>

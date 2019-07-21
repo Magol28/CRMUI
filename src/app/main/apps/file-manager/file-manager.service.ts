@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpEventType  } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 
 @Injectable()
 export class FileManagerService implements Resolve<any>
 {
+    form: FormGroup;
     onFilesChanged: BehaviorSubject<any>;
     onFileSelected: BehaviorSubject<any>;
 

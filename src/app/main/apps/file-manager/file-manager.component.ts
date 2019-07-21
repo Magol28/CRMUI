@@ -36,7 +36,7 @@ export interface DialogData {
 export class FileManagerComponent implements OnInit, OnDestroy {
   animal: string;
   name: string;
-  loginForm: FormGroup;
+  form: FormGroup;
   selected: any;
   pathArr: string[];
 
@@ -54,6 +54,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
     private _fileManagerService: FileManagerService,
     private _fuseSidebarService: FuseSidebarService,
     private _fileService: FileService,
+    
     public dialog: MatDialog
 
 
@@ -80,6 +81,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    
     this._fileManagerService.onFileSelected
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(selected => {
@@ -88,7 +90,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
         //this.pathArr = selected.location.split('>');
       });
   }
-
+0
   /**
    * On destroy
    */
