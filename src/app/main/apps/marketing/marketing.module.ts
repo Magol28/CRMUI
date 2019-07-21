@@ -32,6 +32,7 @@ import { ReportCampaingComponent } from "./report-campaing/report-campaing.compo
 import { ClientCampaingComponent } from "./client-campaing/client-campaing.component";
 import { StateCampaingComponent } from "./state-campaing/state-campaing.component";
 import { ClientCampaingService } from "./services/client-campaing.service";
+import { StateCampaingIdComponent } from "./state-campaing-id/state-campaing-id.component";
 
 const routes: Routes = [
     {
@@ -56,6 +57,14 @@ const routes: Routes = [
     {
         path: "ReportCampaing",
         component: ReportCampaingComponent
+    },
+    {
+        path: "stateCampaing",
+        component: StateCampaingComponent
+    },
+    {
+        path: "stateCampaingDetail/:id",
+        component: StateCampaingIdComponent
     }
 ];
 
@@ -68,7 +77,8 @@ const routes: Routes = [
         Campaing2Component,
         ReportCampaingComponent,
         ClientCampaingComponent,
-        StateCampaingComponent
+        StateCampaingComponent,
+        StateCampaingIdComponent
     ],
     imports: [
         RouterModule.forChild(routes),
