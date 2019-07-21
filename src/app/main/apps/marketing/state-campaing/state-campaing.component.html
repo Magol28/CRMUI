@@ -17,7 +17,7 @@
           shopping_basket
         </mat-icon>
         <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-          Employees
+          Campaing
         </span>
       </div>
       <!-- / APP TITLE -->
@@ -51,21 +51,36 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
             <td mat-cell *matCellDef="let row"> {{row.name}} </td>
           </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="budget">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Budget </th>
-            <td mat-cell *matCellDef="let row"> {{row.budget}} </td>
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
+            <td mat-cell *matCellDef="let row"> {{row.state}} </td>
+          </ng-container>
+          <ng-container matColumnDef="stage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Stage </th>
+            <td mat-cell *matCellDef="let row"> {{row.stage}} </td>
           </ng-container>
 
           <ng-container matColumnDef="gender_range">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender Range </th>
             <td mat-cell *matCellDef="let row"> {{row.gender_range}} </td>
           </ng-container>
+
+
+          <ng-container matColumnDef="ager_range">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Age Range </th>
+            <td mat-cell *matCellDef="let row"> {{row.age_range}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="budget">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Budget </th>
+            <td mat-cell *matCellDef="let row"> {{row.budget}} </td>
+          </ng-container>
+
           <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
             <td mat-cell *matCellDef="let row"> {{row.description}} </td>
           </ng-container>
+
 
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

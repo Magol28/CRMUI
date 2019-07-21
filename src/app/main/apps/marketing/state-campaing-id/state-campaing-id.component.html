@@ -6,15 +6,10 @@
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon class="secondary-text s-18">home</mat-icon>
         <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
-        <span class="secondary-text">Employees</span>
+        <span class="secondary-text">Campaing</span>
       </div>
-      <div class="h1 mt-16">Employees management</div>
+      <div class="h1 mt-16">Campaing Detail</div>
     </div>
-    <!-- ADD BUTTON -->
-    <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0">
-      <span>Guardar</span>
-    </button>
-    <!-- / ADD BUTTON -->
   </div>
 
   <!-- / HEADER -->
@@ -32,11 +27,26 @@
 
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
 
-          <mat-form-field appearance="outline" fxFlex="90" class="pr-4">
-            <mat-label>Ic Campaing</mat-label>
+          <mat-form-field appearance="outline" fxFlex="45" class="pr-4">
+            <mat-label>Id Campaing</mat-label>
             <input matInput formControlName="id" required>
-            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+            <mat-icon matSuffix class="disabled-text">code</mat-icon>
             <mat-error> Id Campaing is required!</mat-error>
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+          <mat-form-field appearance="outline" fxFlex="45" class="pr-4">
+            <mat-label>Canton </mat-label>
+            <input matInput formControlName="canton">
+            <mat-icon matSuffix class="secondary-text">location_on</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="45" class="pr-4">
+            <mat-label>Provincia </mat-label>
+            <input matInput formControlName="provincia">
+            <mat-icon matSuffix class="secondary-text">location_on</mat-icon>
           </mat-form-field>
 
         </div>
@@ -45,7 +55,7 @@
           <mat-form-field appearance="outline" fxFlex="90" class="pr-4">
             <mat-label>Name Campaing</mat-label>
             <input matInput formControlName="name">
-            <mat-icon matSuffix class="secondary-text">event_available</mat-icon>
+            <mat-icon matSuffix class="secondary-text">notes</mat-icon>
           </mat-form-field>
 
         </div>
@@ -54,7 +64,39 @@
           <mat-form-field appearance="outline" fxFlex="90" class="pr-4">
             <mat-label>Description</mat-label>
             <input type="earnings" matInput formControlName="description">
-            <mat-icon matSuffix class="secondary-text">event_available</mat-icon>
+            <mat-icon matSuffix class="secondary-text">notes</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-form-field appearance="outline" fxFlex="90" class="pr-4">
+            <mat-label>Budget</mat-label>
+            <input type="earnings" matInput formControlName="budget">
+            <mat-icon matSuffix class="secondary-text">attach_money</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-form-field appearance="outline" fxFlex="90" class="pr-4">
+            <mat-label>Gender</mat-label>
+            <input type="earnings" matInput formControlName="gender_range">
+            <mat-icon matSuffix class="secondary-text">accessibility_new</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-form-field appearance="outline" fxFlex="90" class="pr-4">
+            <mat-label>Age Range</mat-label>
+            <input type="earnings" matInput formControlName="gender_range">
+            <mat-icon matSuffix class="disabled-text">view_agenda</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <mat-form-field appearance="outline" fxFlex="90" class="pr-4">
+            <mat-label>Earning_range</mat-label>
+            <input type="earnings" matInput formControlName="earning_range">
+            <mat-icon matSuffix class="secondary-text">view_agenda</mat-icon>
           </mat-form-field>
         </div>
 

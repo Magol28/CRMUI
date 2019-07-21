@@ -16,6 +16,9 @@ export class StateCampaingComponent implements OnInit {
     displayedColumns: string[] = [
         "id",
         "name",
+        "state",
+        "stage",
+        "ager_range",
         "budget",
         "gender_range",
         "description"
