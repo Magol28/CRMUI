@@ -21,16 +21,16 @@ export interface PeriodicElement {
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilesComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'population', 'alpha2Code'];
+  displayedColumns: string[] = [ 'id', 'name', 'description'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private _profileS: ProfileService,
+  constructor(private _profile: ProfileService ,
               private router: Router) {
     // Create 100 users
-    this._profileS.getAll().subscribe(data => {
+    this._profile.getAll().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -52,6 +52,7 @@ export class ProfilesComponent implements OnInit {
     }
   }
   search(id: string): void {
-    this.router.navigate(['/apps/security/employee', id]);
+    this.router.navigate(['/apps/security/profile', id]);
   }
 }
+

@@ -14,9 +14,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { AgmCoreModule } from '@agm/core';
 
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 
@@ -44,7 +43,7 @@ const routes: Routes = [
         component: ResourcesComponent
     },
     {
-        path     : 'profile',
+        path     : 'profile/:id',
         component: ProfileComponent
     },
     {
@@ -61,7 +60,7 @@ const routes: Routes = [
     }
     ,
     {
-        path     : 'user',
+        path     : 'user/:id',
         component: UserComponent 
     },
     {
@@ -84,6 +83,7 @@ const routes: Routes = [
     imports     : [
         RouterModule.forChild(routes),
         HttpClientModule,
+        HttpClientJsonpModule ,
         MatButtonModule,
         MatChipsModule,
         MatExpansionModule,
@@ -99,9 +99,6 @@ const routes: Routes = [
         MatTabsModule,
         MatListModule,
         NgxChartsModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8'
-        }),
         FuseSharedModule,
         FuseWidgetModule
     ],

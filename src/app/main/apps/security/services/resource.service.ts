@@ -7,10 +7,22 @@ import { Resource } from 'app/models/Resource';
   providedIn: 'root'
 })
 export class ResourceService {
-  url = 'http://3.80.207.211:8081/resource/getAll';
+    
+  // tslint:disable-next-line:typedef
+  url = 'https://restcountries.eu/rest/v2/all';
   constructor(public http: HttpClient) { }
-  getAll(): Observable<Resource[]> {
-    return this.http.get<Resource[]>(this.url);
+  getAll(): any {
+    return this.http.get(this.url);
+  }
+  getByCedula(cedula: string): any {
+    return this.http.get('http://3.95.152.214:8081/employee/' + cedula);
+  }
+
+  post(data): any {
+    return this.http.post(data, 'd');
+  }
+  put(data): any {
+    return this.http.put(data, 'd');
   }
   }
 

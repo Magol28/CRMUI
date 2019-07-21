@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeService } from '../services/employee.service';
+import { catchError } from 'rxjs/operators';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -16,7 +17,7 @@ export class EmployeeComponent implements OnInit {
   resources: any[];
   selectedOptions = [];
   selectedOption;
-  
+  flat = true;
 
 
   // Private
@@ -47,30 +48,45 @@ export class EmployeeComponent implements OnInit {
     this.form = this._formBuilder.group({
       cedula: [''],
       nombre: [''],
-      fecha_nacimiento: [''],
+      fechaNacimiento: [''],
       direccion: [''],
       telefono: [''],
       email: [''],
       sexo: [''],
-      empresa: [''],
+      empresa: ['ESPE'],
     });
     this.activateR.params.subscribe(params => {
       // tslint:disable-next-line:no-unused-expression
       const cedula = params['id'];
       if (cedula !== 'new') {
+        this.flat = false;
         const data = this._employee.getByCedula(cedula).subscribe(arg => {
           this.form.setValue({
             cedula: arg.cedula,
             nombre: arg.nombre,
-            fecha_nacimiento: arg.fechaNacimiento,
+            fechaNacimiento: arg.fechaNacimiento,
             email: arg.email,
             direccion: arg.direccion,
-            telefono: arg.telefono
+            telefono: arg.telefono,
+            sexo: 'M',
+            empresa: 'ESPE'
           });
       
       });
-      
+        
+      } else {
+        this.form.setValue({
+          cedula: '',
+          nombre: '',
+          fechaNacimiento: '',
+          email: '',
+          direccion: '',
+          telefono: '',
+          sexo: '',
+          empresa: 'ESPE'
+        });
       }
+     
       });
   }
 
@@ -78,5 +94,18 @@ export class EmployeeComponent implements OnInit {
     console.log($event);
     this.selectedOption = $event;
   }
+  guardar(): void {
+    if (this.flat) {
+      this._employee.post(this.form.value).subscribe(data => {
+        
+      });
+      
+    } else {
+      this._employee.put(this.form.value).subscribe(arg => {
+        
+      });
+    }
+  }
+  
   
 }

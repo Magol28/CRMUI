@@ -64,7 +64,7 @@
 
                     <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
                         <mat-list-option *ngFor="let resourceO of resources" [value]="resourceO">
-                            {{resourceO}}
+                            {{resourceO.nombre}}
 
                         </mat-list-option>
 

@@ -4,25 +4,29 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { fuseAnimations } from '@fuse/animations';
 
-import {Router} from '@angular/router';
-import { ProfileService } from '../services/profile.service';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
+  animations   : fuseAnimations,
+  encapsulation: ViewEncapsulation.None
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'population', 'alpha2Code'];
+  displayedColumns: string[] = [ 'nombre', 'password', 'empleado', 'perfil'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private _profileS: ProfileService,
+  constructor(private _employee: UserService ,
               private router: Router) {
     // Create 100 users
-    this._profileS.getAll().subscribe(data => {
+    this._employee.getAll().subscribe(data => {
+      console.log(data);
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -44,9 +48,10 @@ export class UsersComponent implements OnInit {
     }
   }
   search(id: string): void {
-    this.router.navigate(['/apps/security/employee', id]);
+    this.router.navigate(['/apps/security/user', id]);
   }
 }
+
 
 
 

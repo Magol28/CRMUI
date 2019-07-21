@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Subject } from 'rxjs';
-import { ResourceService } from '../services/resource.service';
+import { ProfileService } from '../services/profile.service';
 
+import { ActivatedRoute } from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy
   selected = 'Unavailable';
   disableSelect = new FormControl(false);
   form: FormGroup;
-  resources: any[] = ['p1', 'p2'] ;
+  resources: any[]  ;
   selectedOptions = [];
   selectedOption;
   
@@ -27,13 +29,18 @@ export class ProfileComponent implements OnInit, OnDestroy
      *
      * @param {FormBuilder} _formBuilder
      */
-    constructor(
+  constructor(
+      private activateR: ActivatedRoute,
       private _formBuilder: FormBuilder,
-      private resource: ResourceService
+      private _profile: ProfileService
     )
     {
         // Set the private defaults
-        this._unsubscribeAll = new Subject();
+    this._unsubscribeAll = new Subject();
+    this.form = this._formBuilder.group({
+      name: ['', Validators.required],
+      description: ['']
+  });
     }
 
  
@@ -45,14 +52,18 @@ export class ProfileComponent implements OnInit, OnDestroy
      * On init
      */
     ngOnInit(): void {
-        // this.resource.getAll().subscribe(data => {
-        //     this.typesOfShoes = data
-        // });
-        // Reactive Form
-        this.form = this._formBuilder.group({
-            name: ['', Validators.required],
-            description: ['']
+      this.activateR.params.subscribe(params => { 
+        const id = params['id'];
+        this._profile.getByCedula(id).subscribe(arg => {
+          this.form.setValue({
+            name: arg.nombre,
+            description: arg.descripcion
+          });
+          this.resources = arg.recursos;
+          this.selectedOptions = arg.recursos;
         });
+      });
+      
     }
 
     onNgModelChange($event): void{

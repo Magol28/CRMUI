@@ -6,8 +6,7 @@ import { fuseAnimations } from '@fuse/animations';
 
 import {Router} from '@angular/router';
 import { ProfileService } from '../services/profile.service';
-
-
+import { EmployeeService } from '../services/employee.service';
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
@@ -15,17 +14,17 @@ import { ProfileService } from '../services/profile.service';
   animations   : fuseAnimations,
   encapsulation: ViewEncapsulation.None
 })
-export class ResourcesComponent  implements OnInit {
-  displayedColumns: string[] = [ 'name', 'population', 'alpha2Code'];
+export class ResourcesComponent implements OnInit {
+  displayedColumns: string[] = [ 'name', 'cedula', 'email', 'phone'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private _profileS: ProfileService,
+  constructor(private _employee: EmployeeService ,
               private router: Router) {
     // Create 100 users
-    this._profileS.getAll().subscribe(data => {
+    this._employee.getAll().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -50,3 +49,4 @@ export class ResourcesComponent  implements OnInit {
     this.router.navigate(['/apps/security/employee', id]);
   }
 }
+
