@@ -27,11 +27,16 @@ export class ReportCampaingComponent implements OnInit {
         }
     };
     public barChartLabels: Label[] = [];
-    public barChartType: ChartType = "bar";
-    public barChartLegend = true;
+    public barChartLabelsLocation: Label[] = [];
     public barChartPlugins = [pluginDataLabels];
 
+    public barChartType: ChartType = "bar";
+    public barChartLegend = true;
+
     public barChartData: ChartDataSets[] = [{ data: [], label: "Campains" }];
+    public barChartDataLocation: ChartDataSets[] = [
+        { data: [], label: "Campains" }
+    ];
 
     constructor(private _campaing: ReportService, private router: Router) {
         this._campaing.getClient().subscribe(data => {
@@ -48,6 +53,16 @@ export class ReportCampaingComponent implements OnInit {
                 this.barChartLabels.push(data[i].full_name);
             }
             this.barChartData[0].data = dataCliente;
+        });
+
+        this._campaing.getLocation().subscribe(data => {
+            console.log(data);
+            let dataPronvice = [];
+            for (let i = 0; i < data.length; i++) {
+                dataPronvice.push(data[i].ammount);
+                this.barChartLabelsLocation.push(data[i].province);
+            }
+            this.barChartDataLocation[0].data = dataPronvice;
         });
     }
 
@@ -81,6 +96,17 @@ export class ReportCampaingComponent implements OnInit {
                 this.barChartLabels.push(data[i].full_name);
             }
             this.barChartData[0].data = dataCliente;
+        });
+    }
+    public updateClient(): void {
+        this.barChartLabelsLocation = [];
+        this._campaing.getLocation().subscribe(data => {
+            let dataPronvice = [];
+            for (let i = 0; i < data.length; i++) {
+                dataPronvice.push(data[i].ammount);
+                this.barChartLabelsLocation.push(data[i].province);
+            }
+            this.barChartDataLocation[0].data = dataPronvice;
         });
     }
 }

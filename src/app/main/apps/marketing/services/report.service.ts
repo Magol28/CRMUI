@@ -11,4 +11,10 @@ export class ReportService {
             "http://192.168.1.103:8000/service/clients-total-campaign-report/"
         );
     }
+
+    getLocation(): any {
+        return this.http.get(
+            " http://192.168.1.103:8000/service/campaign-location-report/"
+        );
+    }
 }
