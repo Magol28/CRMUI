@@ -15,7 +15,16 @@ import { ClientCampaingService } from "../services/client-campaing.service";
     encapsulation: ViewEncapsulation.None
 })
 export class ClientCampaingComponent implements OnInit {
-    displayedColumns: string[] = ["Id", "Email"];
+    displayedColumns: string[] = [
+        "Id",
+        "Email",
+        "FullName",
+        "DNI",
+        "Earnings",
+        "Provincia",
+        "Gender",
+        "Birth_date"
+    ];
     dataSource: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -27,6 +36,15 @@ export class ClientCampaingComponent implements OnInit {
     ) {
         // Create 100 users
         this._employee.getAll("1").subscribe(data => {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].gender === "M" || data[i].gender === "m") {
+                    data[i].gender = "Male";
+                } else {
+                    data[i].gender = "Female";
+                }
+            }
+
             this.dataSource = new MatTableDataSource(data);
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;

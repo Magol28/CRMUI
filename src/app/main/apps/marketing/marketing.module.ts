@@ -33,6 +33,7 @@ import { ClientCampaingComponent } from "./client-campaing/client-campaing.compo
 import { StateCampaingComponent } from "./state-campaing/state-campaing.component";
 import { ClientCampaingService } from "./services/client-campaing.service";
 import { StateCampaingIdComponent } from "./state-campaing-id/state-campaing-id.component";
+import { ChartsModule } from "ng2-charts";
 
 const routes: Routes = [
     {
@@ -99,6 +100,7 @@ const routes: Routes = [
         MatSliderModule,
         NgxChartsModule,
         MatStepperModule,
+        ChartsModule,
         AgmCoreModule.forRoot({
             apiKey: "AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8"
         }),
