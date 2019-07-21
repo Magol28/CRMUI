@@ -1,3 +1,43 @@
-<p>
-  report-campaing works!
-</p>
+<div id="order" class="page-layout carded fullwidth inner-scroll">
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2">
+            Reports by Campaign
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+    </div>
+
+    <div class="content-card">
+
+
+      <div class="content">
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer"
+            (click)="widget5SelectedDay = 'yesterday'" [ngClass]="{'accent': widget5SelectedDay === 'yesterday'}">
+            Yesterday
+          </div>
+          <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer"
+            (click)="widget5SelectedDay = 'today'" [ngClass]="{'accent': widget5SelectedDay === 'today'}">
+            Today
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

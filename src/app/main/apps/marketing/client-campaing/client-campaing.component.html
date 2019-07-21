@@ -1,118 +1,71 @@
-<div id="order" class="page-layout carded fullwidth inner-scroll">
+<div class="page-layout carded fullwidth inner-scroll">
 
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg accent"></div>
-  <!-- / TOP BACKGROUND -->
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
 
-  <!-- CENTER -->
-  <div class="center">
+    <!-- CENTER -->
+    <div class="center">
 
-    <!-- HEADER -->
-    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="space-between center">
 
-      <!-- APP TITLE -->
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-          <div class="h2">
-            Report Client Campaign
-          </div>
+            <!-- APP TITLE -->
+            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    shopping_basket
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    Employees
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-wrapper mx-32 mx-md-0">
+                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>search</mat-icon>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </div>
+            </div>
+
+            <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button [routerLink]="'/apps/security/resources/new'"
+                class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>ADD NEW EMPLOYEE</span>
+            </button>
+            <!-- / ADD BUTTON -->
+
         </div>
-      </div>
-      <!-- / APP TITLE -->
+        <!-- / HEADER -->
+
+
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cedula </th>
+                <td mat-cell *matCellDef="let row"> {{row.id}}% </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="search(row.email)">
+            </tr>
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
     </div>
-    <div class="content-card">
-
-      <!-- CONTENT -->
-      <div class="content">
-        <mat-tab-group fxLayout="column" fxFlex>
-
-          <mat-tab label="Campaing">
-            <mat-table class="orders-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
-              fusePerfectScrollbar>
-
-              <!-- ID Column -->
-              <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-                <mat-cell *matCellDef="let order">
-                  <p class="text-truncate">{{order.id}}</p>
-                </mat-cell>
-              </ng-container>
-
-              <!-- Reference Column -->
-              <ng-container matColumnDef="reference">
-                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Reference</mat-header-cell>
-                <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                  <p class="text-truncate">{{order.reference}}</p>
-                </mat-cell>
-              </ng-container>
-
-              <!-- Name Column -->
-              <ng-container matColumnDef="customer">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
-                <mat-cell *matCellDef="let order">
-                  <p class="text-truncate">
-                    {{order.customer.firstName}}
-                    {{order.customer.lastName}}
-                  </p>
-                </mat-cell>
-              </ng-container>
-
-              <!-- Total Price Column -->
-              <ng-container matColumnDef="total">
-                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Total</mat-header-cell>
-                <mat-cell *matCellDef="let order" fxHide fxShow.gt-md>
-                  <p class="total-price text-truncate">
-                    {{order.total | currency:'USD':'symbol'}}
-                  </p>
-                </mat-cell>
-              </ng-container>
-
-              <!-- Payment Column -->
-              <ng-container matColumnDef="payment">
-                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Payment</mat-header-cell>
-                <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                  <p class="text-truncate">
-                    {{order.payment.method}}
-                  </p>
-                </mat-cell>
-              </ng-container>
-
-              <!-- Status Column -->
-              <ng-container matColumnDef="status">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-                <mat-cell *matCellDef="let order">
-                  <p class="status text-truncate h6 p-4" [ngClass]="order.status[0].color">
-                    {{order.status[0].name}}
-                  </p>
-                </mat-cell>
-              </ng-container>
-
-              <!-- Date Column -->
-              <ng-container matColumnDef="date">
-                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Date</mat-header-cell>
-                <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                  <p class="text-truncate">
-                    {{order.date}}
-                  </p>
-                </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-
-              <mat-row *matRowDef="let order; columns: displayedColumns;" class="order" matRipple
-                [routerLink]="'/apps/e-commerce/orders/'+order.id">
-              </mat-row>
-            </mat-table>
-
-            <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-            </mat-paginator>
-
-          </mat-tab>
-
-        </mat-tab-group>
-      </div>
-    </div>
-  </div>
-</div>

@@ -31,6 +31,7 @@ import { Campaing2Component } from "./campaing2/campaing2.component";
 import { ReportCampaingComponent } from "./report-campaing/report-campaing.component";
 import { ClientCampaingComponent } from "./client-campaing/client-campaing.component";
 import { StateCampaingComponent } from "./state-campaing/state-campaing.component";
+import { ClientCampaingService } from "./services/client-campaing.service";
 
 const routes: Routes = [
     {
@@ -51,6 +52,10 @@ const routes: Routes = [
     {
         path: "clientCampaing",
         component: ClientCampaingComponent
+    },
+    {
+        path: "ReportCampaing",
+        component: ReportCampaingComponent
     }
 ];
 
@@ -91,6 +96,10 @@ const routes: Routes = [
         FuseSharedModule,
         FuseWidgetModule
     ],
-    providers: [EcommerceOrdersService, EcommerceOrderService]
+    providers: [
+        EcommerceOrdersService,
+        EcommerceOrderService,
+        ClientCampaingService
+    ]
 })
 export class MarketingModule {}
