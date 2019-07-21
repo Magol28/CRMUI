@@ -4,7 +4,7 @@
     <ng-container matColumnDef="icon">
             <mat-header-cell *matHeaderCellDef fxFlex="64px"></mat-header-cell>
             <mat-cell *matCellDef="let row" fxFlex="64px">
-                <mat-icon class="type-icon" [ngClass]="selected.INFO.TYPE=='DOC' ? 'document' : 'folder'"></mat-icon>
+                <mat-icon class="type-icon" [ngClass]="row.INFO.TYPE=='DOC' ? 'document' : 'folder'"></mat-icon>
             </mat-cell>
         </ng-container>
     <!-- NAME Column -->
