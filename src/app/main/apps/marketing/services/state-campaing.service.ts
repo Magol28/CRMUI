@@ -8,11 +8,11 @@ export class StateCampaingService {
     constructor(private http: HttpClient) {}
 
     getAll(): any {
-        return this.http.get("http://25.22.76.174:8000/service/campaign");
+        return this.http.get("http://192.168.1.103:8000/service/campaign");
     }
     getID(id: String): any {
         return this.http.get(
-            "http://25.22.76.174:8000/service/campaign/?campaign_id=" + id
+            "http://192.168.1.103:8000/service/campaign/?campaign_id=" + id
         );
     }
 }
