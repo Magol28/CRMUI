@@ -10,4 +10,9 @@ export class StateCampaingService {
     getAll(): any {
         return this.http.get("http://25.22.76.174:8000/service/campaign");
     }
+    getID(id: String): any {
+        return this.http.get(
+            "http://25.22.76.174:8000/service/campaign/?campaign_id=" + id
+        );
+    }
 }
