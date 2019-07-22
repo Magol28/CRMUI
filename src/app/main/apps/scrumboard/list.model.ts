@@ -5,6 +5,7 @@ export class List
     id: string;
     name: string;
     idCards: string[];
+    
 
     /**
      * Constructor

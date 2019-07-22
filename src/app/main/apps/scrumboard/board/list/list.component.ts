@@ -10,6 +10,7 @@ import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scr
 import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
 import { Card } from 'app/main/apps/scrumboard/card.model';
 import { ScrumboardCardDialogComponent } from 'app/main/apps/scrumboard/board/dialogs/card/card.component';
+import { SalesService } from 'app/main/apps/scrumboard/services/sales.service';
 
 @Component({
     selector     : 'scrumboard-board-list',
@@ -21,6 +22,7 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
 {
     board: any;
     dialogRef: any;
+    sales: any;
 
     @Input()
     list;
@@ -43,7 +45,8 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _scrumboardService: ScrumboardService,
-        private _matDialog: MatDialog
+        private _matDialog: MatDialog,
+        private _getSalesBySeller: SalesService
     )
     {
         // Set the private defaults
@@ -63,6 +66,11 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(board => {
                 this.board = board;
+            });
+
+            this._getSalesBySeller.getSalesBySeller("1723954093")
+            .subscribe( respuesta =>{                
+                this.sales=respuesta.foundSales;                
             });
     }
 

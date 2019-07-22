@@ -9,6 +9,7 @@
                 [@animate]="{value:'*',params:{x:'50px'}}">Bienvenido, {{nombreUsuario}}  !
             </span>
 
+
             <div class="header-content" fxLayout="row wrap" fxLayoutAlign="space-between" fxFlex="1 0 auto">
 
                 <!-- BOARD SELECTION BUTTON -->
@@ -60,7 +61,7 @@
             <div class="board-content ngx-dnd-container p-16 p-md-24" fxLayout="row"
                  ngxDroppable="list" [model]="board.lists" (out)="onDrop($event)"
                  [@animateStagger]="{value:'50'}">
-
+                <h1>{{board.lists.length}}</h1>
                 <!-- LIST -->
                 <scrumboard-board-list
                     class="scrumboard-board-list list-wrapper ngx-dnd-item"
