@@ -16,9 +16,11 @@ import { List } from 'app/main/apps/scrumboard/list.model';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
+
 export class ScrumboardBoardComponent implements OnInit, OnDestroy
 {
     board: any;
+    sales: any;
     nombreUsuario = 'Selena';
     // Private
     private _unsubscribeAll: Subject<any>;

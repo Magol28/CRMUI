@@ -65,9 +65,9 @@
                 <scrumboard-board-list
                     class="scrumboard-board-list list-wrapper ngx-dnd-item"
                     ngxDraggable
-                    *ngFor="let list of board.lists"
-                    [model]="list"
-                    [list]="list"
+                    *ngFor="let sale of sales"
+                    [model]="sale"
+                    [list]="sale"
                     [@animate]="{value:'*',params:{duration:'350ms',x:'100%'}}">
                 </scrumboard-board-list>
                 <!-- / LIST -->
