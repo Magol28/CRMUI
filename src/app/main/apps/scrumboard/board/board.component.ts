@@ -7,6 +7,8 @@ import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 
 import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
+
+
 import { List } from 'app/main/apps/scrumboard/list.model';
 
 @Component({
@@ -20,6 +22,7 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
 {
     board: any;
     nombreUsuario = "Selena";
+    
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -27,7 +30,8 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _location: Location,
-        private _scrumboardService: ScrumboardService
+        private _scrumboardService: ScrumboardService,
+        
     )
     {
         // Set the private defaults
@@ -51,8 +55,10 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
                 this.board.lists[1].name = "Negociación";        
                 this.board.lists[2].name = "Acuerdo";
                 this.board.lists[3].name = "Listo para Venta";                 
-                this.board.lists[4].name = "Cerrado";                 
+                this.board.lists[4].name = "Cerrado";                          
             });
+
+             
     }
 
     /**
