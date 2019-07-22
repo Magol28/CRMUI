@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { fuseAnimations } from '@fuse/animations';
 
 import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
+import { SalesService } from 'app/main/apps/scrumboard/services/sales.service';
 
 
 import { List } from 'app/main/apps/scrumboard/list.model';
@@ -23,7 +24,7 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
 {
     board: any;
     nombreUsuario = "Selena";
-    
+    sales: any;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -32,6 +33,7 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
         private _activatedRoute: ActivatedRoute,
         private _location: Location,
         private _scrumboardService: ScrumboardService,
+        private _getSalesBySeller: SalesService
         
     )
     {
@@ -48,18 +50,22 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this._getSalesBySeller.getSalesBySeller("1723954093")
+        .subscribe( respuesta =>{               
+            this.sales=filterSales(respuesta.foundSales);
+        });
+
         this._scrumboardService.onBoardChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(board => {
                 this.board = board;
-                this.board.lists[0].name = "Habilitado para la venta";  
-                this.board.lists[1].name = "Negociación";        
+                this.board.lists[0].name = "Habilitado para la venta";
+                this.board.lists[1].name = "Negociación";
                 this.board.lists[2].name = "Acuerdo";
-                this.board.lists[3].name = "Listo para Venta";                 
-                this.board.lists[4].name = "Cerrado";                          
+                this.board.lists[3].name = "Listo para Venta";
+                this.board.lists[4].name = "Cerrado";  
             });
 
-             
     }
 
     /**
@@ -111,4 +117,18 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
     {
         this._scrumboardService.updateBoard();
     }
+}
+
+const phases = [
+    "Habilitado para la venta",  
+    "Negociación",        
+    "Acuerdo",
+    "Listo para Venta",                 
+    "Cerrado",
+]
+const filterSalsesByPhase = (sale,phase) => sale.phase === phase;
+
+const filterSales = (sales) => {
+    const filteredSales = phases.map(phase => sales.filter(sale => filterSalsesByPhase(sale,phase)));
+    return filteredSales;
 }

@@ -59,16 +59,15 @@
 
             <!-- BOARD -->
             <div class="board-content ngx-dnd-container p-16 p-md-24" fxLayout="row"
-                 ngxDroppable="list" [model]="board.lists" (out)="onDrop($event)"
+                 ngxDroppable="list" [model]="sales" (out)="onDrop($event)"
                  [@animateStagger]="{value:'50'}">
-                <h1>{{board.lists.length}}</h1>
                 <!-- LIST -->
                 <scrumboard-board-list
                     class="scrumboard-board-list list-wrapper ngx-dnd-item"
                     ngxDraggable
-                    *ngFor="let sale of sales"
-                    [model]="sale"
-                    [list]="sale"
+                    *ngFor="let list of sales"
+                    [model]="list"
+                    [list]="list"
                     [@animate]="{value:'*',params:{duration:'350ms',x:'100%'}}">
                 </scrumboard-board-list>
                 <!-- / LIST -->
