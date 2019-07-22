@@ -15,7 +15,6 @@ import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 import { SharedComponent } from './sidebars/shared/shared.component';
 import { DialogOverviewExample, DialogOverviewCarpetaDialog } from './dialog-overview/dialog-overview-example';
 import { VersionComponent } from './sidebars/version/version.component';
-import { MaterialModule } from 'app/main/angular-material-elements/material.module';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
 import { VersionManagerService } from 'app/main/apps/file-manager/version-manager.service';
@@ -57,8 +56,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { AngularMaterialElementsComponent } from 'app/main/angular-material-elements/angular-material-elements.component';
-import { ExampleViewerComponent } from 'app/main/angular-material-elements/example-viewer/example-viewer';
 
 const routes: Routes = [
     {
@@ -83,8 +80,6 @@ const routes: Routes = [
         VersionComponent,
         FileDropDirective,
         UploadFormComponent,
-        AngularMaterialElementsComponent,
-        ExampleViewerComponent,
         DialogOverviewExample, 
         DialogOverviewCarpetaDialog
     ],
@@ -100,7 +95,6 @@ const routes: Routes = [
         MatRippleModule,
         MatSlideToggleModule,
         MatTableModule,
-        MaterialModule,
         FuseSharedModule,
         FuseSidebarModule,
         NgxFileDropModule,

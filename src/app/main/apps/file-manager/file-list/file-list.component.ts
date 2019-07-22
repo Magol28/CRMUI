@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table'; import { fuseAnimations } from '@fuse/animations';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-
+import {ChangeDetectionStrategy} from '@angular/core';
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
 import { FileService } from '../services/file.service';
 export interface PeriodicElement {
@@ -21,7 +21,8 @@ export interface PeriodicElement {
     templateUrl: './file-list.component.html',
     styleUrls: ['./file-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations
+    animations: fuseAnimations,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileManagerFileListComponent implements OnInit, OnDestroy {
 
@@ -207,3 +208,6 @@ export class FilesDataSource extends DataSource<any>
     disconnect(): void {
     }
 }
+export class CdkVirtualScrollOverviewExample {
+    items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
+  }

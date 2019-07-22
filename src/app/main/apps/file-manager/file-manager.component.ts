@@ -16,7 +16,6 @@ import 'prismjs/components/prism-typescript';
 import { fuseAnimations } from '@fuse/animations/index';
 import { FuseCopierService } from '@fuse/services/copier.service';
 
-import { EXAMPLE_COMPONENTS } from 'app/main/angular-material-elements/example-components';
 
 
 
