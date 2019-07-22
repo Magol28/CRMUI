@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SalesService } from '../../../services/sales.service';
 import * as moment from 'moment';
+
+
 
 @Component({
     selector     : 'scrumboard-board-card',
@@ -13,6 +16,7 @@ export class ScrumboardBoardCardComponent implements OnInit
     @Input()
     cardId;
 
+    sales: any;
     card: any;
     board: any;
 
@@ -22,7 +26,8 @@ export class ScrumboardBoardCardComponent implements OnInit
      * @param {ActivatedRoute} _activatedRoute
      */
     constructor(
-        private _activatedRoute: ActivatedRoute
+        private _activatedRoute: ActivatedRoute,
+        private _getSalesBySeller: SalesService
     )
     {
     }
@@ -40,6 +45,11 @@ export class ScrumboardBoardCardComponent implements OnInit
         this.card = this.board.cards.filter((card) => {
             return this.cardId === card.id;
         })[0];
+
+        this._getSalesBySeller.getSalesBySeller("1723954093")
+            .subscribe( respuesta =>{                
+                this.sales=respuesta.foundSales;                
+            }); 
     }
 
     // -----------------------------------------------------------------------------------------------------

@@ -13,18 +13,6 @@ const routes = [
         loadChildren: './dashboards/project/project.module#ProjectDashboardModule'
     },
     {
-        path        : 'mail',
-        loadChildren: './mail/mail.module#MailModule'
-    },
-    {
-        path        : 'mail-ngrx',
-        loadChildren: './mail-ngrx/mail.module#MailNgrxModule'
-    },
-    {
-        path        : 'chat',
-        loadChildren: './chat/chat.module#ChatModule'
-    },
-    {
         path        : 'calendar',
         loadChildren: './calendar/calendar.module#CalendarModule'
     },
@@ -45,12 +33,17 @@ const routes = [
         loadChildren: './file-manager/file-manager.module#FileManagerModule'
     },
     {
-        path        : 'contacts',
-        loadChildren: './contacts/contacts.module#ContactsModule'
-    },
-    {
         path        : 'scrumboard',
         loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
+    },
+    {
+        path: 'client',
+        loadChildren: './clients/client.module#AppClientModule'
+    }
+    ,
+    {
+        path: 'security',
+        loadChildren: './security/security.module#SecurityModule'
     }
 ];
 
