@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Injectable()
-export class FileManagerService implements Resolve<any>
+export class VersionManagerService implements Resolve<any>
 {
     form: FormGroup;
     onFilesChanged: BehaviorSubject<any>;
@@ -45,7 +45,26 @@ export class FileManagerService implements Resolve<any>
             );
         });
     }
+    /**
+     * version
+     *
+    
+     * @returns {Observable<any> | Promise<any> | any}
+      *  @param {FileService} _fileService
+     */
+    version(): Observable<any> | Promise<any> | any {
+        return new Promise((versio, reject) => {
 
+            Promise.all([
+                this.getFiles('14')
+            ]).then(
+                ([files]) => {
+                    versio();
+                },
+                reject
+            );
+        });
+    }
     /**
      * Get files
      *
@@ -55,10 +74,12 @@ export class FileManagerService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-            this._httpClient.get('http://25.76.59.152:3000/documentfolder/14/state/ACT', { headers: header })
+            this._httpClient.get('http://25.76.59.152:3000/documentfolderversion/14%2Fcarpeta%2Ffile.docx/alex', { headers: header })
                 .subscribe((response: any) => {
-                    this.onFilesChanged.next(response.Items);
-                    this.onFileSelected.next(response.Items[0]);
+                    console.log('entro a la version')
+                    console.log(response.Versions);
+                    this.onFilesChanged.next(response.Versions);
+                    this.onFileSelected.next(response.Versions[0]);
                     resolve(response);
                 }, reject);
         });
