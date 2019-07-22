@@ -87,7 +87,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
       .subscribe(selected => {
         this.selected = selected;
         console.log(this.selected);
-        //this.pathArr = selected.location.split('>');
+        this.pathArr = selected.INFO.PATH_FATHER.split('/');
       });
   }
 0
@@ -116,7 +116,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   public file;
   public dt;
 
-  public dropped(files: NgxFileDropEntry[]) {
+  public dropped(files: NgxFileDropEntry[],variable:String) {
     this.files = files;
     for (const droppedFile of files) {
 
@@ -129,7 +129,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
           //  console.log(droppedFile.relativePath, file);
           this.file = file;
           this.dt = new Date(file.lastModified);
-          this._fileService.postTrack(file, droppedFile.relativePath);
+          this._fileService.postTrack(file, droppedFile.relativePath,variable);
           /**
           // You could upload it like this:
           const formData = new FormData()

@@ -31,12 +31,12 @@
 
             <!-- BREADCRUMB -->
             <div class="breadcrumb text-truncate h1 pl-72" fxLayout="row" fxLayoutAlign="start center"
-                [@animate]="{value:'*',params:{x:'50px'}}">
-                <div *ngFor="let path of pathArr; last  as isLast" fxLayout="row" fxLayoutAlign="start center">
-                    <span>{{path}}</span>
-                    <mat-icon *ngIf="!isLast" class="separator">chevron_right</mat-icon>
-                </div>
-            </div>
+            [@animate]="{value:'*',params:{x:'50px'}}">
+           <div *ngFor="let path of pathArr; last  as isLast" fxLayout="row" fxLayoutAlign="start center">
+               <span>{{path}}</span>
+               <mat-icon *ngIf="!isLast" class="separator">chevron_right</mat-icon>
+           </div>
+       </div>
             <!-- / BREADCRUMB -->
 
             <!-- ADD FILE BUTTON -->
@@ -87,7 +87,7 @@
 
         <ng-template #notShow>
 
-            <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event)"
+            <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event,pathArr)"
                 (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
 
                 <ng-template let-openFileSelector="openFileSelector">

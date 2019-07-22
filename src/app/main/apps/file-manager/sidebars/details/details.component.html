@@ -42,10 +42,10 @@
         <div class="title">Info</div>
 
         <table>
-                <tr class="name">
-                        <th>Nombre</th>
-                        <td>{{selected.INFO.NAME}}</td>
-                    </tr>
+            <tr class="name">
+                <th>Nombre</th>
+                <td>{{selected.INFO.NAME}}</td>
+            </tr>
             <tr class="type">
                 <th>Type</th>
                 <td>{{selected.INFO.TYPE}}</td>
@@ -61,58 +61,93 @@
                 <td>{{selected.INFO.CREATION_DATE}}</td>
             </tr>
 
-           
-                <tr class="Compartir">
-                        <th>Compartir</th>
+
+            <tr class="Compartir">
+                <th>Compartir</th>
+                <td>
+                    <button mat-fab color="warn" class="add-file-button" (click)="openModal(loading)"
+                        aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </td>
+            </tr>
+            <tr  class="Version">
+                    <th>Versiones</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button" (click)="version(selected.INFO.PATH); openModal(template);  "
+                            aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="Download">
+                        <th>Descargar</th>
                         <td>
-                                <button mat-fab color="warn" class="add-file-button" (click)="openModal(template)" aria-label="Add file"
-                                [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <button mat-fab color="warn" class="add-file-button" (click)="descargar(selected.INFO.PATH,selected.INFO.NAME)"
+                                aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
                                 <mat-icon>add</mat-icon>
                             </button>
                         </td>
                     </tr>
-                    <tr class="Version">
-                            <th>Versiones</th>
-                            <td>
-                                    <button mat-fab color="warn" class="add-file-button" (click)="openModal(loading)" aria-label="Add file"
-                                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </td>
-                        </tr>
+                        
         </table>
-        
-               
+
+
 
     </div>
 
-    
+
 </div>
-<ng-template #template>
-        
-        <div class="modal-body">
-            <label>Persona A Compartir</label>
-            <input type="text" class="form-control" /><br/>
+<ng-template   #template>
 
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary pull-right" (click)="modalRef.hide()">
-                Close
-            </button>
-        </div>
-    </ng-template>
     
-<ng-template #loading>
-        
-        <div class="modal-body">
-            <label>Versiones</label>
-            <input type="text" class="form-control" /><br/>
+<mat-table  #table [dataSource]="dataSourceVersion.Versions" [@animateStagger]="{value:'50'}">
 
-        </div>
-        <div class="modal-footer">
+          <!-- NAME Column -->
+        <ng-container matColumnDef="VersionId">
+            <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.VersionId}}</mat-cell>
+        </ng-container>
+    
+        <!-- TYPE Column -->
+        <ng-container matColumnDef="LastModified">
+            <mat-header-cell *matHeaderCellDef>Tipo</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.LastModified}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="radio">
+                <mat-header-cell *matHeaderCellDef>Radio</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <mat-radio-group [(ngModel)]="row">
+                    <mat-radio-button [value]="row.IsLatest"></mat-radio-button>
+                  </mat-radio-group>
+                </mat-cell>
+              </ng-container>
+       
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)" (dblclick)="onRowDblclicked(row)"
+            [ngClass]="{'selected' : row == selected}" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+        
+    </mat-table>
+    <div class="modal-footer">
             <button type="button" class="btn btn-primary pull-right" (click)="modalRef.hide()">
-                Close
+                Guardar
             </button>
         </div>
-    </ng-template>
+</ng-template>
+
+<ng-template #loading>
+
+    <div class="modal-body">
+        <label>Versiones</label>
+        <input type="text" class="form-control" /><br />
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary pull-right" (click)="modalRef.hide()">
+            Close
+        </button>
+    </div>
+</ng-template>
 <!-- / SIDEBAR CONTENT -->

@@ -1,4 +1,5 @@
-<mat-table #table [dataSource]="dataSource" [@animateStagger]="{value:'50'}">
+
+<mat-table #table [dataSource]="files" [@animateStagger]="{value:'50'}">
 
     <!-- Type Column -->
     <ng-container matColumnDef="icon">
@@ -32,7 +33,17 @@
 
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)"
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)" (dblclick)="onRowDblclicked(row)"
         [ngClass]="{'selected' : row == selected}" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
     </mat-row>
+    
 </mat-table>
+<tr class="Download">
+       
+        <td>
+            <button (click)="Atras()">
+                Atras
+            </button>
+        </td>
+    </tr>
+

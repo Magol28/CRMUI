@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpParams, HttpEventType  } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,11 +12,13 @@ export class FileService {
   constructor(public http: HttpClient) { }
   public dt;
   public datePipe;
-  postTrack(file: File,relativePath:string):any {
+  postTrack(file: File,relativePath:string,variable:String):any {
     const data =new FormData();
+    var PathFather:string=(''+variable).replace(',','/');
     
+    relativePath=PathFather+'/'+relativePath;
     data.append('document', file, file.name);
-    data.append('DOCUMENTPATH','14/'+relativePath);
+    data.append('DOCUMENTPATH',relativePath);
     data.append('CLIENT_COMPANYID','14');
     data.append('USERID', 'alex');
     data.append('NAME', file.name);
@@ -24,12 +28,18 @@ export class FileService {
     data.append('ACCESS_DATE', this.dt);
     data.append('MODIFICATION_DATE', this.dt);
     data.append('CREATION_DATE', this.dt);
-    data.append('STATE', 'ACT');
+    data.append('STATET', 'ACT');
     data.append('TYPE', 'DOC');
     var Path=relativePath.split('/');
     
-    var auxPath=Path[0];
-    data.append('PATH_FATHER','14/'+auxPath);
+    
+    var auxPath='';
+    for (var i = 0; i < (Path.length-1); i++) {
+      auxPath += Path[i];
+      if (i < (Path.length-2))
+      auxPath += '/';
+  }
+    data.append('PATH_FATHER',auxPath);
     
     return this.http.put(this.url, data, {reportProgress:true,observe:'events'}).subscribe(
       event=>{
@@ -52,6 +62,27 @@ export class FileService {
       }
     );
   }
+
+  versiones(version:String):Promise<any> {
+    console.log(version);
+    
+    return new Promise((resolve, reject) => {
+
+      const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
+      this.http.get('http://25.76.59.152:3000/documentfolderversion/'+version+'/alex', { headers: header })
+          .subscribe((response: any) => {
+            console.log('versiones');
+              console.log(response.Versions);
+              resolve(response);
+          }, reject);
+  });
+    
+  }
+  async descarga(url:string):Promise<Blob> {
+    const file = await this.http.get<Blob>(url, { responseType:'blob' as 'json'}).toPromise();
+    return file;
+  }
+
   agregacar(relativePath:string):any {
     const data =new FormData();
     
@@ -66,7 +97,7 @@ export class FileService {
     data.append('ACCESS_DATE', this.dt);
     data.append('MODIFICATION_DATE', this.dt);
     data.append('CREATION_DATE', this.dt);
-    data.append('STATE', 'ACT');
+    data.append('STATET', 'ACT');
     data.append('TYPE', 'CAR');
     var Path=relativePath.split('/');
     
