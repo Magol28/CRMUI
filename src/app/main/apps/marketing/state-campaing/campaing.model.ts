@@ -1,4 +1,4 @@
 class StateCampaing {
-    id: number;
+    id: string;
     name: string;
 }

@@ -32,8 +32,12 @@ export class StateCampaingIdComponent implements OnInit {
         private router: Router
     ) {}
     campaing: StateCampaing[] = [
-        { id: 11, name: "Dr Nice" },
-        { id: 12, name: "Narco" }
+        { id: "S", name: "Start" },
+        { id: "ST", name: "Stopped" },
+        { id: "R", name: "Removed" },
+        { id: "C", name: "Completed" },
+        { id: "P", name: "Pending" },
+        { id: "LB", name: "Limited by budget" }
     ];
 
     ngOnInit(): void {
