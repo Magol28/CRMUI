@@ -1,8 +1,8 @@
 <!-- CARD COVER -->
-<div *ngIf="board.settings.cardCoverImages && card.idAttachmentCover"
+<!-- <div *ngIf="board.settings.cardCoverImages && card.idAttachmentCover"
      class="list-card-cover">
     <img [src]="card.attachments | getById:card.idAttachmentCover:'src'">
-</div>
+</div> -->
 <!-- / CARD COVER -->
 
 <!-- CARD DETAILS -->
@@ -27,7 +27,9 @@
     <!-- / CARD LABELS -->
 
     <!-- CARD NAME -->
-    <div class="list-card-name">{{card.name}}</div>
+    <!-- <div class="list-card-name">{{card.name}}</div> -->
+    <div class="list-card-name">{{sales[0].name}}</div>
+    
     <!-- / CARD NAME -->
 
     <div *ngIf="card.due || card.checkItems"
@@ -58,7 +60,7 @@
     </div>
 
     <!-- CARD MEMBERS -->
-    <div *ngIf="card.idMembers.length > 0"
+    <!-- <div *ngIf="card.idMembers.length > 0"
          class="list-card-members"
          fxLayout="row">
 
@@ -70,7 +72,7 @@
                  [matTooltip]="board.members | getById:memberId:'name'">
         </div>
 
-    </div>
+    </div> -->
     <!-- / CARD MEMBERS -->
 
 </div>

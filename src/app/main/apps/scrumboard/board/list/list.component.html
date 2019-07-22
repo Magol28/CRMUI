@@ -28,11 +28,11 @@
              [model]="list.idCards" ngxDroppable="card" (out)="onDrop($event)"
              fusePerfectScrollbar #listScroll>
             <scrumboard-board-card ngxDraggable
-                (click)="openCardDialog(cardId)"
-                class="scrumboard-board-card ngx-dnd-item"
-                *ngFor="let cardId of list.idCards"
-                [model]="cardId"
-                [cardId]="cardId">
+                                   (click)="openCardDialog(cardId)"
+                                   class="scrumboard-board-card ngx-dnd-item"
+                                   *ngFor="let cardId of list.idCards"
+                                   [model]="cardId"
+                                   [cardId]="cardId">
             </scrumboard-board-card>
         </div>
     </div>

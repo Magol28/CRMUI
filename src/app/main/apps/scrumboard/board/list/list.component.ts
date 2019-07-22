@@ -11,8 +11,6 @@ import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
 import { Card } from 'app/main/apps/scrumboard/card.model';
 import { ScrumboardCardDialogComponent } from 'app/main/apps/scrumboard/board/dialogs/card/card.component';
 
-import { Router } from '@angular/router';
-
 @Component({
     selector     : 'scrumboard-board-list',
     templateUrl  : './list.component.html',
@@ -45,13 +43,11 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _scrumboardService: ScrumboardService,
-        private _matDialog: MatDialog,
-        private router : Router
+        private _matDialog: MatDialog
     )
     {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
-
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -139,12 +135,6 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
      *
      * @param cardId
      */
-
-    //Información de la tarjeta
-    openCard(id: number){
-        this.router.navigate(['/apps/dashboards/project/info','Silvi']);
-    };
-
     openCardDialog(cardId): void
     {
         this.dialogRef = this._matDialog.open(ScrumboardCardDialogComponent, {
