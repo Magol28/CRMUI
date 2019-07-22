@@ -23,7 +23,6 @@ const routes = [
     ],
     imports     : [
         RouterModule.forChild(routes),
-
         MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,

@@ -20,6 +20,7 @@ import { FakeDbService } from 'app/fake-db/fake-db.service';
 import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
 
@@ -32,20 +33,8 @@ const appRoutes: Routes = [
         loadChildren: './main/pages/pages.module#PagesModule'
     },
     {
-        path        : 'ui',
-        loadChildren: './main/ui/ui.module#UIModule'
-    },
-    {
-        path        : 'documentation',
-        loadChildren: './main/documentation/documentation.module#DocumentationModule'
-    },
-    {
-        path        : 'angular-material-elements',
-        loadChildren: './main/angular-material-elements/angular-material-elements.module#AngularMaterialElementsModule'
-    },
-    {
         path      : '**',
-        redirectTo: 'apps/dashboards/analytics'
+        redirectTo: 'pages/auth/login'
     }
 ];
 
@@ -77,7 +66,6 @@ const appRoutes: Routes = [
         FuseProgressBarModule,
         FuseSharedModule,
         FuseSidebarModule,
-
         // App modules
         LayoutModule,
         AppStoreModule

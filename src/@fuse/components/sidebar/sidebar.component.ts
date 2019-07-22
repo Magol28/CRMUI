@@ -637,7 +637,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
         this.openedChanged.emit(this.opened);
 
         // Hide the sidebar
-        this._hideSidebar();
+     //   this._hideSidebar();
 
         // Mark for check
         this._changeDetectorRef.markForCheck();

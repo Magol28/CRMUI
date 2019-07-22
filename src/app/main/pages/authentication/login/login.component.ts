@@ -14,7 +14,6 @@ import { fuseAnimations } from '@fuse/animations';
 export class LoginComponent implements OnInit
 {
     loginForm: FormGroup;
-
     /**
      * Constructor
      *
@@ -62,6 +61,6 @@ export class LoginComponent implements OnInit
     
     logIn(): void
     {
-        
+         localStorage.setItem('user', 'prueba');
     }
 }
