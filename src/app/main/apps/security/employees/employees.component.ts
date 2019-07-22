@@ -5,16 +5,17 @@ import {MatTableDataSource} from '@angular/material/table';
 import { fuseAnimations } from '@fuse/animations';
 
 import {Router} from '@angular/router';
-import { ProfileService } from '../services/profile.service';
 import { EmployeeService } from '../services/employee.service';
+
 @Component({
-  selector: 'app-resources',
-  templateUrl: './resources.component.html',
-  styleUrls: ['./resources.component.scss'],
-  animations   : fuseAnimations,
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-employees',
+  templateUrl: './employees.component.html',
+  styleUrls: ['./employees.component.scss'],
+  
+    animations   : fuseAnimations,
+    encapsulation: ViewEncapsulation.None
 })
-export class ResourcesComponent implements OnInit {
+export class EmployeesComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'cedula', 'email', 'phone'];
   dataSource: MatTableDataSource<any>;
 
@@ -49,4 +50,5 @@ export class ResourcesComponent implements OnInit {
     this.router.navigate(['/apps/security/employee', id]);
   }
 }
+
 

@@ -16,15 +16,13 @@
                     shopping_basket
                 </mat-icon>
                 <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Employees
+                    Productos
                 </span>
             </div>
-            <!-- / APP TITLE -->
-
-            <!-- SEARCH -->
+            
             <div class="search-wrapper mx-32 mx-md-0">
                 <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
+                    <mat-icon>buscar</mat-icon>
                     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
                 </div>
             </div>
@@ -32,8 +30,8 @@
             <!-- / SEARCH -->
 
             <!-- ADD BUTTON -->
-            <button mat-raised-button [routerLink]="'/apps/security/employee/new'" class="add-product-button fuse-white mt-24 mt-md-0">
-                <span>ADD NEW EMPLOYEE</span>
+            <button mat-raised-button [routerLink]="'/apps/security/resources/new'" class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>ADD NEW PRODUCT</span>
             </button>
             <!-- / ADD BUTTON -->
 
@@ -46,29 +44,35 @@
 
 
             <!-- Progress Column -->
-            <ng-container matColumnDef="cedula">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cedula </th>
-                <td mat-cell *matCellDef="let row"> {{row.cedula}}% </td>
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let row"> {{row.nombre}}% </td>
             </ng-container>
 
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+            <ng-container matColumnDef="precio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+                <td mat-cell *matCellDef="let row"> {{row.precio}} </td>
             </ng-container>
 
             <!-- Color Column -->
-            <ng-container matColumnDef="phone">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> telefono </th>
-                <td mat-cell *matCellDef="let row"> {{row.telefono}} </td>
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> descripcion </th>
+                <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+            
+            <ng-container matColumnDef="fecha_registro">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha de registro </th>
                 <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+            
+            <ng-container matColumnDef="fecha_producto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha de registro </th>
+                <td mat-cell *matCellDef="let row"> {{row}} </td>
+
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="search(row.cedula)">
+            <tr class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="search(row.nombre)">
             </tr>
 
         </table>

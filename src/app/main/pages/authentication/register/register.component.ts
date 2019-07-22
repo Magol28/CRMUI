@@ -57,10 +57,13 @@ export class RegisterComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         this.registerForm = this._formBuilder.group({
-            name           : ['', Validators.required],
+            nombre: ['', Validators.required],
+            ruc: ['', Validators.required],
+            razonSocial: ['', Validators.required],
+            direccion: ['', Validators.required],
+            telefono           : ['', Validators.required],
             email          : ['', [Validators.required, Validators.email]],
             password       : ['', Validators.required],
-            passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
         });
 
         // Update the validity of the 'passwordConfirm' field

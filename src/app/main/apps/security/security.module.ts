@@ -14,41 +14,80 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { AgmCoreModule } from '@agm/core';
 
+import {HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 
 import { ResourcesComponent } from './resources/resources.component';
-import { EcommerceProductsService } from '../e-commerce/products/products.service';
-import { EcommerceProductService } from '../e-commerce/product/product.service';
-import { EcommerceOrdersService } from '../e-commerce/orders/orders.service';
-import { EcommerceOrderService } from '../e-commerce/order/order.service';
 import { ResourceComponent } from './resource/resource.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfilesComponent } from './profiles/profiles.component';
+
+import { MatListModule } from '@angular/material/list';
+import { ResourceService } from './services/resource.service';
+import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { UserComponent } from './user/user.component';
+import { UsersComponent } from './users/users.component';
+import { EmployeeService } from './services/employee.service';
+import { UserService } from './services/user.service';
+import { ProfileService } from './services/profile.service';
+import { AuthGuard } from '../../../guards/auth.guard';
 const routes: Routes = [
     {
         path     : 'resources',
         component: ResourcesComponent,
-        resolve: {
-            data: EcommerceProductsService
-        }
+        data: { roles: ['prueba'] }
     },
     {
         path     : 'resource/:id',
-        component: ResourcesComponent,
-        resolve  : {
-            data: EcommerceProductService
-        }
+        component: ResourcesComponent
+    },
+    {
+        path     : 'profile/:id',
+        component: ProfileComponent
+    },
+    {
+        path     : 'profiles',
+        component: ProfilesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['profile'] }
+    },
+    {
+        path     : 'employee/:id',
+        component: EmployeeComponent
+    },
+    {
+        path     : 'employees',
+        component: EmployeesComponent
     }
+    ,
+    {
+        path     : 'user/:id',
+        component: UserComponent 
+    },
+    {
+        path     : 'users',
+        component: UsersComponent
+    }
+    
 ];
 @NgModule({
     declarations: [
         ResourcesComponent,
-        ResourceComponent
+        ResourceComponent,
+        ProfileComponent,
+        ProfilesComponent,
+        EmployeesComponent,
+        EmployeeComponent,
+        UserComponent,
+        UsersComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
-
+        HttpClientModule,
+        HttpClientJsonpModule ,
         MatButtonModule,
         MatChipsModule,
         MatExpansionModule,
@@ -62,19 +101,17 @@ const routes: Routes = [
         MatSnackBarModule,
         MatTableModule,
         MatTabsModule,
-
+        MatListModule,
         NgxChartsModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8'
-        }),
         FuseSharedModule,
         FuseWidgetModule
     ],
-    providers   : [
-        EcommerceProductsService,
-        EcommerceProductService,
-        EcommerceOrdersService,
-        EcommerceOrderService
+    providers:
+        [
+        ResourceService,
+        ProfileService,
+        EmployeeService,
+        UserService
     ]
 })
 export class SecurityModule

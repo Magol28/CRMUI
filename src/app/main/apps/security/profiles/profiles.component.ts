@@ -6,25 +6,31 @@ import { fuseAnimations } from '@fuse/animations';
 
 import {Router} from '@angular/router';
 import { ProfileService } from '../services/profile.service';
-import { EmployeeService } from '../services/employee.service';
+
+export interface PeriodicElement {
+    name: string;
+    position: number;
+    weight: number;
+    symbol: string;
+  }
 @Component({
-  selector: 'app-resources',
-  templateUrl: './resources.component.html',
-  styleUrls: ['./resources.component.scss'],
+  selector: 'app-profiles',
+  templateUrl: './profiles.component.html',
+  styleUrls: ['./profiles.component.scss'],
   animations   : fuseAnimations,
   encapsulation: ViewEncapsulation.None
 })
-export class ResourcesComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'cedula', 'email', 'phone'];
+export class ProfilesComponent implements OnInit {
+  displayedColumns: string[] = [ 'id', 'name', 'description'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private _employee: EmployeeService ,
+  constructor(private _profile: ProfileService ,
               private router: Router) {
     // Create 100 users
-    this._employee.getAll().subscribe(data => {
+    this._profile.getAll().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -46,7 +52,7 @@ export class ResourcesComponent implements OnInit {
     }
   }
   search(id: string): void {
-    this.router.navigate(['/apps/security/employee', id]);
+    this.router.navigate(['/apps/security/profile', id]);
   }
 }
 
