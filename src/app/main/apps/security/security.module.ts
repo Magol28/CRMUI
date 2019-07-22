@@ -26,17 +26,19 @@ import { ProfilesComponent } from './profiles/profiles.component';
 
 import { MatListModule } from '@angular/material/list';
 import { ResourceService } from './services/resource.service';
-import { ProfileService } from 'app/main/pages/profile/profile.service';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 import { EmployeeService } from './services/employee.service';
 import { UserService } from './services/user.service';
+import { ProfileService } from './services/profile.service';
+import { AuthGuard } from '../../../guards/auth.guard';
 const routes: Routes = [
     {
         path     : 'resources',
-        component: ResourcesComponent
+        component: ResourcesComponent,
+        data: { roles: ['prueba'] }
     },
     {
         path     : 'resource/:id',
@@ -48,7 +50,9 @@ const routes: Routes = [
     },
     {
         path     : 'profiles',
-        component: ProfilesComponent 
+        component: ProfilesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['profile'] }
     },
     {
         path     : 'employee/:id',
