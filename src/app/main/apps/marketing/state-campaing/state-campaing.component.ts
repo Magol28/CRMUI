@@ -10,7 +10,9 @@ import { StateCampaingService } from "../services/state-campaing.service";
 @Component({
     selector: "app-state-campaing",
     templateUrl: "./state-campaing.component.html",
-    styleUrls: ["./state-campaing.component.scss"]
+    styleUrls: ["./state-campaing.component.scss"],
+    animations: fuseAnimations,
+    encapsulation: ViewEncapsulation.None
 })
 export class StateCampaingComponent implements OnInit {
     displayedColumns: string[] = [

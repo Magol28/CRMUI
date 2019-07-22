@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import {
     FormBuilder,
     FormGroup,
@@ -9,10 +9,13 @@ import { Subject } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { StateCampaingService } from "../services/state-campaing.service";
 import { Router } from "@angular/router";
+import { fuseAnimations } from "@fuse/animations";
 @Component({
     selector: "app-state-campaing-id",
     templateUrl: "./state-campaing-id.component.html",
-    styleUrls: ["./state-campaing-id.component.scss"]
+    styleUrls: ["./state-campaing-id.component.scss"],
+    animations: fuseAnimations,
+    encapsulation: ViewEncapsulation.None
 })
 export class StateCampaingIdComponent implements OnInit {
     selected = "Unavailable";
@@ -28,6 +31,10 @@ export class StateCampaingIdComponent implements OnInit {
         private _campaing: StateCampaingService,
         private router: Router
     ) {}
+    campaing: StateCampaing[] = [
+        { id: 11, name: "Dr Nice" },
+        { id: 12, name: "Narco" }
+    ];
 
     ngOnInit(): void {
         this.form = this._formBuilder.group({
