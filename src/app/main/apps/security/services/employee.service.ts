@@ -20,6 +20,9 @@ export class EmployeeService {
   post(data): any {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
+      
+    const info = localStorage.getItem('user');
+    const prueba = (JSON.parse(info));
     const objeto = {
       cedula: data.cedula,
       nombre: data.nombre,
@@ -28,34 +31,28 @@ export class EmployeeService {
       telefono: data.telefono,
       email: data.email,
       sexo: data.sexo,
-      empresa: {nombre: 'SuSo Labs', 
-      ruc: '1102096321001', 
-      razonSocial: 'Ventas', 
-      direccion: 'Sangolqui', 
-      telefono: '0996108755', 
-      email: 'susolabs@gmail.com'}
+      empresa: prueba.empleado.empresa
     };
-    this.url += '/add';
-    return this.http.post(this.url, objeto, {headers});
+   
+    
+    return this.http.post(this.url + '/add', objeto, {headers});
   }
   
   put(data): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const info = localStorage.getItem('user');
+    const prueba = (JSON.parse(info));
     const objeto = {
-      cedula: data.cedula,
-      nombre: data.nombre,
-      fechaNacimiento: data.fechaNacimiento,
-      direccion: data.direccion,
-      telefono: data.telefono,
-      email: data.email,
-      sexo: data.sexo,
-      empresa: {nombre: 'SuSo Labs', 
-      ruc: '1102096321001', 
-      razonSocial: 'Ventas', 
-      direccion: 'Sangolqui', 
-      telefono: '0996108755', 
-      email: 'susolabs@gmail.com'}
-    };
-    return this.http.put( 'http://3.95.152.214:8081/employee/add', JSON.stringify(objeto), { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
-  }
+        cedula: data.cedula,
+        nombre: data.nombre,
+        fechaNacimiento: data.fechaNacimiento,
+        direccion: data.direccion,
+        telefono: data.telefono,
+        email: data.email,
+        sexo: data.sexo,
+        empresa: prueba.empleado.empresa
+      };
+    return this.http.put(this.url + '/update', objeto, {headers}); }
 }
 
