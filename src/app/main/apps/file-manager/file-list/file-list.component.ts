@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table'; import { fuseAnima
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import {ChangeDetectionStrategy} from '@angular/core';
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
+import { VersionManagerService } from 'app/main/apps/file-manager/version-manager.service';
 import { FileService } from '../services/file.service';
 export interface PeriodicElement {
     name: string;
@@ -27,8 +28,9 @@ export interface PeriodicElement {
 export class FileManagerFileListComponent implements OnInit, OnDestroy {
 
     files: any;
+    filesver: any;
     dataSource: FilesDataSource | null;
-    dataSourceaux = new MatTableDataSource();
+    dataSourceaux: FilesDataSource | null;
     pathArr: string[];
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     displayedColumns = ['icon', 'NAME', 'TYPE', 'USERID', 'CREATION_DATE'];
@@ -41,11 +43,13 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
      * Constructor
      *
      * @param {FileManagerService} _fileManagerService
+     * @param {VersionManagerService} _versionManagerService
      * @param {FuseSidebarService} _fuseSidebarService
      */
     constructor(
         private _fileManagerService: FileManagerService,
         private _fuseSidebarService: FuseSidebarService,
+        private _versionManagerService: VersionManagerService,
         private _file: FileService
     ) {
         // Set the private defaults
@@ -67,15 +71,19 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
     }*/
     ngOnInit(): void {
         this.dataSource = new FilesDataSource(this._fileManagerService);
-
-        this.dataSourceaux.paginator = this.paginator;
+        this.dataSourceaux= new FilesDataSource(this._versionManagerService);
         this._fileManagerService.onFilesChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(filesu => {
                 this.files = this.filterByFather('14', filesu);
                 console.log(this.files);
             });
-
+            this._versionManagerService.onFilesChanged
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe(filesu => {
+                this.filesver = this.filterByFather('14', filesu);
+                console.log(this.filesver);
+            });
         this._fileManagerService.onFileSelected
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(selected => {

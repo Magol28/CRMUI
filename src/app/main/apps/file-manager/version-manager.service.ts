@@ -74,12 +74,12 @@ export class VersionManagerService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-            this._httpClient.get('http://25.76.59.152:3000/documentfolderversion/14%2Fcarpeta%2Ffile.docx/alex', { headers: header })
+            this._httpClient.get('http://25.76.59.152:3000/documentfolder/14/state/ICT', { headers: header })
                 .subscribe((response: any) => {
                     console.log('entro a la version')
                     console.log(response.Versions);
-                    this.onFilesChanged.next(response.Versions);
-                    this.onFileSelected.next(response.Versions[0]);
+                    this.onFilesChanged.next(response.Items);
+                    this.onFileSelected.next(response.Items[0]);
                     resolve(response);
                 }, reject);
         });
