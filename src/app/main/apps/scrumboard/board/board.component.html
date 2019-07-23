@@ -5,6 +5,10 @@
         <!-- HEADER -->
         <div class="header p-16 p-md-24" [ngClass]="board.settings.color" fxLayout="column">
 
+            <span class="mat-display-1 my-0 my-sm-24 welcome-message"
+                [@animate]="{value:'*',params:{x:'50px'}}">Bienvenido, {{nombreUsuario}}  !
+            </span>
+
             <div class="header-content" fxLayout="row wrap" fxLayoutAlign="space-between" fxFlex="1 0 auto">
 
                 <!-- BOARD SELECTION BUTTON -->
@@ -69,10 +73,10 @@
                 <!-- / LIST -->
 
                 <!-- NEW LIST BUTTON-->
-                <scrumboard-board-add-list class="new-list-wrapper" (listAdded)="onListAdd($event)"
+                <!-- <scrumboard-board-add-list class="new-list-wrapper" (listAdded)="onListAdd($event)"
                                            ngxDraggable [moves]="false"
                                            [@animate]="{value:'*',params:{duration:'350ms',x:'100%'}}">
-                </scrumboard-board-add-list>
+                </scrumboard-board-add-list> -->
                 <!-- / NEW LIST BUTTON-->
 
             </div>

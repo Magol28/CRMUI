@@ -2,8 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Subject } from 'rxjs';
 
-import { ActivatedRoute } from '@angular/router';
-import { catchError } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';import { catchError } from 'rxjs/operators';
 import { ProductService } from '../services/product.service';
 import { fuseAnimations } from '@fuse/animations';
 @Component({
@@ -33,7 +32,7 @@ export class ProductComponent implements OnInit {
   constructor(
     private activateR: ActivatedRoute,
     private _formBuilder: FormBuilder,
-    private _employee: ProductService
+  private _employee: ProductService
   ) {
     // Set the private defaults
     
@@ -61,7 +60,7 @@ export class ProductComponent implements OnInit {
       const cedula = params['id'];
       if (cedula !== 'new') {
         this.flat = false;
-        const data = this._employee.getByCodigo(cedula).subscribe(arg => {
+const data = this._employee.getByCodigo(cedula).subscribe(arg => {
           this.form = this._formBuilder.group({
             cod_producto: [cedula],
             nombre: [arg.nombre],
@@ -74,7 +73,7 @@ export class ProductComponent implements OnInit {
         
       } else {
         this.form.setValue({
-          
+
             nombre: [''],
             categoria: [''],
             precio:  [''],
@@ -90,13 +89,13 @@ export class ProductComponent implements OnInit {
     this.selectedOption = $event;
   }
   guardar(): void {
-   if (this.flat) {
+if (this.flat) {
       this._employee.post(this.form.value).subscribe(data => {
         
       });
       
     } else {
-      this._employee.put(this.form.value).subscribe(data => {
+ this._employee.put(this.form.value).subscribe(data => {
       });
     }
   }
