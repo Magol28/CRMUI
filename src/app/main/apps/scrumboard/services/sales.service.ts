@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 export class SalesService {
 
   /* _url = "http://localhost:3000/"; */
-  _url = "http://54.242.242.56:3000/";
+  _url = "http://192.168.100.8:3000/";
 
 
   constructor(public http: HttpClient) { }
@@ -28,7 +28,7 @@ export class SalesService {
     
 
   getSalesById(id): any {
-    const url = 'http://localhost:3000/sales/' + id;
+    const url = 'http://192.168.100.8:3000/sales/' + id;
     return this.http.get(url);
   }
 }
