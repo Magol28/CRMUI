@@ -529,6 +529,113 @@
                     <!-- / WIDGET GROUP -->
 
                 </mat-tab>
+
+                <mat-tab label="Tasks">
+
+                    <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
+                         [@animateStagger]="{value:'50'}">
+
+                        <!-- WIDGET 1 -->
+                        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                                     fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25" *ngFor="let task of tasks, let i=index">
+
+                            <!-- Front -->
+                            <div class="fuse-widget-front" >
+                                <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
+                                     fxLayoutAlign="space-between center">
+                               
+                                    <button mat-icon-button fuseWidgetToggle aria-label="more">
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
+                                </div>
+
+                                <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                                    <div class="light-blue-fg font-size-50 line-height-72">
+                                      Tarea {{i}}
+                                    </div>
+                                    <div class="h3 secondary-text font-weight-500">  {{task.description}}
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                            <!-- / Front -->
+
+                            <!-- Back -->
+                            <div class="fuse-widget-back p-16 pt-32">
+                                <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                        aria-label="Flip widget">
+                                    <mat-icon class="s-16">close</mat-icon>
+                                </button>
+
+                                <div>
+                                    {{task.description}}
+                                </div>
+                            </div>
+                            <!-- / Back -->
+
+                        </fuse-widget>
+                        <!-- / WIDGET 1 -->
+
+                    </div>
+                    <!-- / WIDGET GROUP -->
+
+                </mat-tab>
+               
+                <mat-tab label="Meetings">
+
+                        <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
+                             [@animateStagger]="{value:'50'}">
+    
+                            <!-- WIDGET 1 -->
+                            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                                         fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25" *ngFor="let meeting of meetings, let i=index">
+    
+                                <!-- Front -->
+                                <div class="fuse-widget-front" >
+                                    <div class="pl-16 pr-8 py-16 h-52" fxLayout="row"
+                                         fxLayoutAlign="space-between center">
+                                   
+                                        <button mat-icon-button fuseWidgetToggle aria-label="more">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                    </div>
+    
+                                    <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                                        <div class="light-blue-fg font-size-50 line-height-72">
+                                        Reunion {{i}}
+                                        </div>
+                                        <div class="h3 secondary-text font-weight-500">  {{meeting.description}}
+                                        </div>
+                                    </div>
+    
+                                   
+                                </div>
+                                <!-- / Front -->
+    
+                                <!-- Back -->
+                                <div class="fuse-widget-back p-16 pt-32">
+                                    <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                            aria-label="Flip widget">
+                                        <mat-icon class="s-16">close</mat-icon>
+                                    </button>
+    
+                                    <div>
+                                        {{meeting.observation}}
+                                    </div>
+                                </div>
+                                <!-- / Back -->
+    
+                            </fuse-widget>
+                            <!-- / WIDGET 1 -->
+    
+                        </div>
+                        <!-- / WIDGET GROUP -->
+    
+                    </mat-tab>
+                    
+
+
             </mat-tab-group>
 
         </div>
