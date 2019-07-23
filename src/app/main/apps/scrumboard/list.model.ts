@@ -4,7 +4,8 @@ export class List
 {
     id: string;
     name: string;
-    idCards: string[];
+    sales: any[];
+    
 
     /**
      * Constructor
@@ -15,6 +16,6 @@ export class List
     {
         this.id = list.id || FuseUtils.generateGUID();
         this.name = list.name || '';
-        this.idCards = [];
+        this.sales = [];
     }
 }
