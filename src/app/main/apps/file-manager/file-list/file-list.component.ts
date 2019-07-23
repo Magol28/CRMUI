@@ -150,6 +150,11 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
             console.log('Doble Click');
             console.log(this.files);
         }
+        if(selected.INFO.TYPE=="CAR"){
+            this.pathArr = (selected.INFO.PATH_FATHER+'/'+selected.INFO.NAME).split('/');
+          }else{
+            this.pathArr = selected.INFO.PATH_FATHER.split('/');
+          }
     }
     Atras(): void {
 

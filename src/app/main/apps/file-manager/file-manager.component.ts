@@ -91,6 +91,13 @@ export class FileManagerComponent implements OnInit, OnDestroy {
         this.selected = selected;
         console.log(this.selected);
         this.pathArr = selected.INFO.PATH_FATHER.split('/');
+        
+        if(selected.INFO.TYPE=="CAR"){
+          this.pathArr = (selected.INFO.PATH_FATHER+'/'+selected.INFO.NAME).split('/');
+        }else{
+          this.pathArr = selected.INFO.PATH_FATHER.split('/');
+        }
+     
       });
 
 
@@ -163,6 +170,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   public carpeta() {
     console.log('Sube Carpeta');
     console.log(this.pathArr);
+    
     
     this._fileService.agregacar(this.nombre, this.pathArr);
 

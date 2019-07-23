@@ -110,8 +110,9 @@ export class FileService {
         PathFather+='/';
       }
     }
+    var documentpath:string=(variable+'/'+nombre).replace(',','/');
     //data.append('document', undefined, undefined);
-    data.append('DOCUMENTPATH',variable+'/'+nombre);
+    data.append('DOCUMENTPATH',documentpath);
     data.append('CLIENT_COMPANYID','14');
     data.append('USERID', 'alex');
     data.append('NAME', nombre);
