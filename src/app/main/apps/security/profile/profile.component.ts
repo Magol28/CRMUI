@@ -5,6 +5,7 @@ import { ProfileService } from '../services/profile.service';
 
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
+import { ResourceService } from '../services/resource.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,7 @@ export class ProfileComponent implements OnInit, OnDestroy
   selected = 'Unavailable';
   disableSelect = new FormControl(false);
   form: FormGroup;
-  resources: any[]  ;
+  resources = []  ;
   selectedOptions = [];
   selectedOption;
   
@@ -32,7 +33,8 @@ export class ProfileComponent implements OnInit, OnDestroy
   constructor(
       private activateR: ActivatedRoute,
       private _formBuilder: FormBuilder,
-      private _profile: ProfileService
+      private _profile: ProfileService,
+      private _resouces: ResourceService
     )
     {
         // Set the private defaults
@@ -51,20 +53,29 @@ export class ProfileComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void {
-      this.activateR.params.subscribe(params => { 
-        const id = params['id'];
+  ngOnInit(): void {
+    this.activateR.params.subscribe(params => {
+      const id = params['id'];
+      this._resouces.getAll().subscribe(erg => {
+         
         this._profile.getByCedula(id).subscribe(arg => {
           this.form.setValue({
             name: arg.nombre,
             description: arg.descripcion
           });
-          this.resources = arg.recursos;
+          const datos = erg;
+          console.log(this.resources);
+          console.log(this.selectedOptions);
+          this.resources = erg;
           this.selectedOptions = arg.recursos;
+          console.log(this.resources);
+          console.log(this.selectedOptions);
         });
+        
       });
       
-    }
+    });
+  }
 
     onNgModelChange($event): void{
       console.log($event);

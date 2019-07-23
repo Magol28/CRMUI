@@ -4,6 +4,7 @@ import { LoginModule } from 'app/main/pages/authentication/login/login.module';
 import { RegisterModule } from 'app/main/pages/authentication/register/register.module';
 import { Error404Module } from 'app/main/pages/errors/404/error-404.module';
 import { Error500Module } from 'app/main/pages/errors/500/error-500.module';
+import { LoginService } from './services/login.service';
 
 @NgModule({
     imports: [
@@ -13,6 +14,9 @@ import { Error500Module } from 'app/main/pages/errors/500/error-500.module';
         // Errors
         Error404Module,
         Error500Module
+    ],
+    providers: [
+        LoginService
     ]
 })
 export class PagesModule

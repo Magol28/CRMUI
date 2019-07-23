@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
-
+import { LoginService } from '../../services/login.service';
+import {Router} from '@angular/router';
+import { stringify } from '@angular/compiler/src/util';
 @Component({
     selector     : 'login',
     templateUrl  : './login.component.html',
@@ -22,7 +24,9 @@ export class LoginComponent implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _login: LoginService,
+        private router: Router
     )
     {
         // Configure the layout
@@ -61,6 +65,18 @@ export class LoginComponent implements OnInit
     
     logIn(): void
     {
-         localStorage.setItem('user', 'prueba');
+        const data = {
+            nombre: this.loginForm.value.email,
+            password: this.loginForm.value.password,
+        };
+        this._login.logIn(data).subscribe((arg) => {
+            const datos = arg;
+            localStorage.setItem('user', JSON.stringify(datos));
+            const info = localStorage.getItem('user');
+            // const prueba = (JSON.parse(info));
+            // console.log(prueba.empleado.empresa);
+            this.router.navigate(['/apps/security/employees']);
+        });
+         
     }
 }

@@ -10,14 +10,7 @@
 
             <form name="registerForm" [formGroup]="registerForm" novalidate>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Name</mat-label>
-                    <input matInput formControlName="nombre">
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>
-                        Name is required
-                    </mat-error>
-                </mat-form-field>
+
 
                 <mat-form-field appearance="outline">
                     <mat-label>Ruc</mat-label>
@@ -25,6 +18,14 @@
                     <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
                     <mat-error>
                         Ruc is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="nombre">
+                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                    <mat-error>
+                        Name is required
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
