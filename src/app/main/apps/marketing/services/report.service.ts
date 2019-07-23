@@ -8,13 +8,13 @@ export class ReportService {
     constructor(private http: HttpClient) {}
     getClient(): any {
         return this.http.get(
-            "http://192.168.1.108:8000/service/clients-total-campaign-report/"
+            "http://192.168.1.112:8000/service/clients-total-campaign-report/"
         );
     }
 
     getLocation(): any {
         return this.http.get(
-            " http://192.168.1.108:8000/service/campaign-location-report/"
+            " http://192.168.1.112:8000/service/campaign-location-report/"
         );
     }
 }

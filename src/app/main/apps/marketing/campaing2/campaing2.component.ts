@@ -24,6 +24,7 @@ export class Campaing2Component implements OnInit {
     resources: any[];
     selectedOptions = [];
     selectedOption;
+    flat: boolean = true;
 
     toppingList: string[] = [
         "Azuay",
@@ -85,6 +86,22 @@ export class Campaing2Component implements OnInit {
         });
     }
     createCampaign(): void {
-        alert("Create Campaign");
+        if (this.form.value.ageStart > this.form.value.ageEnd) {
+            alert("Age exceeds limits");
+            this.flat = false;
+        }
+
+        if (this.form.value.bugetStart > this.form.value.bugetEnd) {
+            alert("Buget exceeds limits");
+            this.flat = false;
+        }
+
+        if (this.flat == true) {
+            console.log(this.toppingList);
+            console.log(this.advisorList);
+            console.log(this.productsList);
+            console.log(this.form.value);
+            alert("Campaign Created");
+        }
     }
 }

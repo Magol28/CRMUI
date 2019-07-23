@@ -33,7 +33,7 @@ export class TeleMarketingService {
 
     getMarketing(idMarketing, idUser): any {
         return this.http.get(
-            "http://192.168.1.108:8000/service/campaign/?campaign_id=" +
+            "http://192.168.1.112:8000/service/campaign/?campaign_id=" +
                 idMarketing +
                 "&created_by=" +
                 idUser
@@ -51,7 +51,7 @@ export class TeleMarketingService {
             client_risk: data.risk
         };
         return this.http.put(
-            "http://192.168.1.108:8000/service/telemarketing-result/",
+            "http://192.168.1.112:8000/service/telemarketing-result/",
             JSON.stringify(objeto),
             { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
         );
