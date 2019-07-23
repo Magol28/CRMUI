@@ -20,14 +20,14 @@
     <!-- LIST CONTENT -->
     <div class="list-content" fxLayout="column">
         <div class="list-cards ngx-dnd-container"
-             [model]="list.id" ngxDroppable="card" (out)="onDrop($event)"
+             [model]="list.sales" ngxDroppable="card" (out)="onDrop($event)"
              fusePerfectScrollbar #listScroll>
             <scrumboard-board-card ngxDraggable
-                                   (click)="openCardDialog(cardId)"
-                                   class="scrumboard-board-card ngx-dnd-item"
-                                   *ngFor="let card of list"
-                                   [model]="card"
-                                   [cardId]="card">
+                (click)="openCardDialog(card)"
+                class="scrumboard-board-card ngx-dnd-item"
+                *ngFor="let card of list"
+                [model]="card"
+                [cardId]="card">
             </scrumboard-board-card>
         </div>
     </div>
