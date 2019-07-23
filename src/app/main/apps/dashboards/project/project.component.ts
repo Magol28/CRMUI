@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as shape from 'd3-shape';
@@ -11,6 +11,7 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { SalesService } from '../../scrumboard/services/sales.service';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 const { getSalesById } = SalesService.prototype;
 
@@ -23,6 +24,13 @@ const { getSalesById } = SalesService.prototype;
 })
 export class ProjectDashboardComponent implements OnInit
 {
+
+    displayedColumns: string[] = [ 'creation-date', 'num-offers', 'isValid'];
+    dataSource: MatTableDataSource<any>;
+  
+    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
+    
     nom : String;
     projects: any[];
     selectedProject: any;
