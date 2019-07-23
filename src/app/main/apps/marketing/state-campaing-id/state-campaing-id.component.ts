@@ -18,7 +18,8 @@ import { fuseAnimations } from "@fuse/animations";
     encapsulation: ViewEncapsulation.None
 })
 export class StateCampaingIdComponent implements OnInit {
-    selected = "Unavailable";
+    selected = "";
+    opcionSeleccionado: string = "S";
     disableSelect = new FormControl(false);
     form: FormGroup;
     resources: any[];
@@ -58,6 +59,7 @@ export class StateCampaingIdComponent implements OnInit {
             // tslint:disable-next-line:no-unused-expression
             const idCampaing = params["id"];
             var gender = "";
+            //this.selected = "S";
             const data = this._campaing.getID(idCampaing).subscribe(arg => {
                 this.form.controls["id"].disable();
                 this.form.controls["location"].disable();
@@ -75,6 +77,10 @@ export class StateCampaingIdComponent implements OnInit {
                 } else {
                     gender = "female";
                 }
+                console.log(this.selected);
+
+                this.selected = arg.stage;
+
                 this.form.setValue({
                     id: arg.id,
                     location: arg.location,
@@ -96,5 +102,11 @@ export class StateCampaingIdComponent implements OnInit {
     onNgModelChange($event): void {
         console.log($event);
         this.selectedOption = $event;
+    }
+    updateState(): void {
+        this._campaing
+            .putStage(this.form.value, this.selected)
+            .subscribe(data => {});
+        alert("Etapa de la Campaña Modificada");
     }
 }

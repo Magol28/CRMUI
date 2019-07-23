@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
     providedIn: "root"
@@ -8,11 +8,23 @@ export class StateCampaingService {
     constructor(private http: HttpClient) {}
 
     getAll(): any {
-        return this.http.get("http://25.22.76.174:8000/service/campaign");
+        return this.http.get("http://192.168.1.108:8000/service/campaign");
     }
     getID(id: String): any {
         return this.http.get(
-            "http://25.22.76.174:8000/service/campaign/?campaign_id=" + id
+            "http://192.168.1.108:8000/service/campaign/?campaign_id=" + id
+        );
+    }
+
+    putStage(data, select): any {
+        const objeto = {
+            id: data.id,
+            stage: select
+        };
+        return this.http.put(
+            "http://192.168.1.108:8000/service/campaign/",
+            JSON.stringify(objeto),
+            { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
         );
     }
 }

@@ -113,7 +113,7 @@ export class UserComponent implements OnInit, OnDestroy {
     const empleado = this.employeForm.controls['countryControl'].value;
     const perfil = this.profileForm.controls['countryControl'].value;
     let cedula;
-    let id;
+    let nombre;
     this.empleados.forEach(element => {
         if (element.nombre === empleado) {
           cedula = element.cedula;
@@ -121,7 +121,7 @@ export class UserComponent implements OnInit, OnDestroy {
       });
     this.perfiles.forEach(element => {
         if (element.nombre === perfil) {
-          id = element.id;
+          nombre = element.nombre;
           
          }
       });
@@ -130,7 +130,7 @@ export class UserComponent implements OnInit, OnDestroy {
       this._user.post(this.form.controls['name'].value,
         this.form.controls['password'].value,
         cedula,
-        id
+        nombre
 
       ).subscribe(data => {
         
@@ -139,7 +139,7 @@ export class UserComponent implements OnInit, OnDestroy {
       this._user.put(this.form.controls['name'].value,
         this.form.controls['password'].value,
         cedula,
-        id
+        nombre
 
       ).subscribe(data => {
         

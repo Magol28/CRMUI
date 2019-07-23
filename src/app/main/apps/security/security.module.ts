@@ -34,6 +34,8 @@ import { EmployeeService } from './services/employee.service';
 import { UserService } from './services/user.service';
 import { ProfileService } from './services/profile.service';
 import { AuthGuard } from '../../../guards/auth.guard';
+import { ProductComponent } from './product/product.component';
+import { ProductsComponent } from './products/products.component';
 const routes: Routes = [
     {
         path     : 'resources',
@@ -71,6 +73,15 @@ const routes: Routes = [
         path     : 'users',
         component: UsersComponent
     }
+    ,
+    {
+        path     : 'product/:id',
+        component: ProductComponent 
+    },
+    {
+        path     : 'products',
+        component: ProductsComponent
+    }
     
 ];
 @NgModule({
@@ -82,7 +93,9 @@ const routes: Routes = [
         EmployeesComponent,
         EmployeeComponent,
         UserComponent,
-        UsersComponent
+        UsersComponent,
+        ProductComponent,
+        ProductsComponent
     ],
     imports     : [
         RouterModule.forChild(routes),

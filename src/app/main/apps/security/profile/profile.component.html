@@ -10,6 +10,9 @@
             </div>
             <div class="h1 mt-16">Profile management</div>
         </div>
+        <button mat-raised-button (click)="guardar()" class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>Guardar</span>
+            </button>
     </div>
     <!-- / HEADER -->
 
@@ -57,16 +60,20 @@
                             <tr>
                                 <th scope="col">Code</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">State</th>
+
                                 <th scope="col">State</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of resources">
+                            <tr *ngFor="let item of recursos, let i = index">
                                 <td>{{item.id}}</td>
                                 <td>{{item.nombre}}</td>
-                                <td>{{item.nombre}}</td>
-                                <td>{{item.nombre}}</td>
+                                <td *ngIf="item.isvalid">
+                                    <button style="background-color: red" (click)=change(i)>Remove</button>
+                                </td>
+                                <td *ngIf="!item.isvalid">
+                                    <button style="background-color: green" (click)=change(i)>Add</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
