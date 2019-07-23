@@ -156,6 +156,16 @@
                         </mat-form-field>
                       </div>
 
+                      <div fxLayout="row" fxLayoutAlign="space-between">
+                        <mat-form-field>
+                          <mat-label>Products</mat-label>
+                          <mat-select multiple>
+                            <mat-option *ngFor="let product of productsList" [value]="product.cod_producto">
+                              {{product.nombre}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
                     </mat-expansion-panel>
 
 

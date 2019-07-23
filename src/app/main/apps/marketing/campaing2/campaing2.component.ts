@@ -51,7 +51,7 @@ export class Campaing2Component implements OnInit {
         "Zamora Chinchipe"
     ];
     advisorList = [];
-
+    productsList = [];
     constructor(
         private _campaing: CampaingService,
         private activateR: ActivatedRoute,
@@ -62,6 +62,13 @@ export class Campaing2Component implements OnInit {
             console.log(data);
             for (let i = 0; i < data.length; i++) {
                 this.advisorList.push(data[i]);
+            }
+        });
+
+        this._campaing.getClient().subscribe(data => {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                this.productsList.push(data[i]);
             }
         });
     }

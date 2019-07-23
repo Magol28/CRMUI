@@ -10,4 +10,8 @@ export class CampaingService {
     getAdvisor(): any {
         return this.http.get("http://192.168.1.108:8000/service/advisor/");
     }
+
+    getClient(): any {
+        return this.http.get("http://25.64.247.201:5002/api/producto");
+    }
 }
