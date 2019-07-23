@@ -11,7 +11,7 @@ export class FileService {
   prueba = (JSON.parse(this.info));
   ip='192.168.100.8';
  
-  url = 'http://'+this.ip+':3000/documentfolder/'+this.prueba.empleado.nombre;
+  url = 'http://'+this.ip+':3001/documentfolder/'+this.prueba.empleado.nombre;
   constructor(public http: HttpClient) { }
   public dt;
   public datePipe;
@@ -68,7 +68,7 @@ export class FileService {
 
  obtener():any {
     
-    return this.http.get('http://'+this.ip+':3000/documentfolder/'+this.prueba.empleado.empresa.ruc+'/state/ACT', {reportProgress:true,observe:'events'}).subscribe(
+    return this.http.get('http://'+this.ip+':3001/documentfolder/'+this.prueba.empleado.empresa.ruc+'/state/ACT', {reportProgress:true,observe:'events'}).subscribe(
       event=>{
         console.log(event);
         
@@ -82,7 +82,7 @@ export class FileService {
     return new Promise((resolve, reject) => {
 
       const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-      this.http.get('http://'+this.ip+':3000/documentfolderversion/'+version+'/'+this.prueba.empleado.nombre, { headers: header })
+      this.http.get('http://'+this.ip+':3001/documentfolderversion/'+version+'/'+this.prueba.empleado.nombre, { headers: header })
           .subscribe((response: any) => {
             console.log('versiones');
               console.log(response.Versions);
@@ -93,7 +93,7 @@ export class FileService {
   }
   eliminar(del:String,statet:string):Promise<any> {
     console.log(del);
-    var url='http://'+this.ip+':3000/documentfolder/remove/'+del+'/state/'+statet;
+    var url='http://'+this.ip+':3001/documentfolder/remove/'+del+'/state/'+statet;
     console.log(url);
     return new Promise((resolve, reject) => {
 
@@ -109,7 +109,7 @@ export class FileService {
   }
   fisico(del:String):Promise<any> {
     console.log(del);
-    var url='http://'+this.ip+':3000/documentfolder/'+del+'/'+this.prueba.empleado.nombre;
+    var url='http://'+this.ip+':3001/documentfolder/'+del+'/'+this.prueba.empleado.nombre;
     console.log(url);
     return new Promise((resolve, reject) => {
 
@@ -128,7 +128,7 @@ export class FileService {
     console.log(path);
     
     return new Promise((resolve, reject) => {
-      var url='http://'+this.ip+':3000/documentfolder/'+path+'/versionActive/'+id;
+      var url='http://'+this.ip+':3001/documentfolder/'+path+'/versionActive/'+id;
       console.log(url);
       const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
       this.http.put(url, { headers: header })

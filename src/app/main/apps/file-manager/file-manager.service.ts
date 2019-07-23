@@ -57,7 +57,7 @@ export class FileManagerService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-            this._httpClient.get('http://192.168.100.8:3000/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ACT', { headers: header })
+            this._httpClient.get('http://192.168.100.8:3001/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ACT', { headers: header })
                 .subscribe((response: any) => {
                     this.onFilesChanged.next(response.Items);
                     this.onFileSelected.next(response.Items[0]);

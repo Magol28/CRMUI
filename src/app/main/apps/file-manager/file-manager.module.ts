@@ -56,6 +56,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -65,7 +66,10 @@ const routes: Routes = [
         resolve: {
             files: FileManagerService,
             version:VersionManagerService
-        }
+        },
+        canActivate: [AuthGuard],
+        data: { roles: ['Documentos'] }
+        
     }
 ];
 
