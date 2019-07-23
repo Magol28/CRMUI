@@ -30,10 +30,16 @@
           <mat-form-field>
             <mat-label class="h1">State</mat-label>
             <mat-select [(value)]="selected">
-              <mat-option *ngFor="let item of campaing" value="item.id">{{item.name}}</mat-option>
+              <mat-option value="S">Start</mat-option>
+              <mat-option value="ST">Stopped</mat-option>
+              <mat-option value="R">Removed</mat-option>
+              <mat-option value="C">Completed</mat-option>
+              <mat-option value="P">Pending</mat-option>
+              <mat-option value="LB">Limited by budget</mat-option>
+
 
             </mat-select>
-            <mat-icon matSuffix class="secondary-text">event_available</mat-icon>
+            <mat-icon matSuffix class="secondary-text">comment</mat-icon>
           </mat-form-field>
         </div>
 
@@ -111,6 +117,10 @@
             <input type="earnings" matInput formControlName="earning_range">
             <mat-icon matSuffix class="secondary-text">view_agenda</mat-icon>
           </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="1 0 auto">
+          <button mat-button mat-raised-button color="primary" (click)="updateState()">Update State Campaing</button>
         </div>
 
 
