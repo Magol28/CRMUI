@@ -14,8 +14,9 @@ export class AuthGuard implements CanActivate {
         if (currentUser) {
             const prueba = (JSON.parse(currentUser));
             const recursos = prueba.perfil.recursos;
-            
-            if (recursos.some(e => e.nombre === route.data.roles)) {
+            console.log(recursos);
+            console.log(route.data.roles);
+            if (recursos.some(e => e.nombre === route.data.roles[0])) {
                 return true;
             } else {
                 this.router.navigate(['/pages/auth/login']);

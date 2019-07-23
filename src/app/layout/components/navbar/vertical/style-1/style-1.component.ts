@@ -152,5 +152,6 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
     }
     salir(): void{
         localStorage.clear();
+        this._router.navigate(['/pages/auth/login']);
     }
 }
