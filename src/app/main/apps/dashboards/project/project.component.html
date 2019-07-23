@@ -253,106 +253,20 @@
                     <!-- / WIDGET GROUP -->
 
                 </mat-tab>
-
-                <mat-tab label="Quotations">
-
-                    <!-- WIDGET GROUP -->
-                    <div class="widget-group" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
-                        [@animateStagger]="{value:'50'}">
-
-                        <!-- WIDGET 11 -->
-                        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="row"
-                            fxFlex="100">
-
-                            <!-- Front -->
-                            <div class="fuse-widget-front">
-
-                                <div class="p-24 mb-8 border-bottom" fxLayout="row"
-                                    fxLayoutAlign="space-between center">
-                                    <div class="h2">Quotations</div>
-                                    <div class="text-boxed accent m-0">
-                                        {{selectedProject.quotations.length}}
-                                        quotations
-                                    </div>
-                                </div>
-
-                                <mat-table #table [dataSource]="selectedProject.quotations">
-
-                                    <!-- Avatar Column -->
-                                    <ng-container matColumnDef="avatar">
-                                        <mat-header-cell fxFlex="96px" *matHeaderCellDef></mat-header-cell>
-                                        <mat-cell fxFlex="96px" *matCellDef="let contact">
-                                            <img class="avatar" *ngIf="contact.avatar" [alt]="contact.name"
-                                                [src]="contact.avatar" />
-                                        </mat-cell>
-                                    </ng-container>
-                                    <!-- Creation Date Column -->
-                                    <ng-container matColumnDef="name">
-                                        <mat-header-cell *matHeaderCellDef>Creation Date</mat-header-cell>
-                                        <mat-cell *matCellDef="let quotation">
-                                            <p class="text-truncate font-weight-600">{{quotation.creationDate}}
-                                                {{quotation.creationDate}}</p>
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <!-- Num Offers Column -->
-                                    <ng-container matColumnDef="position">
-                                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Num Offers
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let quotation" fxHide fxShow.gt-sm>
-                                            <p class="position text-truncate">
-                                                {{quotation.offers.length}}
-                                            </p>
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <!-- Office Column -->
-                                    <ng-container matColumnDef="office">
-                                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Is Valid
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let quotation" fxHide fxShow.gt-md>
-                                            <p class="office text-truncate">
-                                                {{quotation.isValid}}
-                                            </p>
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <!-- Email Column -->
-                                    <ng-container matColumnDef="email">
-                                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-sm>Email
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-sm>
-                                            <p class="email text-truncate">
-                                                {{contact.email}}
-                                            </p>
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <!-- Phone Column -->
-                                    <ng-container matColumnDef="phone">
-                                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Phone
-                                        </mat-header-cell>
-                                        <mat-cell *matCellDef="let contact" fxHide fxShow.gt-md>
-                                            <p class="phone text-truncate">
-                                                {{contact.phone}}
-                                            </p>
-                                        </mat-cell>
-                                    </ng-container>
-
-                                    <mat-header-row *matHeaderRowDef="widgets.widget11.table.columns"></mat-header-row>
-                                    <mat-row *matRowDef="let contact; columns: widgets.widget11.table.columns;">
-                                    </mat-row>
-                                </mat-table>
-                            </div>
-                            <!-- / Front -->
-
-                        </fuse-widget>
-                        <!-- / WIDGET 11 -->
-
-                    </div>
-                    <!-- / WIDGET GROUP -->
-
-                </mat-tab>
+            <mat-tab label="Quotations">
+                    <table>
+                            <tr>
+                              <th>Creation Date</th>
+                              <th>Offers </th>
+                              <th>Is valid</th>
+                            </tr>
+                            <tr *ngFor="let q of selectedProject.quotations">
+                              <td>{{q.creationDate}}</td>
+                              <td>{{q.offers.length}}</td>
+                              <td>{{q.isValid}}</td>
+                            </tr>
+                          </table>
+            </mat-tab>
 
                 <mat-tab label="Contract">
 
