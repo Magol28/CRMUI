@@ -93,6 +93,23 @@ export class FileService {
   });
     
   }
+
+  cambiarversion(path:String,id:String):Promise<any> {
+    console.log(path);
+    
+    return new Promise((resolve, reject) => {
+      var url='http://25.76.59.152:3000/documentfolder/'+path+'/versionActive/'+id;
+      console.log(url);
+      const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
+      this.http.put(url, { headers: header })
+          .subscribe((response: any) => {
+            console.log('versiones');
+              console.log(response);
+              resolve(response);
+          }, reject);
+  });
+    
+  }
   
   async descarga(url:string):Promise<Blob> {
     const file = await this.http.get<Blob>(url, { responseType:'blob' as 'json'}).toPromise();
