@@ -24,7 +24,7 @@ export class UserService {
       nombre,
       password,
       empleado: { cedula },
-      perfil: { id}
+      perfil: {  nombre: id}
     };
     console.log(this.url + '/add');
     console.log(user);
@@ -37,7 +37,7 @@ export class UserService {
       nombre,
       password,
       empleado: { cedula },
-      perfil: { id}
+      perfil: { nombre: id}
     };
     console.log(this.url + '/add');
     console.log(user);

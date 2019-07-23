@@ -1,82 +1,83 @@
 <div class="page-layout carded fullwidth inner-scroll">
 
-    <!-- TOP BACKGROUND -->
-    <div class="top-bg accent"></div>
-    <!-- / TOP BACKGROUND -->
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg accent"></div>
+  <!-- / TOP BACKGROUND -->
 
-    <!-- CENTER -->
-    <div class="center">
+  <!-- CENTER -->
+  <div class="center">
 
-        <!-- HEADER -->
-        <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+      <!-- HEADER -->
+      <div class="header accent" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
 
-            <!-- APP TITLE -->
-            <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                    shopping_basket
-                </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                    Productos
-                </span>
-            </div>
-            
-            <div class="search-wrapper mx-32 mx-md-0">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>buscar</mat-icon>
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-                </div>
-            </div>
+          <!-- APP TITLE -->
+          <div class="logo mb-24 mb-md-0" fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                  shopping_basket
+              </mat-icon>
+              <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                  Products
+              </span>
+          </div>
+          <!-- / APP TITLE -->
 
-            <!-- / SEARCH -->
+          <!-- SEARCH -->
+          <div class="search-wrapper mx-32 mx-md-0">
+              <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon>search</mat-icon>
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+              </div>
+          </div>
 
-            <!-- ADD BUTTON -->
-            <button mat-raised-button [routerLink]="'/apps/security/resources/new'" class="add-product-button fuse-white mt-24 mt-md-0">
-                <span>ADD NEW PRODUCT</span>
-            </button>
-            <!-- / ADD BUTTON -->
+          <!-- / SEARCH -->
 
-        </div>
-        <!-- / HEADER -->
+          <!-- ADD BUTTON -->
+          <button mat-raised-button [routerLink]="'/apps/security/product/new'" class="add-product-button fuse-white mt-24 mt-md-0">
+              <span>ADD NEW PRODUCTS</span>
+          </button>
+          <!-- / ADD BUTTON -->
+
+      </div>
+      <!-- / HEADER -->
+
+      <div class="content-card">
+          <!-- CONTENT -->
+          <div class="content">
 
 
+              <table mat-table [dataSource]="dataSource" matSort>
 
-        <table mat-table [dataSource]="dataSource" matSort>
 
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                      <td mat-cell *matCellDef="let row"> {{row.nombre}}</td>
+                  </ng-container>
 
-            <!-- Progress Column -->
-            <ng-container matColumnDef="nombre">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                <td mat-cell *matCellDef="let row"> {{row.nombre}}% </td>
-            </ng-container>
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="category">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+                      <td mat-cell *matCellDef="let row"> {{row.categoria}} </td>
+                  </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="precio">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
-                <td mat-cell *matCellDef="let row"> {{row.precio}} </td>
-            </ng-container>
+                  <!-- Color Column -->
+                  <ng-container matColumnDef="description">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+                      <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
+                  </ng-container>
 
-            <!-- Color Column -->
-            <ng-container matColumnDef="descripcion">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> descripcion </th>
-                <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
-            </ng-container>
+                  <ng-container matColumnDef="price">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+                      <td mat-cell *matCellDef="let row"> {{row.precio}} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="search(row.cod_producto)">
+                  </tr>
 
-            
-            <ng-container matColumnDef="fecha_registro">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha de registro </th>
-                <td mat-cell *matCellDef="let row"> {{row.email}} </td>
-            
-            <ng-container matColumnDef="fecha_producto">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha de registro </th>
-                <td mat-cell *matCellDef="let row"> {{row}} </td>
+              </table>
 
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="search(row.nombre)">
-            </tr>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
-        </table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-
-    </div>
+          </div>
+      </div>
+  </div>
