@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SalesService } from 'app/main/apps/scrumboard/services/sales.service';
+import { runInThisContext } from 'vm';
 
 @Component({
     selector     : 'scrumboard-board-add-card',
@@ -14,6 +15,9 @@ export class ScrumboardBoardAddCardComponent
     formActive: boolean;
     form: FormGroup;
     sale: any;
+
+    @Input()
+    cardId;
 
     @Output()
     cardAdded: EventEmitter<any>;
@@ -50,6 +54,8 @@ export class ScrumboardBoardAddCardComponent
      */
     openForm(): void
     {
+        console.log("esta es la venta");
+        console.log(this.cardId);
         this.form = this._formBuilder.group({
             name: [''],
             description: [''],
@@ -83,31 +89,19 @@ export class ScrumboardBoardAddCardComponent
     onFormSubmit(): void
     {            
         const data = 
-        {"sale": {            
-            "name": this.form.getRawValue().name,
-            "description": this.form.getRawValue().description,
-            "idCompany": this.form.getRawValue().idCompany
+        {sale: {            
+            name: this.form.getRawValue().name,
+            description: this.form.getRawValue().description,
+            idCompany: this.form.getRawValue().idCompany
         }};
-        console.log("Entrooooo****");
-        console.log(this.form.value); 
         if ( this.form.valid ){
-        this._sale.postSale(this.form.value).subscribe(data => {
+        this._sale.postSale(data).subscribe(data => {
             console.log(data);
+            this.cardAdded.next(data);
+            this.formActive = false;
         });
     }
     }
-
-    
-
-     /*    if ( this.form.valid )
-        {
-            const cardName = this.form.getRawValue().name;
-            this.cardAdded.next(cardName);
-            this.formActive = false;
-        } */
-
-
-
-    }
+}
 
 

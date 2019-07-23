@@ -6,7 +6,9 @@ import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 })
 export class SalesService {
 
-  _url = "http://localhost:3000/";
+  /* _url = "http://localhost:3000/"; */
+  _url = "http://54.242.242.56:3000/";
+
 
   constructor(public http: HttpClient) { }
 
@@ -19,13 +21,9 @@ export class SalesService {
   postSale(data): any {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
-    const objeto = {
-      name: data.name,
-      description: data.description,
-      idCompany: data.idCompany
-    };
+      console.log(data);
     const url = this._url+'sales/seller/'+'1723954093';
-    return this.http.post(url, objeto, {headers});
+    return this.http.post(url, data, {headers});
   }
     
 
