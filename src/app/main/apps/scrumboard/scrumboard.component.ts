@@ -50,6 +50,7 @@ export class ScrumboardComponent implements OnInit, OnDestroy
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(boards => {
                 this.boards = boards;
+                this.boards[0].name = "VENTAS";
             });
     }
 
