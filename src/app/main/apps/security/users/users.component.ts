@@ -16,7 +16,7 @@ import { UserService } from '../services/user.service';
   encapsulation: ViewEncapsulation.None
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = [ 'nombre', 'password', 'empleado', 'perfil'];
+  displayedColumns: string[] = [ 'nombre', 'perfil', 'empleado'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

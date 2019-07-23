@@ -9,13 +9,14 @@ import { Resource } from 'app/models/Resource';
 export class ResourceService {
     
   // tslint:disable-next-line:typedef
-  url = 'https://restcountries.eu/rest/v2/all';
+  url = 'http://3.95.152.214:8081/resource';
+  url2 = 'http://3.95.152.214:8081/profile';
   constructor(public http: HttpClient) { }
   getAll(): any {
-    return this.http.get(this.url);
+    return this.http.get(this.url + '/getAll');
   }
   getByCedula(cedula: string): any {
-    return this.http.get('http://3.95.152.214:8081/employee/' + cedula);
+    return this.http.get(this.url2 + '/' + cedula);
   }
 
   post(data): any {
