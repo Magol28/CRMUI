@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Subject } from 'rxjs';
 
-import { ActivatedRoute } from '@angular/router';
-import { EmployeeService } from '../services/employee.service';
-import { catchError } from 'rxjs/operators';
-
+import { ActivatedRoute } from '@angular/router';import { catchError } from 'rxjs/operators';
+import { ProductService } from '../services/product.service';
+import { fuseAnimations } from '@fuse/animations';
 @Component({
   selector: 'app-product',
-  //templateUrl: './employee.component.html',
   templateUrl: './product.component.html',
-  //styleUrls: ['./employee.component.scss']
-  styleUrls: ['./employee.component.scss']
+  styleUrls: ['./product.component.scss'],
+  animations   : fuseAnimations,
+  encapsulation: ViewEncapsulation.None
 })
 export class ProductComponent implements OnInit {
   selected = 'Unavailable';
+  fecha: Date;
   disableSelect = new FormControl(false);
   form: FormGroup;
   resources: any[];
@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
   constructor(
     private activateR: ActivatedRoute,
     private _formBuilder: FormBuilder,
-    private _employee: EmployeeService
+  private _employee: ProductService
   ) {
     // Set the private defaults
     
@@ -49,44 +49,35 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     
     this.form = this._formBuilder.group({
-      cedula: [''],
       nombre: [''],
-      fechaNacimiento: [''],
-      direccion: [''],
-      telefono: [''],
-      email: [''],
-      sexo: [''],
-      empresa: ['ESPE'],
+      categoria: [''],
+      precio:  [''],
+      descripcion: ['']
     });
     this.activateR.params.subscribe(params => {
+      const info = localStorage.getItem('user');
       // tslint:disable-next-line:no-unused-expression
       const cedula = params['id'];
       if (cedula !== 'new') {
         this.flat = false;
-        const data = this._employee.getByCedula(cedula).subscribe(arg => {
-          this.form.setValue({
-            cedula: arg.cedula,
-            nombre: arg.nombre,
-            fechaNacimiento: arg.fechaNacimiento,
-            email: arg.email,
-            direccion: arg.direccion,
-            telefono: arg.telefono,
-            sexo: 'M',
-            empresa: 'ESPE'
+const data = this._employee.getByCodigo(cedula).subscribe(arg => {
+          this.form = this._formBuilder.group({
+            cod_producto: [cedula],
+            nombre: [arg.nombre],
+            categoria: [arg.categoria],
+            precio:  [arg.precio],
+            descripcion: [arg.descripcion]
           });
       
       });
         
       } else {
         this.form.setValue({
-          cedula: '',
-          nombre: '',
-          fechaNacimiento: '',
-          email: '',
-          direccion: '',
-          telefono: '',
-          sexo: '',
-          empresa: 'ESPE'
+
+            nombre: [''],
+            categoria: [''],
+            precio:  [''],
+            descripcion: ['']
         });
       }
      
@@ -98,14 +89,13 @@ export class ProductComponent implements OnInit {
     this.selectedOption = $event;
   }
   guardar(): void {
-    if (this.flat) {
+if (this.flat) {
       this._employee.post(this.form.value).subscribe(data => {
         
       });
       
     } else {
-      this._employee.put(this.form.value).subscribe(arg => {
-        
+ this._employee.put(this.form.value).subscribe(data => {
       });
     }
   }

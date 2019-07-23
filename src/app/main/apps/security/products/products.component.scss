@@ -57,7 +57,7 @@
         .mat-cell {
             min-width: 0;
             display: flex;
-            align-items: center;
+            align-items: stretch;
         }
         .mat-column-id {
             flex: 0 1 84px;
@@ -102,4 +102,11 @@
 
 tr.example-element-row:not(.example-expanded-row):hover {
     background: #777;
+}
+
+.mat-cell,
+.mat-footer-cell {
+    font-size: 14px;
+    border-right: 50px !important;
+    padding-right: 100px !important;
 }

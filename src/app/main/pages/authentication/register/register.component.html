@@ -72,7 +72,7 @@
 
 
 
-                <button mat-raised-button color="accent" class="submit-button" aria-label="CREATE AN ACCOUNT" [disabled]="registerForm.invalid">
+                <button mat-raised-button color="accent" (click)="register()" class="submit-button" aria-label="CREATE AN ACCOUNT" [disabled]="registerForm.invalid">
                     CREATE AN ACCOUNT
                 </button>
 
