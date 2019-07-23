@@ -7,15 +7,15 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FormGroup } from '@angular/forms';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
-
+import { FormBuilder } from '@angular/forms';
 import { AfterViewInit, ComponentFactoryResolver, ComponentRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-typescript';
-
+import { FormControl } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations/index';
 import { FuseCopierService } from '@fuse/services/copier.service';
-
+import { Validators} from '@angular/forms';
 
 
 
@@ -35,6 +35,7 @@ export interface DialogData {
 export class FileManagerComponent implements OnInit, OnDestroy {
   animal: string;
   name: string;
+  nombre: string = '';
   form: FormGroup;
   selected: any;
   pathArr: string[];
@@ -53,13 +54,16 @@ export class FileManagerComponent implements OnInit, OnDestroy {
     private _fileManagerService: FileManagerService,
     private _fuseSidebarService: FuseSidebarService,
     private _fileService: FileService,
-    
+    private fb: FormBuilder,
     public dialog: MatDialog
 
 
   ) {
     // Set the private defaults
     this._unsubscribeAll = new Subject();
+    this.form = this.fb.group({
+      name: 'Jose'
+    });
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -80,7 +84,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-    
+
     this._fileManagerService.onFileSelected
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(selected => {
@@ -88,8 +92,10 @@ export class FileManagerComponent implements OnInit, OnDestroy {
         console.log(this.selected);
         this.pathArr = selected.INFO.PATH_FATHER.split('/');
       });
+
+
   }
-0
+
   /**
    * On destroy
    */
@@ -115,7 +121,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   public file;
   public dt;
 
-  public dropped(files: NgxFileDropEntry[],variable:String) {
+  public dropped(files: NgxFileDropEntry[], variable: String) {
     this.files = files;
     for (const droppedFile of files) {
 
@@ -128,7 +134,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
           //  console.log(droppedFile.relativePath, file);
           this.file = file;
           this.dt = new Date(file.lastModified);
-          this._fileService.postTrack(file, droppedFile.relativePath,variable);
+          this._fileService.postTrack(file, droppedFile.relativePath, variable);
           /**
           // You could upload it like this:
           const formData = new FormData()
@@ -154,9 +160,11 @@ export class FileManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public carpeta(event) {
-
-    this._fileService.agregacar('jose');
+  public carpeta() {
+    console.log('Sube Carpeta');
+    console.log(this.pathArr);
+    
+    this._fileService.agregacar(this.nombre, this.pathArr);
 
   }
 

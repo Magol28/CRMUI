@@ -78,19 +78,43 @@ export class FileService {
   });
     
   }
+  eliminar(del:String):Promise<any> {
+    console.log(del);
+    
+    return new Promise((resolve, reject) => {
+
+      const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
+      this.http.put('http://25.76.59.152:3000/documentfolder/remove/'+del+'', { headers: header })
+          .subscribe((response: any) => {
+            console.log('versiones');
+              console.log(response.Versions);
+              resolve(response);
+          }, reject);
+  });
+    
+  }
+  
   async descarga(url:string):Promise<Blob> {
     const file = await this.http.get<Blob>(url, { responseType:'blob' as 'json'}).toPromise();
     return file;
   }
 
-  agregacar(relativePath:string):any {
+  
+  agregacar(nombre:string,variable:String[]):any {
     const data =new FormData();
     
-   
-    data.append('DOCUMENTPATH','14/'+relativePath);
+    var PathFather:string='';
+    for(var i=0;i<variable.length;i++){
+      PathFather+=variable[i];
+      if(i<(variable.length-1)){
+        PathFather+='/';
+      }
+    }
+    //data.append('document', undefined, undefined);
+    data.append('DOCUMENTPATH',variable+'/'+nombre);
     data.append('CLIENT_COMPANYID','14');
     data.append('USERID', 'alex');
-    data.append('NAME', relativePath);
+    data.append('NAME', nombre);
     
     this.dt = new Date();
     this.dt = this.dt.getFullYear() + '-' + ('0' + (this.dt.getMonth() + 1)).slice(-2) + '-' + ('0' + this.dt.getDate()).slice(-2);
@@ -99,11 +123,20 @@ export class FileService {
     data.append('CREATION_DATE', this.dt);
     data.append('STATET', 'ACT');
     data.append('TYPE', 'CAR');
-    var Path=relativePath.split('/');
+    var Path=(PathFather+'/'+nombre).split('/');
     
-    var auxPath=Path[0];
-    data.append('PATH_FATHER','14/'+auxPath);
-    
+    console.log(Path);
+    var auxPath='';
+    for (var i = 0; i < (Path.length-1); i++) {
+      auxPath += Path[i];
+      if (i < (Path.length-2))
+      auxPath += '/';
+  }
+    data.append('PATH_FATHER',auxPath);
+    console.log('Nombre del Archivo')
+    console.log(nombre)
+    console.log('Path del Archivo')
+    console.log(auxPath)
     return this.http.put(this.url, data, {reportProgress:true,observe:'events'}).subscribe(
       event=>{
         if(event.type===HttpEventType.UploadProgress){

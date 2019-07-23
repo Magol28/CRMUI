@@ -21,6 +21,7 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     modalRef: BsModalRef;
     dataSource: FilesDataSource | null;
     dataSourceVersion: any | null;
+    operacionSeleccionada: string = '';
     displayedColumns = ['VersionId', 'LastModified','radio'];
     
     // Private
@@ -98,6 +99,9 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
 
         
     }
+    cambiarversion(){
+        console.log(this.operacionSeleccionada);
+    }
     async version(dato:String):Promise<void>{
         var aux=dato.split('/');
         dato="";
@@ -113,6 +117,26 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
               
 
     }
+    cambioversion():void{
+console.log(this.operacionSeleccionada);
+
+    }
+    async eliminar(dato:String):Promise<void>{
+        var aux=dato.split('/');
+        dato="";
+        for(var i=0;i<aux.length;i++){
+            dato+=aux[i];
+            if(i<(aux.length-1))
+            dato+='%2F';
+        }
+        
+        this._fileService.eliminar(dato);
+        await console.log("datos eliminados")
+       
+              
+
+    }
+    
 }
 
 export class FilesDataSource extends DataSource<any>

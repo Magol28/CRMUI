@@ -138,12 +138,15 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
      */
     onRowDblclicked(selected): void {
         if (selected.INFO.TYPE == 'CAR') {
+           
             this._fileManagerService.onFilesChanged
                 .pipe(takeUntil(this._unsubscribeAll))
                 .subscribe(filesu => {
                     this.files = this.filterByFather(selected.INFO.PATH, filesu);
+                    
                     console.log(this.files);
                 });
+                
             console.log('Doble Click');
             console.log(this.files);
         }
