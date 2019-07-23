@@ -72,10 +72,12 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.dataSource = new FilesDataSource(this._fileManagerService);
         this.dataSourceaux= new FilesDataSource(this._versionManagerService);
+        var info = localStorage.getItem('user');
+ var  prueba = (JSON.parse(info));
         this._fileManagerService.onFilesChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(filesu => {
-                this.files = this.filterByFather('14', filesu);
+                this.files = this.filterByFather(prueba.empleado.empresa.ruc, filesu);
                 console.log(this.files);
             });
             this._versionManagerService.onFilesChanged
@@ -93,6 +95,7 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
 
     filterByFather(aux: String, filesD: any) {
         var auxList: any[] = [];
+        
         console.log(filesD);
         for (var i = 0; i < filesD.length; i++) {
             if (filesD[i].INFO.PATH_FATHER == aux) {
@@ -158,6 +161,7 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
             console.log('Doble Click');
             console.log(this.files);
         }
+        
         if(selected.INFO.TYPE=="CAR"){
             this.pathArr = (selected.INFO.PATH_FATHER+'/'+selected.INFO.NAME).split('/');
           }else{

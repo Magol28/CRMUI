@@ -138,7 +138,7 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
             dato+='%2F';
         }
         
-        this._fileService.eliminar(dato,'ACT');
+        this._fileService.eliminar(dato,'ICT');
         await console.log("datos eliminados")
        
               
@@ -153,13 +153,27 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
             dato+='%2F';
         }
         
-        this._fileService.eliminar(dato,'ICT');
+        this._fileService.eliminar(dato,'ACT');
         await console.log("datos eliminados")
        
               
 
     }
-    
+    async fisico(dato:String):Promise<void>{
+        var aux=dato.split('/');
+        dato="";
+        for(var i=0;i<aux.length;i++){
+            dato+=aux[i];
+            if(i<(aux.length-1))
+            dato+='%2F';
+        }
+        
+        this._fileService.fisico(dato);
+        await console.log("datos eliminados")
+       
+              
+
+    }
 }
 
 export class FilesDataSource extends DataSource<any>

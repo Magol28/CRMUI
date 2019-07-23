@@ -3,15 +3,16 @@
 
     <div class="toolbar" fxLayout="row" fxLayoutAlign="end center">
 
-        <button mat-icon-button matTooltip="Delete" (click)="eliminar(selected.INFO.PATH)">
-            <mat-icon>delete</mat-icon>
-        </button>
+        <div *ngIf="selected.INFO.STATET==='ACT'">
+            <button mat-icon-button matTooltip="Delete" (click)="eliminar(selected.INFO.PATH)">
+                <mat-icon>delete</mat-icon>
+            </button>
 
-        <button mat-icon-button class="" aria-label="Download" matTooltip="Download"
-            (click)="descargar(selected.INFO.PATH,selected.INFO.NAME)">
-            <mat-icon>get_app</mat-icon>
-        </button>
-
+            <button mat-icon-button class="" aria-label="Download" matTooltip="Download"
+                (click)="descargar(selected.INFO.PATH,selected.INFO.NAME)">
+                <mat-icon>get_app</mat-icon>
+            </button>
+        </div>
 
     </div>
 
@@ -59,51 +60,50 @@
 
             <div *ngIf="selected.INFO.STATET==='ACT'">
 
-                    <tr class="Version">
-                            <th>Versiones</th>
-                            <td>
-                                <button mat-fab color="warn" class="add-file-button"
-                                    (click)="version(selected.INFO.PATH); openModal(template);  " aria-label="Add file"
-                                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                                    <mat-icon>add</mat-icon>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="Download">
-                            <th>Descargar</th>
-                            <td>
-                                <button mat-fab color="warn" class="add-file-button"
-                                    (click)="descargar(selected.INFO.PATH,selected.INFO.NAME)" aria-label="Add file"
-                                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                                    <mat-icon>get_app</mat-icon>
-                                </button>
-                            </td>
-                        </tr>
+                <tr class="Version">
+                    <th>Versiones</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button"
+                            (click)="version(selected.INFO.PATH); openModal(template);  " aria-label="Add file"
+                            [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="Download">
+                    <th>Descargar</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button"
+                            (click)="descargar(selected.INFO.PATH,selected.INFO.NAME)" aria-label="Add file"
+                            [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>get_app</mat-icon>
+                        </button>
+                    </td>
+                </tr>
             </div>
             <div *ngIf="selected.INFO.STATET==='ICT'">
 
-                    <tr class="Restore">
-                            <th>Restaurar</th>
-                            <td>
-                                    <button mat-fab color="warn" class="add-file-button"
-                                    (click)="restaurar(selected.INFO.PATH)" aria-label="Add file"
-                                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                                    <mat-icon>restore</mat-icon>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="Delete">
-                            <th>Eliminar Definitivamente</th>
-                            <td>
-                                <button mat-fab color="warn" class="add-file-button"
-                                    (click)="descargar(selected.INFO.PATH,selected.INFO.NAME)" aria-label="Add file"
-                                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                            </td>
-                        </tr>
+                <tr class="Restore">
+                    <th>Restaurar</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button" (click)="restaurar(selected.INFO.PATH)"
+                            aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>restore</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="Delete">
+                    <th>Eliminar Definitivamente</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button"
+                            (click)="fisico(selected.INFO.PATH)" aria-label="Add file"
+                            [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
             </div>
-           
+
 
         </table>
 

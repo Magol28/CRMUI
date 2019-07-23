@@ -15,7 +15,7 @@ import 'prismjs/components/prism-typescript';
 import { FormControl } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations/index';
 import { FuseCopierService } from '@fuse/services/copier.service';
-import { Validators} from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 
 
@@ -84,20 +84,23 @@ export class FileManagerComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
-
+    var info = localStorage.getItem('user');
+    var prueba = (JSON.parse(info));
+    this.pathArr = prueba.empleado.empresa.ruc.split('/');
     this._fileManagerService.onFileSelected
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(selected => {
         this.selected = selected;
         console.log(this.selected);
-        this.pathArr = selected.INFO.PATH_FATHER.split('/');
+
         
-        if(selected.INFO.TYPE=="CAR"){
-          this.pathArr = (selected.INFO.PATH_FATHER+'/'+selected.INFO.NAME).split('/');
-        }else{
-          this.pathArr = selected.INFO.PATH_FATHER.split('/');
-        }
-     
+          if (selected.INFO.TYPE == "CAR") {
+            this.pathArr = (selected.INFO.PATH_FATHER + '/' + selected.INFO.NAME).split('/');
+          } else {
+            this.pathArr = selected.INFO.PATH_FATHER.split('/');
+          }
+        
+
       });
 
 
@@ -142,21 +145,8 @@ export class FileManagerComponent implements OnInit, OnDestroy {
           this.file = file;
           this.dt = new Date(file.lastModified);
           this._fileService.postTrack(file, droppedFile.relativePath, variable);
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
- 
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
- 
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
+          
+          
 
         });
       } else {
@@ -170,8 +160,8 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   public carpeta() {
     console.log('Sube Carpeta');
     console.log(this.pathArr);
-    
-    
+
+
     this._fileService.agregacar(this.nombre, this.pathArr);
 
   }

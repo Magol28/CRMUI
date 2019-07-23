@@ -7,8 +7,11 @@ import { Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class FileService {
-
-  url = 'http://25.76.59.152:3000/documentfolder/alex';
+  info = localStorage.getItem('user');
+  prueba = (JSON.parse(this.info));
+  ip='25.76.59.152';
+ 
+  url = 'http://'+this.ip+':3000/documentfolder/'+this.prueba.empleado.nombre;
   constructor(public http: HttpClient) { }
   public dt;
   public datePipe;
@@ -19,8 +22,8 @@ export class FileService {
     relativePath=PathFather+'/'+relativePath;
     data.append('document', file, file.name);
     data.append('DOCUMENTPATH',relativePath);
-    data.append('CLIENT_COMPANYID','14');
-    data.append('USERID', 'alex');
+    data.append('CLIENT_COMPANYID',this.prueba.empleado.empresa.ruc);
+    data.append('USERID', this.prueba.empleado.nombre);
     data.append('NAME', file.name);
     
     this.dt = new Date(file.lastModified);
@@ -43,6 +46,8 @@ export class FileService {
     
     return this.http.put(this.url, data, {reportProgress:true,observe:'events'}).subscribe(
       event=>{
+        console.log('archivo cargado')
+        console.log(event);
         if(event.type===HttpEventType.UploadProgress){
           console.log('Upload Progress: '+Math.round(event.loaded/event.total)*100+'%');
         }else if(event.type===HttpEventType.Response){
@@ -55,7 +60,7 @@ export class FileService {
 
  obtener():any {
     
-    return this.http.get('http://25.76.59.152:3000/documentfolder/14/state/ACT', {reportProgress:true,observe:'events'}).subscribe(
+    return this.http.get('http://'+this.ip+':3000/documentfolder/'+this.prueba.empleado.empresa.ruc+'/state/ACT', {reportProgress:true,observe:'events'}).subscribe(
       event=>{
         console.log(event);
         
@@ -69,7 +74,7 @@ export class FileService {
     return new Promise((resolve, reject) => {
 
       const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-      this.http.get('http://25.76.59.152:3000/documentfolderversion/'+version+'/alex', { headers: header })
+      this.http.get('http://'+this.ip+':3000/documentfolderversion/'+version+'/'+this.prueba.empleado.nombre, { headers: header })
           .subscribe((response: any) => {
             console.log('versiones');
               console.log(response.Versions);
@@ -80,7 +85,7 @@ export class FileService {
   }
   eliminar(del:String,statet:string):Promise<any> {
     console.log(del);
-    var url='http://25.76.59.152:3000/documentfolder/remove/'+del+'/state/'+statet;
+    var url='http://'+this.ip+':3000/documentfolder/remove/'+del+'/state/'+statet;
     console.log(url);
     return new Promise((resolve, reject) => {
 
@@ -94,12 +99,28 @@ export class FileService {
   });
     
   }
+  fisico(del:String):Promise<any> {
+    console.log(del);
+    var url='http://'+this.ip+':3000/documentfolder/'+del+'/'+this.prueba.empleado.nombre;
+    console.log(url);
+    return new Promise((resolve, reject) => {
+
+      const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
+      this.http.delete(url, { headers: header })
+          .subscribe((response: any) => {
+            console.log('versiones');
+              console.log(response.Versions);
+              resolve(response);
+          }, reject);
+  });
+    
+  }
 
   cambiarversion(path:String,id:String):Promise<any> {
     console.log(path);
     
     return new Promise((resolve, reject) => {
-      var url='http://25.76.59.152:3000/documentfolder/'+path+'/versionActive/'+id;
+      var url='http://'+this.ip+':3000/documentfolder/'+path+'/versionActive/'+id;
       console.log(url);
       const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
       this.http.put(url, { headers: header })
@@ -131,8 +152,8 @@ export class FileService {
     var documentpath:string=(variable+'/'+nombre).replace(',','/');
     //data.append('document', undefined, undefined);
     data.append('DOCUMENTPATH',documentpath);
-    data.append('CLIENT_COMPANYID','14');
-    data.append('USERID', 'alex');
+    data.append('CLIENT_COMPANYID',this.prueba.empleado.empresa.ruc);
+    data.append('USERID', this.prueba.empleado.nombre);
     data.append('NAME', nombre);
     
     this.dt = new Date();
