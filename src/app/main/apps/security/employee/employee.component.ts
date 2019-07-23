@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class EmployeeComponent implements OnInit {
   selected = 'Unavailable';
+  fecha: Date;
   disableSelect = new FormControl(false);
   form: FormGroup;
   resources: any[];
@@ -48,7 +49,7 @@ export class EmployeeComponent implements OnInit {
     this.form = this._formBuilder.group({
       cedula: [''],
       nombre: [''],
-      fechaNacimiento: [''],
+      fechaNacimiento:  [''],
       direccion: [''],
       telefono: [''],
       email: [''],
@@ -56,19 +57,33 @@ export class EmployeeComponent implements OnInit {
       empresa: ['ESPE'],
     });
     this.activateR.params.subscribe(params => {
+      const info = localStorage.getItem('user');
       // tslint:disable-next-line:no-unused-expression
       const cedula = params['id'];
       if (cedula !== 'new') {
         this.flat = false;
         const data = this._employee.getByCedula(cedula).subscribe(arg => {
+          if (arg.sexo === 'M') {
+            this.selected = 'Men';
+          } else {
+            this.selected = 'Women';
+          }
+          const fecha = new Date(arg.fechaNacimiento);
+          let fechaN: string ;
+          if (fecha.getMonth() < 10) {
+             fechaN = fecha.getFullYear() + '-0' + fecha.getMonth() + '-' + fecha.getDate();
+          }else{
+             fechaN = fecha.getFullYear() + '-' + fecha.getMonth() + '-' + fecha.getDate();
+          }
+          
           this.form.setValue({
             cedula: arg.cedula,
             nombre: arg.nombre,
-            fechaNacimiento: arg.fechaNacimiento,
+            fechaNacimiento: fechaN,
             email: arg.email,
             direccion: arg.direccion,
             telefono: arg.telefono,
-            sexo: 'M',
+            sexo: this.selected,
             empresa: 'ESPE'
           });
       
@@ -95,7 +110,7 @@ export class EmployeeComponent implements OnInit {
     this.selectedOption = $event;
   }
   guardar(): void {
-    if (this.flat) {
+   if (this.flat) {
       this._employee.post(this.form.value).subscribe(data => {
         
       });

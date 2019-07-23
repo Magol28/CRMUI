@@ -1,4 +1,4 @@
-@import 'src/@fuse/scss/fuse';
+@import "src/@fuse/scss/fuse";
 
 todo-list-item {
     display: block;
@@ -17,14 +17,12 @@ todo-list-item {
     }
 
     &.move-disabled {
-
         .handle {
             display: none;
         }
     }
 
     .tags {
-
         .tag {
             font-size: 11px;
             border-radius: 2px;
@@ -41,7 +39,6 @@ todo-list-item {
     }
 
     &.completed {
-
         .title,
         .notes {
             text-decoration: line-through;
@@ -62,7 +59,6 @@ todo-list-item {
     }
 
     .buttons {
-
         .is-starred {
             margin: 0 0 0 16px;
         }
