@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/internal/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { RegisterService } from '../../services/register.service';
 
 @Component({
     selector     : 'register',
@@ -22,10 +23,10 @@ export class RegisterComponent implements OnInit, OnDestroy
 
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _register: RegisterService
     )
     {
-        // Configure the layout
         this._fuseConfigService.config = {
             layout: {
                 navbar   : {
@@ -43,17 +44,9 @@ export class RegisterComponent implements OnInit, OnDestroy
             }
         };
 
-        // Set the private defaults
         this._unsubscribeAll = new Subject();
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
     ngOnInit(): void
     {
         this.registerForm = this._formBuilder.group({
@@ -62,27 +55,32 @@ export class RegisterComponent implements OnInit, OnDestroy
             razonSocial: ['', Validators.required],
             direccion: ['', Validators.required],
             telefono           : ['', Validators.required],
-            email          : ['', [Validators.required, Validators.email]],
+            email          : ['', [Validators.required]],
             password       : ['', Validators.required],
         });
-
-        // Update the validity of the 'passwordConfirm' field
-        // when the 'password' field changes
-        this.registerForm.get('password').valueChanges
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(() => {
-                this.registerForm.get('passwordConfirm').updateValueAndValidity();
-            });
     }
 
-    /**
-     * On destroy
-     */
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+    }
+    register(): void{
+        
+        const objeto = {
+            nombre: this.registerForm.controls['nombre'].value,
+            ruc: this.registerForm.controls['ruc'].value,
+            razonSocial: this.registerForm.controls['razonSocial'].value,
+            direccion: this.registerForm.controls['direccion'].value,
+            telefono: this.registerForm.controls['telefono'].value,
+            email: this.registerForm.controls['email'].value
+          //  password: this.registerForm.controls['password'].value
+        };
+        console.log(objeto);
+        this._register.post(objeto).subscribe(error => {
+            
+        });
     }
 }
 
@@ -119,3 +117,4 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
 
     return {passwordsNotMatching: true};
 };
+

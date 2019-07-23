@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit, OnDestroy
   resources = []  ;
   selectedOptions = [];
   selectedOption;
-  
+  falt: boolean;
+  recursos = [];
 
 
     // Private
@@ -56,20 +57,46 @@ export class ProfileComponent implements OnInit, OnDestroy
   ngOnInit(): void {
     this.activateR.params.subscribe(params => {
       const id = params['id'];
+      
       this._resouces.getAll().subscribe(erg => {
-         
+        if (id === 'new') {
+          this.falt = true;
+          erg.forEach(item => {
+            this.recursos.push({
+              id: item.id,
+              nombre: item.nombre,
+              isvalid: false
+            });
+          });
+          console.log('hola');
+          
+          this.resources = erg;
+          return;
+        }
         this._profile.getByCedula(id).subscribe(arg => {
           this.form.setValue({
             name: arg.nombre,
             description: arg.descripcion
           });
-          const datos = erg;
-          console.log(this.resources);
-          console.log(this.selectedOptions);
-          this.resources = erg;
+
           this.selectedOptions = arg.recursos;
-          console.log(this.resources);
-          console.log(this.selectedOptions);
+          erg.forEach(item => {
+            this.recursos.push({
+              id: item.id,
+              nombre: item.nombre,
+              isvalid: false
+            });
+          });
+          
+          const x = this.recursos.length;
+          console.log(x);
+          for (let i = 0; i < x; i++) {
+            if (this.selectedOptions.some(e => e.nombre === this.recursos[i].nombre)) {
+              this.recursos[i].isvalid = true;
+            }
+            
+          }
+          
         });
         
       });
@@ -81,6 +108,9 @@ export class ProfileComponent implements OnInit, OnDestroy
       console.log($event);
       this.selectedOption = $event;
     }
+  change(id: number): void {
+    this.recursos[id].isvalid =  !this.recursos[id ].isvalid ;
+  }
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
@@ -88,5 +118,36 @@ export class ProfileComponent implements OnInit, OnDestroy
         this._unsubscribeAll.complete();
     }
 
+  guardar(): any {
+    const x = this.recursos.length;
+    const resourcesArray = [];
+    for (let i = 0; i < x; i++) {
+      if (this.recursos[i].isvalid) {
+              console.log(this.resources);
+              const getFruit = this.resources.find(item => item.nombre === this.recursos[i].nombre);
+              console.log(getFruit);
+              resourcesArray.push(getFruit);
+            }
+           
+    }
+    if (this.falt) {
+      this._profile.post(this.form.controls['name'].value,
+        this.form.controls['description'].value,
+        'ATC',
+        resourcesArray
+      ).subscribe(data => {
+      
+      });
+    }else{
+      this._profile.put(this.form.controls['name'].value,
+        this.form.controls['description'].value,
+        'ATC',
+        resourcesArray
+      ).subscribe(data => {
+      
+      });
+    }
+    console.log(resourcesArray);
+  }
 }
 
