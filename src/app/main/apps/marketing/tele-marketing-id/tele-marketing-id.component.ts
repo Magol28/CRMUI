@@ -49,6 +49,11 @@ export class TeleMarketingIdComponent implements OnInit {
             email: [""],
             earnings: [""],
             birth_date: [""],
+            locationCampaing: [""],
+            budgetCampaing: [""],
+            nameCampaing: [""],
+            descriptionCampaing: [""],
+            age_rangeCampaing: [""],
             result: ["", Validators.required],
             detail: ["", Validators.required],
             risk: ["", Validators.required]
@@ -57,13 +62,6 @@ export class TeleMarketingIdComponent implements OnInit {
         const data = this._teleMarketing
             .getClient(this.idClient.toString())
             .subscribe(arg => {
-                this.form.controls["dni"].disable();
-                this.form.controls["full_name"].disable();
-                this.form.controls["gender"].disable();
-                this.form.controls["location"].disable();
-                this.form.controls["earnings"].disable();
-                this.form.controls["birth_date"].disable();
-                this.form.controls["email"].disable();
                 if (arg.gender === "M" || arg.gender === "m") {
                     gender = "male";
                 } else {
@@ -87,15 +85,48 @@ export class TeleMarketingIdComponent implements OnInit {
             )
             .subscribe(arg => {
                 this.form.controls["result"].setValue(arg.result);
-                this.form.controls["detail"].setValue(arg.detail);
-                this.form.controls["risk"].setValue(arg.risk);
+                this.form.controls["detail"].setValue(arg.result_detail);
+                this.form.controls["risk"].setValue(arg.client_risk);
+
+                console.log(arg);
+            });
+
+        const dataCampaing = this._teleMarketing
+            .getMarketing(this.idCampaing.toString(), "14")
+            .subscribe(arg => {
+                this.form.controls["locationCampaing"].setValue(
+                    arg.location.provincia
+                );
+                this.form.controls["budgetCampaing"].setValue(arg.budget);
+                this.form.controls["nameCampaing"].setValue(arg.name);
+                this.form.controls["descriptionCampaing"].setValue(
+                    arg.description
+                );
+                this.form.controls["age_rangeCampaing"].setValue(arg.age_range);
 
                 console.log(arg);
             });
     }
 
     updateRisk(): void {
-        alert("updateRisk");
+        console.log("value");
+        console.log(this.form);
+        const riskClient = this._teleMarketing
+            .putTeleMarketing(
+                this.form.value,
+                this.idClient,
+                this.idCampaing,
+                this.idAdvisor
+            )
+            .subscribe(arg => {
+                alert("Telemarketing was updated");
+            });
     }
-    calculateRisk(): void {}
+    calculateRisk(): void {
+        const riskClient = this._teleMarketing
+            .getClientRisk(this.idClient.toString())
+            .subscribe(arg => {
+                this.form.controls["risk"].setValue(arg.risk);
+            });
+    }
 }
