@@ -145,26 +145,42 @@
                       <mat-expansion-panel-header>
                         <mat-panel-title>Model Campaign</mat-panel-title>
                       </mat-expansion-panel-header>
+                      <div fxFlex fxLayout="column">
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                          <mat-form-field>
+                            <mat-label>Advisor</mat-label>
+                            <mat-select multiple formControlName="advisor">
+                              <mat-option *ngFor="let advisor of advisorList" [value]="advisor.id">{{advisor.user_name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
 
-                      <div fxLayout="row" fxLayoutAlign="space-between">
-                        <mat-form-field>
-                          <mat-label>Advisor</mat-label>
-                          <mat-select multiple>
-                            <mat-option *ngFor="let advisor of advisorList" [value]="advisor.id">{{advisor.user_name}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                          <mat-form-field>
+                            <mat-label>Products</mat-label>
+                            <mat-select multiple formControlName="products">
+                              <mat-option *ngFor="let product of productsList" [value]="product.cod_producto">
+                                {{product.nombre}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
 
-                      <div fxLayout="row" fxLayoutAlign="space-between">
-                        <mat-form-field>
-                          <mat-label>Products</mat-label>
-                          <mat-select multiple>
-                            <mat-option *ngFor="let product of productsList" [value]="product.cod_producto">
-                              {{product.nombre}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="pl-4">
+                          <mat-form-field>
+                            <mat-label class="h1">campaign files</mat-label>
+                            <mat-select formControlName="filesCampaign">
+                              <mat-option value="S">Holiday Campaigns</mat-option>
+                              <mat-option value="ST">Party Campaign</mat-option>
+                              <mat-option value="R">Makeup Campaign</mat-option>
+                              <mat-option value="C">Sale Campaign</mat-option>
+                              <mat-option value="P">Education Campaign</mat-option>
+
+                            </mat-select>
+                            <mat-icon matSuffix class="secondary-text">insert_drive_file</mat-icon>
+                          </mat-form-field>
+                        </div>
                       </div>
                     </mat-expansion-panel>
 

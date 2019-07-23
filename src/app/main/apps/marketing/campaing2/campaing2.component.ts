@@ -18,6 +18,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class Campaing2Component implements OnInit {
     selected = "";
+    selectedFileCampaigns = "";
     opcionSeleccionado: string = "S";
     disableSelect = new FormControl(false);
     form: FormGroup;
@@ -82,7 +83,11 @@ export class Campaing2Component implements OnInit {
             ageEnd: ["", Validators.required],
             bugetStart: ["", Validators.required],
             bugetEnd: ["", Validators.required],
-            rdGender: ["", Validators.required]
+            rdGender: ["", Validators.required],
+
+            advisor: ["", Validators.required],
+            products: ["", Validators.required],
+            filesCampaign: ["", Validators.required]
         });
     }
     createCampaign(): void {
