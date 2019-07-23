@@ -130,7 +130,9 @@ export class FileManagerComponent implements OnInit, OnDestroy {
   public files: NgxFileDropEntry[] = [];
   public file;
   public dt;
-
+  refresh(): void {
+    window.location.reload();
+}
   public dropped(files: NgxFileDropEntry[], variable: String) {
     this.files = files;
     for (const droppedFile of files) {

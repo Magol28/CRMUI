@@ -23,6 +23,8 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     dataSourceVersion: any | null;
     operacionSeleccionada: string = '';
     displayedColumns = ['VersionId', 'LastModified','radio'];
+    info = localStorage.getItem('user');
+  prueba = (JSON.parse(this.info));
     
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -53,6 +55,9 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     
         
     }
+    refresh(): void {
+        window.location.reload();
+    }
     /**
      * On init
      */
@@ -79,13 +84,14 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     async descargar(path:String,nombre:String): Promise<void> {
             var nom:string=''+nombre;
             var aux = path.split('/');
-            var PATH: string = "http://25.76.59.152:3000/documentfolder/";
+            var PATH: string = "http://192.168.100.8:3000/documentfolder/";
             for (var i = 0; i < aux.length; i++) {
                 PATH += aux[i];
                 if (i < (aux.length-1))
                     PATH += '%2F';
             }
-            PATH+='/alex';
+            PATH+='/'+this.prueba.empleado.nombre;
+            console.log(PATH);
             const blob = await this._fileService.descarga(PATH);
             let dataType = blob.type;
             let binaryData = [];
@@ -155,7 +161,7 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
         
         this._fileService.eliminar(dato,'ACT');
         await console.log("datos eliminados")
-       
+        
               
 
     }

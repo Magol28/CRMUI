@@ -74,15 +74,12 @@
 
         <ng-template #notShow>
 
-            <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event,pathArr)"
-                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"
+            <ngx-file-drop dropZoneLabel="Arrastre Sus Archivos Aqui" (onFileDrop)="dropped($event,pathArr);"
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" 
                 
                 >
 
-                <ng-template let-openFileSelector="openFileSelector">
-                    Optional custom content that replaces the the entire default content.
-                    <button type="button" (click)="openFileSelector()">Browse Files</button>
-                </ng-template>
+               
             </ngx-file-drop>
             <file-list></file-list>
         </ng-template>

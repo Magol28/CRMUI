@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 export class FileService {
   info = localStorage.getItem('user');
   prueba = (JSON.parse(this.info));
-  ip='25.76.59.152';
+  ip='192.168.100.8';
  
   url = 'http://'+this.ip+':3000/documentfolder/'+this.prueba.empleado.nombre;
   constructor(public http: HttpClient) { }
@@ -17,7 +17,15 @@ export class FileService {
   public datePipe;
   postTrack(file: File,relativePath:string,variable:String):any {
     const data =new FormData();
-    var PathFather:string=(''+variable).replace(',','/');
+    var father:string[]=(''+variable).split(',');
+    var PathFather:string='';
+    for(var i=0;i<father.length;i++){
+      PathFather+=father[i];
+      if(i<(father.length-1)){
+        PathFather+='/';
+      }
+    }
+    
     
     relativePath=PathFather+'/'+relativePath;
     data.append('document', file, file.name);
