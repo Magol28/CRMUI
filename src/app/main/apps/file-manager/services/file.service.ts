@@ -78,13 +78,14 @@ export class FileService {
   });
     
   }
-  eliminar(del:String):Promise<any> {
+  eliminar(del:String,statet:string):Promise<any> {
     console.log(del);
-    
+    var url='http://25.76.59.152:3000/documentfolder/remove/'+del+'/state/'+statet;
+    console.log(url);
     return new Promise((resolve, reject) => {
 
       const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-      this.http.put('http://25.76.59.152:3000/documentfolder/remove/'+del+'', { headers: header })
+      this.http.put(url, { headers: header })
           .subscribe((response: any) => {
             console.log('versiones');
               console.log(response.Versions);

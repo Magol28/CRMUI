@@ -26,7 +26,7 @@ export interface PeriodicElement {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileManagerFileListComponent implements OnInit, OnDestroy {
-
+    seltabla:string="";
     files: any;
     filesver: any;
     dataSource: FilesDataSource | null;
@@ -81,7 +81,7 @@ export class FileManagerFileListComponent implements OnInit, OnDestroy {
             this._versionManagerService.onFilesChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(filesu => {
-                this.filesver = this.filterByFather('14', filesu);
+                this.filesver = filesu;
                 console.log(this.filesver);
             });
         this._fileManagerService.onFileSelected

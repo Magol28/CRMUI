@@ -1,3 +1,4 @@
+
 <mat-tab-group>
     <mat-tab label="Archivos">
         <mat-table #table [dataSource]="files" [@animateStagger]="{value:'50'}">
@@ -41,7 +42,7 @@
 
         </mat-table>
     </mat-tab>
-    <mat-tab label="Papelera"><mat-table #table [dataSource]="filesver" [@animateStagger]="{value:'50'}">
+    <mat-tab   label="Papelera"><mat-table #table [dataSource]="filesver" [@animateStagger]="{value:'50'}">
 
         <!-- Type Column -->
         <ng-container matColumnDef="icon">
@@ -82,10 +83,11 @@
     </mat-table>
  </mat-tab>
 
-</mat-tab-group>
+</mat-tab-group> 
 <tr class="Download">
 
     <td>
+           
         <button (click)="Atras()">
             Atras
         </button>

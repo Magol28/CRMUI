@@ -18,7 +18,7 @@ import { VersionComponent } from './sidebars/version/version.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
 import { VersionManagerService } from 'app/main/apps/file-manager/version-manager.service';
-
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import { FileManagerComponent } from 'app/main/apps/file-manager/file-manager.component';
 import { FileManagerDetailsSidebarComponent } from 'app/main/apps/file-manager/sidebars/details/details.component';
 import { FileManagerPapeleraComponent } from 'app/main/apps/file-manager/papelera/papelera.component';
@@ -85,6 +85,7 @@ const routes: Routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
+        ScrollDispatchModule,
         MatFormFieldModule,
         MatButtonModule,
         MatInputModule,

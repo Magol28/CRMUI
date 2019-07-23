@@ -64,7 +64,7 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
             .subscribe(selected => {
                 this.selected = selected;
             });
-        
+            
           
     }
     
@@ -138,7 +138,22 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
             dato+='%2F';
         }
         
-        this._fileService.eliminar(dato);
+        this._fileService.eliminar(dato,'ACT');
+        await console.log("datos eliminados")
+       
+              
+
+    }
+    async restaurar(dato:String):Promise<void>{
+        var aux=dato.split('/');
+        dato="";
+        for(var i=0;i<aux.length;i++){
+            dato+=aux[i];
+            if(i<(aux.length-1))
+            dato+='%2F';
+        }
+        
+        this._fileService.eliminar(dato,'ICT');
         await console.log("datos eliminados")
        
               
