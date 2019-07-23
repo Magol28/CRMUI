@@ -31,4 +31,23 @@ export class SalesService {
     const url = 'http://192.168.100.8:3000/sales/' + id;
     return this.http.get(url);
   }
+
+  getTaskBySale(id: String) :any{
+    const url = this._url+'sales/'+id+'/tasks';
+    return this.http.get(url);
+  }
+    
+  getMeetingsBySale(id: String) :any{
+    const url = this._url+'sales/'+id+'/meetings';
+    return this.http.get(url);
+  }
+  getCommunicationsBySale(id: String) :any{
+    const url = this._url+'sales/'+id+'/communications';
+    return this.http.get(url);
+  }
+  getQuotationsBySale(id: String) :any{
+    const url = this._url+'sales/'+id+'/quotations';
+    return this.http.get(url);
+  }
+
 }

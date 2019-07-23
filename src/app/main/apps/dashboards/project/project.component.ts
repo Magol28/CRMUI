@@ -35,6 +35,11 @@ export class ProjectDashboardComponent implements OnInit
     projects: any[];
     selectedProject: any;
     meetings:any [];
+
+    tasks=[];
+    meeting=[];
+    communications=[];
+    quotations=[];
     
     dialogRef: any;
 
@@ -66,59 +71,7 @@ export class ProjectDashboardComponent implements OnInit
         //private _matDialog: MatDialog
     )
     {
-        /**
-         * Widget 5
-         */
-        this.widget5 = {
-            currentRange  : 'TW',
-            xAxis         : true,
-            yAxis         : true,
-            gradient      : false,
-            legend        : false,
-            showXAxisLabel: false,
-            xAxisLabel    : 'Days',
-            showYAxisLabel: false,
-            yAxisLabel    : 'Isues',
-            scheme        : {
-                domain: ['#42BFF7', '#C6ECFD', '#C7B42C', '#AAAAAA']
-            },
-            onSelect      : (ev) => {
-                console.log(ev);
-            },
-            supporting    : {
-                currentRange  : '',
-                xAxis         : false,
-                yAxis         : false,
-                gradient      : false,
-                legend        : false,
-                showXAxisLabel: false,
-                xAxisLabel    : 'Days',
-                showYAxisLabel: false,
-                yAxisLabel    : 'Isues',
-                scheme        : {
-                    domain: ['#42BFF7', '#C6ECFD', '#C7B42C', '#AAAAAA']
-                },
-                curve         : shape.curveBasis
-            }
-        };
-
-        /**
-         * Widget 6
-         */
-        this.widget6 = {
-            currentRange : 'TW',
-            legend       : false,
-            explodeSlices: false,
-            labels       : true,
-            doughnut     : true,
-            gradient     : false,
-            scheme       : {
-                domain: ['#f44336', '#9c27b0', '#03a9f4', '#e91e63']
-            },
-            onSelect     : (ev) => {
-                console.log(ev);
-            }
-        };
+        
 
         /**
          * Widget 7
@@ -187,6 +140,18 @@ export class ProjectDashboardComponent implements OnInit
                     this.selectedProject = data.sale;
                     this.widgets = this._projectDashboardService.widgets;
                 });
+                this.getSales.getMeetingsBySale(id).subscribe(data=>{
+                    console.log(data.tasks)
+                   this.meeting=data.tasks;
+                })
+                this.getSales.getCommunicationsBySale(id).subscribe(data=>{
+                    console.log(data.tasks)
+                   this.communications=data.tasks;
+                })
+                this.getSales.getQuotationsBySale(id).subscribe(data=>{
+                    console.log(data)
+                   this.quotations=data;
+                })
         });
 
         /**

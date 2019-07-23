@@ -36,6 +36,9 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    info = localStorage.getItem('user');
+    prueba = (JSON.parse(this.info));
+        
 
     constructor(
         private _activatedRoute: ActivatedRoute,
@@ -59,7 +62,8 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this._getSalesBySeller.getSalesBySeller("3")
+        
+        this._getSalesBySeller.getSalesBySeller("1723954093")
         .subscribe( respuesta =>{               
             this.sales = filterSales(respuesta.foundSales);
             console.log(respuesta.foundSales);
