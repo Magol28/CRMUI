@@ -10,8 +10,9 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 
-//import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ScrumboardCardDialogComponent } from 'app/main/apps/scrumboard/board/dialogs/card/card.component';
+import { SalesService } from '../../scrumboard/services/sales.service';
+
+const { getSalesById } = SalesService.prototype;
 
 @Component({
     selector     : 'project-dashboard',
@@ -25,9 +26,9 @@ export class ProjectDashboardComponent implements OnInit
     nom : String;
     projects: any[];
     selectedProject: any;
+    meetings:any [];
     
     dialogRef: any;
-
 
     widgets: any;
     widget5: any = {};
@@ -53,6 +54,7 @@ export class ProjectDashboardComponent implements OnInit
         private _projectDashboardService: ProjectDashboardService,
         private router : ActivatedRoute,
         private router2 : Router,
+        private getSales : SalesService,
         //private _matDialog: MatDialog
     )
     {
@@ -169,8 +171,15 @@ export class ProjectDashboardComponent implements OnInit
     ngOnInit(): void
     {
         this.projects = this._projectDashboardService.projects;
-        this.selectedProject = this.projects[0];
-        this.widgets = this._projectDashboardService.widgets;
+        this.router.params.subscribe(params => {
+            const id = params['id'];
+            this.getSales.getSalesById(id)
+                .subscribe(data => {
+                    alert(data.sale.name);
+                    this.selectedProject = data.sale;
+                    this.widgets = this._projectDashboardService.widgets;
+                });
+        });
 
         /**
          * Widget 11
@@ -199,10 +208,10 @@ export class ProjectDashboardComponent implements OnInit
         this._fuseSidebarService.getSidebar(name).toggleOpen();
     }
 
-    informacionCard(id: number){
+    informacionCard (id: number){
         this.router2.navigate(['/apps/dashboards/project/info','Silvi']);
     };
-    
+
     
 
 }
@@ -235,8 +244,6 @@ export class FilesDataSource extends DataSource<any>
     disconnect(): void
     {
     }
-
-    
-
 }
+
 

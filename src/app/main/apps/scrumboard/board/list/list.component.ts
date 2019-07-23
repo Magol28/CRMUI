@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -44,7 +44,8 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _scrumboardService: ScrumboardService,
-        private _matDialog: MatDialog
+        private _matDialog: MatDialog,
+        private _goToBoard: Router
     )
     {
         // Set the private defaults
@@ -60,13 +61,11 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        console.log(this.list);
         this._scrumboardService.onBoardChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(board => {
-                this.board = board;
-            });
-
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(board => {
+            this.board = board;
+        });
     }
 
     /**
@@ -154,12 +153,24 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     }
 
     /**
+     * Open card sale
+     *
+     * @param cardId
+     */
+    openCardSale(card): void
+    {
+        this._goToBoard.navigate(['/apps/dashboards/project/info/' + card._id]);
+    }
+
+    /**
      * On drop
      *
      * @param ev
+     * @param card
      */
-    onDrop(ev): void
+    onDrop(ev,card): void
     {
+        console.log(card);
         this._scrumboardService.updateBoard();
     }
 }
