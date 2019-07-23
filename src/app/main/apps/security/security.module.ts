@@ -38,7 +38,7 @@ const routes: Routes = [
     {
         path     : 'resources',
         component: ResourcesComponent,
-        data: { roles: ['prueba'] }
+        data: { roles: ['resource'] }
     },
     {
         path     : 'resource/:id',
