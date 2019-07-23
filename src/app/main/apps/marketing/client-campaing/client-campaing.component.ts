@@ -6,6 +6,12 @@ import { fuseAnimations } from "@fuse/animations";
 
 import { Router } from "@angular/router";
 import { ClientCampaingService } from "../services/client-campaing.service";
+import {
+    FormGroup,
+    FormControl,
+    FormBuilder,
+    Validators
+} from "@angular/forms";
 
 @Component({
     selector: "app-client-campaing",
@@ -27,15 +33,52 @@ export class ClientCampaingComponent implements OnInit {
     ];
     dataSource: MatTableDataSource<any>;
 
+    form: FormGroup;
+    isLinear = false;
+    firstFormGroup: FormGroup;
+    secondFormGroup: FormGroup;
+    resources: any[];
+
+    campaignList = [];
+    selected = "";
+    opcionSeleccionado: string = "S";
+    disableSelect = new FormControl(false);
+
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
     constructor(
+        private _formBuilder: FormBuilder,
         private _employee: ClientCampaingService,
         private router: Router
     ) {
         // Create 100 users
-        this._employee.getAll("1").subscribe(data => {
+
+        this._employee.getCampaign().subscribe(data => {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                this.campaignList.push(data[i]);
+            }
+        });
+    }
+
+    // tslint:disable-next-line:typedef
+    ngOnInit() {
+        this.form = this._formBuilder.group({
+            campaing: ["", Validators.required]
+        });
+    }
+
+    // tslint:disable-next-line:typedef
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
+    search(): void {
+        this._employee.getAll(this.form.value.campaing).subscribe(data => {
             console.log(data);
             for (let i = 0; i < data.length; i++) {
                 if (data[i].gender === "M" || data[i].gender === "m") {
@@ -49,20 +92,5 @@ export class ClientCampaingComponent implements OnInit {
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
         });
-    }
-
-    // tslint:disable-next-line:typedef
-    ngOnInit() {}
-
-    // tslint:disable-next-line:typedef
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
-    }
-    search(id: string): void {
-        // this.router.navigate(["/apps/security/employee", id]);
     }
 }

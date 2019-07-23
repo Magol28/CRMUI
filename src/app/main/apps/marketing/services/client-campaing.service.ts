@@ -12,4 +12,8 @@ export class ClientCampaingService {
                 id
         );
     }
+
+    getCampaign(): any {
+        return this.http.get("http://192.168.1.108:8000/service/campaign/");
+    }
 }
