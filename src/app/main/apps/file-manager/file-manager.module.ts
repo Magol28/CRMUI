@@ -18,7 +18,7 @@ import { VersionComponent } from './sidebars/version/version.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { FileManagerService } from 'app/main/apps/file-manager/file-manager.service';
 import { VersionManagerService } from 'app/main/apps/file-manager/version-manager.service';
-
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import { FileManagerComponent } from 'app/main/apps/file-manager/file-manager.component';
 import { FileManagerDetailsSidebarComponent } from 'app/main/apps/file-manager/sidebars/details/details.component';
 import { FileManagerPapeleraComponent } from 'app/main/apps/file-manager/papelera/papelera.component';
@@ -56,6 +56,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -65,7 +66,10 @@ const routes: Routes = [
         resolve: {
             files: FileManagerService,
             version:VersionManagerService
-        }
+        },
+        canActivate: [AuthGuard],
+        data: { roles: ['Documentos'] }
+        
     }
 ];
 
@@ -85,6 +89,7 @@ const routes: Routes = [
     ],
     imports: [
         RouterModule.forChild(routes),
+        ScrollDispatchModule,
         MatFormFieldModule,
         MatButtonModule,
         MatInputModule,
