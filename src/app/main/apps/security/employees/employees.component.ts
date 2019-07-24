@@ -26,7 +26,15 @@ export class EmployeesComponent implements OnInit {
               private router: Router) {
     // Create 100 users
     this._employee.getAll().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
+      const info = localStorage.getItem('user');
+      const prueba = (JSON.parse(info));
+      const _info = [];
+      data.forEach(item => {
+        if (item.empresa.ruc === prueba.empleado.empresa.ruc) {
+          _info.push(item);
+      }
+      });
+      this.dataSource = new MatTableDataSource(_info);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
      });
