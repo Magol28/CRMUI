@@ -33,6 +33,7 @@ import { ScrumboardLabelSelectorComponent } from 'app/main/apps/scrumboard/board
 import { ScrumboardEditBoardNameComponent } from 'app/main/apps/scrumboard/board/edit-board-name/edit-board-name.component';
 import { ScrumboardBoardSettingsSidenavComponent } from 'app/main/apps/scrumboard/board/sidenavs/settings/settings.component';
 import { ScrumboardBoardColorSelectorComponent } from 'app/main/apps/scrumboard/board/sidenavs/settings/board-color-selector/board-color-selector.component';
+import { AuthGuard } from '../../../guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -40,14 +41,19 @@ const routes: Routes = [
         component: ScrumboardComponent,
         resolve  : {
             scrumboard: ScrumboardService
-        }
+        },
+        
+        canActivate: [AuthGuard],
+        data: { roles: ['Ventas'] }
     },
     {
         path     : 'boards/:boardId/:boardUri',
         component: ScrumboardBoardComponent,
         resolve  : {
             board: BoardResolve
-        }
+        },
+        canActivate: [AuthGuard],
+        data: { roles: ['Ventas'] }
     },
     {
         path      : '**',
