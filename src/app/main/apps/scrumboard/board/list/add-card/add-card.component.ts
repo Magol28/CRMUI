@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SalesService } from 'app/main/apps/scrumboard/services/sales.service';
+import { runInThisContext } from 'vm';
 
 @Component({
     selector     : 'scrumboard-board-add-card',
@@ -11,6 +14,10 @@ export class ScrumboardBoardAddCardComponent
 {
     formActive: boolean;
     form: FormGroup;
+    sale: any;
+
+    @Input()
+    cardId;
 
     @Output()
     cardAdded: EventEmitter<any>;
@@ -24,25 +31,35 @@ export class ScrumboardBoardAddCardComponent
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _sale: SalesService
     )
     {
         // Set the defaults
         this.formActive = false;
         this.cardAdded = new EventEmitter();
+
     }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
+    
+
+    
+
     /**
      * Open the form
      */
     openForm(): void
     {
+        console.log("esta es la venta");
+        console.log(this.cardId);
         this.form = this._formBuilder.group({
-            name: ''
+            name: [''],
+            description: [''],
+            idCompany: ['']
         });
         this.formActive = true;
         this.focusNameField();
@@ -70,13 +87,21 @@ export class ScrumboardBoardAddCardComponent
      * On form submit
      */
     onFormSubmit(): void
-    {
-        if ( this.form.valid )
-        {
-            const cardName = this.form.getRawValue().name;
-            this.cardAdded.next(cardName);
+    {            
+        const data = 
+        {sale: {            
+            name: this.form.getRawValue().name,
+            description: this.form.getRawValue().description,
+            idCompany: this.form.getRawValue().idCompany
+        }};
+        if ( this.form.valid ){
+        this._sale.postSale(data).subscribe(data => {
+            console.log(data);
+            this.cardAdded.next(data);
             this.formActive = false;
-        }
+        });
+    }
     }
 }
+
 

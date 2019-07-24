@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as shape from 'd3-shape';
@@ -7,6 +7,13 @@ import { fuseAnimations } from '@fuse/animations';
 
 import { ProjectDashboardService } from 'app/main/apps/dashboards/project/project.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { SalesService } from '../../scrumboard/services/sales.service';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+
+const { getSalesById } = SalesService.prototype;
 
 @Component({
     selector     : 'project-dashboard',
@@ -17,8 +24,24 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 })
 export class ProjectDashboardComponent implements OnInit
 {
+
+    displayedColumns: string[] = [ 'creation-date', 'num-offers', 'isValid'];
+    dataSource: MatTableDataSource<any>;
+  
+    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
+    
+    nom : String;
     projects: any[];
     selectedProject: any;
+    meetings:any [];
+
+    tasks=[];
+    meeting=[];
+    communications=[];
+    quotations=[];
+    
+    dialogRef: any;
 
     widgets: any;
     widget5: any = {};
@@ -30,6 +53,9 @@ export class ProjectDashboardComponent implements OnInit
 
     dateNow = Date.now();
 
+    @Input()
+    list;
+
     /**
      * Constructor
      *
@@ -38,62 +64,14 @@ export class ProjectDashboardComponent implements OnInit
      */
     constructor(
         private _fuseSidebarService: FuseSidebarService,
-        private _projectDashboardService: ProjectDashboardService
+        private _projectDashboardService: ProjectDashboardService,
+        private router : ActivatedRoute,
+        private router2 : Router,
+        private getSales : SalesService,
+        //private _matDialog: MatDialog
     )
     {
-        /**
-         * Widget 5
-         */
-        this.widget5 = {
-            currentRange  : 'TW',
-            xAxis         : true,
-            yAxis         : true,
-            gradient      : false,
-            legend        : false,
-            showXAxisLabel: false,
-            xAxisLabel    : 'Days',
-            showYAxisLabel: false,
-            yAxisLabel    : 'Isues',
-            scheme        : {
-                domain: ['#42BFF7', '#C6ECFD', '#C7B42C', '#AAAAAA']
-            },
-            onSelect      : (ev) => {
-                console.log(ev);
-            },
-            supporting    : {
-                currentRange  : '',
-                xAxis         : false,
-                yAxis         : false,
-                gradient      : false,
-                legend        : false,
-                showXAxisLabel: false,
-                xAxisLabel    : 'Days',
-                showYAxisLabel: false,
-                yAxisLabel    : 'Isues',
-                scheme        : {
-                    domain: ['#42BFF7', '#C6ECFD', '#C7B42C', '#AAAAAA']
-                },
-                curve         : shape.curveBasis
-            }
-        };
-
-        /**
-         * Widget 6
-         */
-        this.widget6 = {
-            currentRange : 'TW',
-            legend       : false,
-            explodeSlices: false,
-            labels       : true,
-            doughnut     : true,
-            gradient     : false,
-            scheme       : {
-                domain: ['#f44336', '#9c27b0', '#03a9f4', '#e91e63']
-            },
-            onSelect     : (ev) => {
-                console.log(ev);
-            }
-        };
+        
 
         /**
          * Widget 7
@@ -154,8 +132,27 @@ export class ProjectDashboardComponent implements OnInit
     ngOnInit(): void
     {
         this.projects = this._projectDashboardService.projects;
-        this.selectedProject = this.projects[0];
-        this.widgets = this._projectDashboardService.widgets;
+        this.router.params.subscribe(params => {
+            const id = params['id'];
+            this.getSales.getSalesById(id)
+                .subscribe(data => {
+                    alert(data.sale.name);
+                    this.selectedProject = data.sale;
+                    this.widgets = this._projectDashboardService.widgets;
+                });
+                this.getSales.getMeetingsBySale(id).subscribe(data=>{
+                    console.log(data.tasks)
+                   this.meeting=data.tasks;
+                })
+                this.getSales.getCommunicationsBySale(id).subscribe(data=>{
+                    console.log(data.tasks)
+                   this.communications=data.tasks;
+                })
+                this.getSales.getQuotationsBySale(id).subscribe(data=>{
+                    console.log(data)
+                   this.quotations=data;
+                })
+        });
 
         /**
          * Widget 11
@@ -163,11 +160,16 @@ export class ProjectDashboardComponent implements OnInit
         this.widget11.onContactsChanged = new BehaviorSubject({});
         this.widget11.onContactsChanged.next(this.widgets.widget11.table.rows);
         this.widget11.dataSource = new FilesDataSource(this.widget11);
+
+        this.router.params.subscribe(data => {
+            this.nom = data['id'];
+        });
     }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
+    
 
     /**
      * Toggle the sidebar
@@ -178,6 +180,13 @@ export class ProjectDashboardComponent implements OnInit
     {
         this._fuseSidebarService.getSidebar(name).toggleOpen();
     }
+
+    informacionCard (id: number){
+        this.router2.navigate(['/apps/dashboards/project/info','Silvi']);
+    };
+
+    
+
 }
 
 export class FilesDataSource extends DataSource<any>
@@ -209,4 +218,5 @@ export class FilesDataSource extends DataSource<any>
     {
     }
 }
+
 

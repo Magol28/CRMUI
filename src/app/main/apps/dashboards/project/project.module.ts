@@ -20,7 +20,7 @@ import { AuthGuard } from 'app/guards/auth.guard';
 
 const routes: Routes = [
     {
-        path     : '**',
+        path     : 'info/:id',
         component: ProjectDashboardComponent,
         resolve  : {
             data: ProjectDashboardService
