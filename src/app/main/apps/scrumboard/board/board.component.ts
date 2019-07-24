@@ -63,7 +63,7 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         
-        this._getSalesBySeller.getSalesBySeller("1723954093")
+        this._getSalesBySeller.getSalesBySeller("1726781584")
         .subscribe( respuesta =>{               
             this.sales = filterSales(respuesta.foundSales);
             console.log(respuesta.foundSales);
