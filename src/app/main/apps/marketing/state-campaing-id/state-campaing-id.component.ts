@@ -103,10 +103,15 @@ export class StateCampaingIdComponent implements OnInit {
         console.log($event);
         this.selectedOption = $event;
     }
+    sendEmail(): void {
+        this._campaing.getEmail(this.form.value.id).subscribe(data => {});
+        alert("Campaign Send Email");
+    }
+
     updateState(): void {
         this._campaing
             .putStage(this.form.value, this.selected)
             .subscribe(data => {});
-        alert("Etapa de la Campaña Modificada");
+        alert("Modified Campaign Stage");
     }
 }
