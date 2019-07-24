@@ -22,7 +22,7 @@ export class SalesService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
       console.log(data);
-    const url = this._url+'sales/seller/'+'1723954093';
+    const url = this._url+'sales/seller/'+'1726781584';
     return this.http.post(url, data, {headers});
   }
     
