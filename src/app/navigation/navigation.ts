@@ -113,7 +113,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id       : 'scrumboard',
-                title    : 'Scrumboard',
+                title    : 'Ventas',
                 translate: 'NAV.SCRUMBOARD',
                 type     : 'item',
                 icon     : 'assessment',

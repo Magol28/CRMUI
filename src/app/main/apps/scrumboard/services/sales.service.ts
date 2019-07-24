@@ -6,7 +6,8 @@ import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 })
 export class SalesService {
 
-  _url = "http://localhost:3000/"; 
+  /* _url = "http://localhost:3000/";  */
+  _url = "http://192.168.1.120:3000/"; 
  /*  _url = "http://54.242.242.56:3000/";  */
 
 
@@ -22,7 +23,7 @@ export class SalesService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
       console.log(data);
-    const url = this._url+'sales/seller/'+'1723954093';
+    const url = this._url+'sales/seller/'+'1726781584';
     return this.http.post(url, data, {headers});
   }
     
@@ -35,8 +36,7 @@ export class SalesService {
   getTaskBySale(id: String) :any{
     const url = this._url+'sales/'+id+'/tasks';
     return this.http.get(url);
-  }
-    
+  }    
   getMeetingsBySale(id: String) :any{
     const url = this._url+'sales/'+id+'/meetings';
     return this.http.get(url);
@@ -45,9 +45,20 @@ export class SalesService {
     const url = this._url+'sales/'+id+'/communications';
     return this.http.get(url);
   }
+  getCallsBySale(id: String) :any{
+    const url = this._url+'sales/'+id+'/communications/call';
+    return this.http.get(url);
+  }
   getQuotationsBySale(id: String) :any{
     const url = this._url+'sales/'+id+'/quotations';
     return this.http.get(url);
+  }
+  changePhase(id: String, data) :any{
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+      console.log(data);
+      const url = this._url+'sales/'+id+'/phase';
+    return this.http.post(url, data, {headers});
   }
 
 }
