@@ -8,16 +8,16 @@ export class ReportCampaingService {
     constructor(private http: HttpClient) {}
 
     getCampaign(): any {
-        return this.http.get("http://192.168.1.112:8000/service/campaign/");
+        return this.http.get("http://54.242.242.56:8000/service/campaign/");
     }
 
     getAdvisor(): any {
-        return this.http.get("http://192.168.1.112:8000/service/advisor/");
+        return this.http.get("http://54.242.242.56:8000/service/advisor/");
     }
 
     getAdvisorCampaign(data): any {
         return this.http.get(
-            "http://192.168.1.112:8000/service/clients-campaign-advisor/?advisor_id=" +
+            "http://54.242.242.56:8000/service/clients-campaign-advisor/?advisor_id=" +
                 data.advisor +
                 "&campaign_id=" +
                 data.campaign

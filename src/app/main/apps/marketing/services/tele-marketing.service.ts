@@ -9,13 +9,13 @@ export class TeleMarketingService {
 
     getClient(id: string): any {
         return this.http.get(
-            "http://192.168.1.108:8000/service/client/?client_id=" + id
+            "http://54.242.242.56:8000/service/client/?client_id=" + id
         );
     }
 
     getTelemarketing(idCient: string, idCampaign: string, idAdvisor): any {
         return this.http.get(
-            "http://192.168.1.108:8000/service/telemarketing-result/?advisor=" +
+            "http://54.242.242.56:8000/service/telemarketing-result/?advisor=" +
                 idAdvisor +
                 "&campaign=" +
                 idCampaign +
@@ -26,14 +26,14 @@ export class TeleMarketingService {
 
     getClientRisk(idCient: string): any {
         return this.http.get(
-            "http://192.168.1.108:8000/service/client-risk/?client_id=" +
+            "http://54.242.242.56:8000/service/client-risk/?client_id=" +
                 idCient
         );
     }
 
     getMarketing(idMarketing, idUser): any {
         return this.http.get(
-            "http://192.168.1.112:8000/service/campaign/?campaign_id=" +
+            "http://54.242.242.56:8000/service/campaign/?campaign_id=" +
                 idMarketing +
                 "&created_by=" +
                 idUser
@@ -51,7 +51,7 @@ export class TeleMarketingService {
             client_risk: data.risk
         };
         return this.http.put(
-            "http://192.168.1.112:8000/service/telemarketing-result/",
+            "http://54.242.242.56:8000/service/telemarketing-result/",
             JSON.stringify(objeto),
             { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
         );
