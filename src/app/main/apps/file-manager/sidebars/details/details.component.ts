@@ -84,7 +84,7 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     async descargar(path:String,nombre:String): Promise<void> {
             var nom:string=''+nombre;
             var aux = path.split('/');
-            var PATH: string = "http://192.168.100.8:3001/documentfolder/";
+            var PATH: string = "http://25.76.59.152:3000/documentfolder/";
             for (var i = 0; i < aux.length; i++) {
                 PATH += aux[i];
                 if (i < (aux.length-1))
@@ -129,6 +129,7 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
         }
         
         this.dataSourceVersion =await this._fileService.versiones(dato);
+        
         await console.log("datos vrsion")
         await       console.log(this.dataSourceVersion)
               

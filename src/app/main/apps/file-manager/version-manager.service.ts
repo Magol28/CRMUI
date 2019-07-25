@@ -73,10 +73,14 @@ export class VersionManagerService implements Resolve<any>
     getFiles(aux:String): Promise<any> {
         var info = localStorage.getItem('user');
         var prueba = (JSON.parse(info));
+        var ip='25.76.59.152';
+        //var ip='192.168.100.8';
+        //var ip='54.242.242.56';
+        var port='3000';
         return new Promise((resolve, reject) => {
 
             const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-            this._httpClient.get('http://192.168.100.8:3001/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ICT', { headers: header })
+            this._httpClient.get('http://'+ip+':'+port+'/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ICT', { headers: header })
                 .subscribe((response: any) => {
                     console.log('entro a la version')
                     console.log(response.Versions);
