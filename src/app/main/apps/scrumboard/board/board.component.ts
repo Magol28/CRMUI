@@ -25,7 +25,7 @@ import { List } from 'app/main/apps/scrumboard/list.model';
 export class ScrumboardBoardComponent implements OnInit, OnDestroy
 {
     board: any;
-    nombreUsuario = "Selena";
+    nombreUsuario = "Cristina";
     sales: any;
     sale: any;
     dialogRef: any;

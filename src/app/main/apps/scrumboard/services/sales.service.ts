@@ -48,6 +48,10 @@ export class SalesService {
     const url = this._url+'sales/'+id+'/communications/call';
     return this.http.get(url);
   }
+  getMailsBySale(id: String) :any{
+    const url = this._url+'sales/'+id+'/communications/mail';
+    return this.http.get(url);
+  }
   getQuotationsBySale(id: String) :any{
     const url = this._url+'sales/'+id+'/quotations';
     return this.http.get(url);
@@ -56,8 +60,6 @@ export class SalesService {
     const url = this._url+'services';
     return this.http.get(url);
   }
-
-
 
   changePhase(id: String, data) :any{
     const headers = new HttpHeaders()
@@ -92,6 +94,14 @@ export class SalesService {
     return this.http.post(url, data, {headers});
   }
 
+  postMail(id: String, data): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+      console.log(data);
+    const url = this._url+'sales/'+id+'/communications/mail';
+    return this.http.post(url, data, {headers});
+  }
+
   postService(data): any {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
@@ -108,5 +118,25 @@ export class SalesService {
     return this.http.post(url, data, {headers});
   }
 
+  putSale(id: String): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const url = this._url+'sales/'+id+'/acceptedQuotation';
+    return this.http.put(url, {headers});
+  }
+
+  putSaleClose(id: String): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const url = this._url+'sales/'+id;
+    return this.http.put(url, {headers});
+  }
+
+  putSaleCancel(id: String): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const url = this._url+'sales/'+id+'/canceled';
+    return this.http.put(url, {headers});
+  }
 
 }

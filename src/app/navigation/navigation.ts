@@ -23,7 +23,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id   : 'project',
-                        title: 'Project',
+                        title: 'Actividades Venta',
                         type : 'item',
                         url  : '/apps/dashboards/project'
                     }

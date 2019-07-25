@@ -21,6 +21,7 @@ export class ProjectDashboardComponent implements OnInit
     form2: FormGroup;
     form3: FormGroup;
     form4: FormGroup;
+    form5: FormGroup;
 
     tasks=[];
     meetings=[];
@@ -29,6 +30,8 @@ export class ProjectDashboardComponent implements OnInit
     services=[];
     calls=[];
     mails=[];
+
+    nameUser = "Cristina";
 
     /**
      * Constructor
@@ -80,6 +83,13 @@ export class ProjectDashboardComponent implements OnInit
             description4: [''],
             unitValue: ['']
         });
+
+        this.form5 = this._formBuilder.group({
+            subject5: [''],
+            description5: [''],
+            observation5: [''],
+            mail: [''],
+        });
         
 
         this.activateR.params.subscribe(params => {
@@ -108,13 +118,16 @@ export class ProjectDashboardComponent implements OnInit
                 console.log(data.services)
                this.services=data.services;
             })
+            this._sales.getMailsBySale(cedula).subscribe(data=>{
+                console.log(data.communication)
+               this.mails=data.communication;
+            })
             
         });
     }
 
     addTask(): void
     {            
-        console.log("entro por fin");
         this.activateR.params.subscribe(params => {
             const cedula = params['id'];
             console.log(cedula);
@@ -165,7 +178,7 @@ export class ProjectDashboardComponent implements OnInit
             {communication: {            
                 subject: this.form2.getRawValue().subject,
                 description: this.form2.getRawValue().description2,
-                date: new Date(),
+                date: this.form2.getRawValue().date2,
                 type: "call",
                 place: this.form2.getRawValue().place,
                 observation: this.form2.getRawValue().observation2,
@@ -182,9 +195,36 @@ export class ProjectDashboardComponent implements OnInit
         });        
     }
 
-    addService(): void
+    addMail(): void
     {            
         console.log("entro por fin");
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];
+            console.log(cedula);
+            const data = 
+            {communication: {            
+                subject: this.form5.getRawValue().subject5,
+                description: this.form5.getRawValue().description5,
+                date: new Date(),
+                type: "mail",
+                observation: this.form5.getRawValue().observation5,
+                email: {
+                    attachment: [],
+                    to: this.form5.getRawValue().mail,
+                    subject: this.form5.getRawValue().subject5,
+                    html: "<h1>"+this.form5.getRawValue().description5+"</h1>",
+                }
+            }};
+            
+            this._sales.postMail(cedula, data).subscribe(data => {
+                console.log(data);
+
+            });
+        });        
+    }
+
+    addService(): void
+    {            
             const data = 
             {service: 
                 {            
@@ -255,6 +295,32 @@ export class ProjectDashboardComponent implements OnInit
         });        
     }
 
+    aceptQuote(): void{
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];            
+            this._sales.putSale(cedula).subscribe(data => {
+                console.log(data);
+            });
+        });    
+    }
+
+    closeSale(): void{
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];            
+            this._sales.putSaleClose(cedula).subscribe(data => {
+                console.log(data);
+            });
+        });    
+    }
+
+    cancelSale(): void{
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];            
+            this._sales.putSaleCancel(cedula).subscribe(data => {
+                console.log(data);
+            });
+        });    
+    }
 }
 
 
