@@ -94,7 +94,7 @@ export class ProjectDashboardComponent implements OnInit
             })
             this._sales.getQuotationsBySale(cedula).subscribe(data=>{
                 console.log(data.quotations)
-               this.quotations=data.quotations;
+               this.quotations=data.quotations || [];
             })
             this._sales.getServices(cedula).subscribe(data=>{
                 console.log(data.services)
