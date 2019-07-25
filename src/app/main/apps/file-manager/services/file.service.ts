@@ -10,10 +10,11 @@ export class FileService {
   info = localStorage.getItem('user');
   prueba = (JSON.parse(this.info));
 
-  ip='25.76.59.152';
+  //ip='25.76.59.152';
   //ip='192.168.100.8';
   //ip='54.242.242.56';
-  port='3000';
+  ip='3.91.68.253';
+  port='3001';
 
  
   url = 'http://'+this.ip+':'+this.port+'/documentfolder/'+this.prueba.empleado.nombre;
