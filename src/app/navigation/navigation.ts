@@ -69,14 +69,6 @@ export const navigation: FuseNavigation[] = [
                 url      : '/apps/file-manager'
             },
             {
-                id       : 'contacts',
-                title    : 'Contacts',
-                translate: 'NAV.CONTACTS',
-                type     : 'item',
-                icon     : 'account_box',
-                url      : '/apps/contacts'
-            },
-            {
                 id       : 'Sales',
                 title    : 'Sales',
                 translate: 'NAV.SCRUMBOARD',
@@ -88,8 +80,8 @@ export const navigation: FuseNavigation[] = [
     },
     {
             
-                id      : 'employees',
-                title   : 'employees',
+                id      : 'mployees',
+                title   : 'Employees',
                 type    : 'collapsable',
                 icon    : 'lock',
                 badge   : {
@@ -114,8 +106,8 @@ export const navigation: FuseNavigation[] = [
     },
     {
             
-                id      : 'User',
-                title   : 'user',
+                id      : 'ser',
+                title   : 'User',
                 type    : 'collapsable',
                 icon    : 'lock',
                 badge   : {
