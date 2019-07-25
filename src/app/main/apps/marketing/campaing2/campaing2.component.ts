@@ -26,6 +26,9 @@ export class Campaing2Component implements OnInit {
     selectedOptions = [];
     selectedOption;
     flat: boolean = true;
+    flatErrorAge: boolean = false;
+    flatErrorBuget: boolean = false;
+    flatCampaign: boolean = false;
 
     toppingList: string[] = [
         "Azuay",
@@ -41,6 +44,7 @@ export class Campaing2Component implements OnInit {
         "Imbabura",
         "Loja",
         "Los Ríos",
+        "Manabi",
         "Morona Santiago",
         "Napo",
         "Orellana",
@@ -96,11 +100,17 @@ export class Campaing2Component implements OnInit {
         if (this.form.value.ageStart > this.form.value.ageEnd) {
             alert("Age exceeds limits");
             this.flat = false;
+            this.flatCampaign = false;
+            this.flatErrorAge = true;
+            this.flatErrorBuget = false;
         }
 
         if (this.form.value.bugetStart > this.form.value.bugetEnd) {
             alert("Buget exceeds limits");
             this.flat = false;
+            this.flatCampaign = false;
+            this.flatErrorAge = false;
+            this.flatErrorBuget = true;
         }
 
         if (this.flat == true) {
@@ -111,9 +121,11 @@ export class Campaing2Component implements OnInit {
 
             this._campaing
                 .postCampaing(this.form.value, this.advisorList)
-                .subscribe(data => {});
-            alert("Etapa de la Campaña Modificada");
-            alert("Campaign Created");
+                .subscribe(data => {
+                    this.flatCampaign = true;
+                    this.flatErrorAge = false;
+                    this.flatErrorBuget = false;
+                });
         }
     }
 }

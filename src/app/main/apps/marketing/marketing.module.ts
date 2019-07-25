@@ -42,7 +42,7 @@ const routes: Routes = [
         component: TeleMarketingComponent
     },
     {
-        path: "telemarketingDetail/:idClient/:idCampaing/:idAdvisor",
+        path: "telemarketingDetail/:idClient/:idAdvisor/:idCampaing",
         component: TeleMarketingIdComponent
     },
     {

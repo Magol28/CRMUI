@@ -8,19 +8,18 @@
   <div class="center">
 
     <!-- HEADER -->
-    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
-
-      <!-- APP TITLE -->
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-          <div class="h2">
-            Telemarketing
-          </div>
+    <div class="header accent p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="column" fxLayoutAlign="center start">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="secondary-text s-18">contact_phone</mat-icon>
+          <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+          <span class="secondary-text">Telemarketing</span>
         </div>
+        <div class="h1 mt-16">Search Risk </div>
       </div>
-      <!-- / APP TITLE -->
-
     </div>
+
+
     <div class="content-card">
       <form class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto"
         name="form" [formGroup]="form">
@@ -224,10 +223,26 @@
                   </mat-accordion>
 
                   <mat-accordion>
-                    <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="1 0 auto">
-                      <button mat-button mat-raised-button color="primary" (click)="updateRisk()"
-                        [disabled]="form.invalid"> Update Risk
-                      </button>
+                    <div fxFlex fxLayout="column">
+                      <div fxLayout="row" fxLayoutAlign="space-between">
+                        <button mat-button mat-raised-button color="primary" (click)="updateRisk()"
+                          [disabled]="form.invalid"> Update Risk
+                        </button>
+                      </div>
+
+
+
+                      <div *ngIf="flatMarketing" fxLayout="row" fxLayoutAlign="space-between">
+                        <div class="message-box success">
+                          Correct data, Updated!
+                        </div>
+                      </div>
+                      <div *ngIf="flatMarketingError" fxLayout="row" fxLayoutAlign="space-between">
+                        <div class="message-box error">
+                          Updated Campaign error!
+                        </div>
+                      </div>
+
                     </div>
                   </mat-accordion>
 

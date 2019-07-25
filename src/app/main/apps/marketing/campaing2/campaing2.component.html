@@ -196,18 +196,19 @@
                             <mat-label class="h1">campaign files</mat-label>
                             <mat-select formControlName="filesCampaign">
                               <mat-option
-                                value="/documentfolder/1102096321001%2FNuevo%2FCampania%2FcampVacaciones.html/Alex Mejia">
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampVacaciones.html/Alex%20Mejia">
                                 Holiday Campaigns</mat-option>
                               <mat-option
-                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampFiesta.html/Alex Mejia">
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampFiesta.html/Alex%20Mejia">
                                 Party Campaign</mat-option>
                               <mat-option
-                                value="/documentfolder/1102096321001%2FNuevo%2FCampania%2FcampMaquillaje.html/Alex Mejia">
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampMaquillaje.html/Alex%20Mejia">
                                 Makeup Campaign</mat-option>
                               <mat-option
-                                value="/documentfolder/1102096321001%2FNuevo%2FCampania%2FcampVentas.html/Alex Mejia">
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampVentas.html/Alex%20Mejia">
                                 Sale Campaign</mat-option>
-                              <mat-option value="/1102096321001%2FNuevo%2FCampania%2FcampEducation.html/Alex Mejia">
+                              <mat-option
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampEducation.html/Alex%20Mejia">
                                 Education Campaign</mat-option>
 
                             </mat-select>
@@ -226,6 +227,19 @@
                         [disabled]="form.invalid"> Create
                         Campaing</button>
                     </div>
+                  </mat-accordion>
+
+                  <mat-accordion>
+                    <div *ngIf="flatCampaign" class="message-box success">
+                      Correct data, Campaign created!
+                    </div>
+                    <div *ngIf="flatErrorAge" class="message-box success">
+                      Error exceeds the age limit!
+                    </div>
+                    <div *ngIf="flatErrorBuget" class="message-box success">
+                      Error exceeds the limit in Budget!
+                    </div>
+
                   </mat-accordion>
 
                 </div>

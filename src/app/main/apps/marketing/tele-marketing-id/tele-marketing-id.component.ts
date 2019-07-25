@@ -27,6 +27,8 @@ export class TeleMarketingIdComponent implements OnInit {
     idClient: number;
     idCampaing: number;
     idAdvisor: number;
+    flatMarketing: boolean = false;
+    flatMarketingError: boolean = false;
     constructor(
         private activateR: ActivatedRoute,
         private _formBuilder: FormBuilder,
@@ -37,8 +39,8 @@ export class TeleMarketingIdComponent implements OnInit {
     ngOnInit() {
         this.activateR.params.subscribe(params => {
             this.idClient = params["idClient"];
-            this.idCampaing = params["idCampaing"];
             this.idAdvisor = params["idAdvisor"];
+            this.idCampaing = params["idCampaing"];
         });
 
         this.form = this._formBuilder.group({
@@ -68,10 +70,10 @@ export class TeleMarketingIdComponent implements OnInit {
                     gender = "female";
                 }
                 this.form.controls["dni"].setValue(arg.dni);
-                this.form.controls["full_name"].setValue(arg.full_name);
+                this.form.controls["full_name"].setValue(arg.name);
                 this.form.controls["gender"].setValue(gender);
-                this.form.controls["location"].setValue(arg.location.provincia);
-                this.form.controls["earnings"].setValue(arg.earnings);
+                this.form.controls["location"].setValue(arg.location.province);
+                this.form.controls["earnings"].setValue(arg.salary);
                 this.form.controls["birth_date"].setValue(arg.birth_date);
                 this.form.controls["email"].setValue(arg.email);
                 console.log(arg);
@@ -92,10 +94,10 @@ export class TeleMarketingIdComponent implements OnInit {
             });
 
         const dataCampaing = this._teleMarketing
-            .getMarketing(this.idCampaing.toString(), "14")
+            .getMarketing(this.idCampaing.toString())
             .subscribe(arg => {
                 this.form.controls["locationCampaing"].setValue(
-                    arg.location.provincia
+                    arg.location.province
                 );
                 this.form.controls["budgetCampaing"].setValue(arg.budget);
                 this.form.controls["nameCampaing"].setValue(arg.name);
@@ -118,15 +120,27 @@ export class TeleMarketingIdComponent implements OnInit {
                 this.idCampaing,
                 this.idAdvisor
             )
-            .subscribe(arg => {
-                alert("Telemarketing was updated");
-            });
+            .subscribe(
+                arg => {
+                    this.flatMarketing = true;
+                    this.flatMarketingError = false;
+                },
+                error => {
+                    this.flatMarketingError = true;
+                    this.flatMarketing = false;
+                }
+            );
     }
     calculateRisk(): void {
         const riskClient = this._teleMarketing
             .getClientRisk(this.idClient.toString())
-            .subscribe(arg => {
-                this.form.controls["risk"].setValue(arg.risk);
-            });
+            .subscribe(
+                arg => {
+                    this.form.controls["risk"].setValue(arg.risk);
+                },
+                err => {
+                    this.form.controls["risk"].setValue("LOW");
+                }
+            );
     }
 }
