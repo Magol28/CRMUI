@@ -19,7 +19,7 @@ import { ProjectDashboardService } from 'app/main/apps/dashboards/project/projec
 
 const routes: Routes = [
     {
-        path     : '**',
+        path     : 'info/:id',
         component: ProjectDashboardComponent,
         resolve  : {
             data: ProjectDashboardService

@@ -3,17 +3,17 @@
 
     <div class="toolbar" fxLayout="row" fxLayoutAlign="end center">
 
-        <button mat-icon-button matTooltip="Delete">
-            <mat-icon>delete</mat-icon>
-        </button>
+        <div *ngIf="selected.INFO.STATET==='ACT'">
+            <button mat-icon-button matTooltip="Delete" (click)="eliminar(selected.INFO.PATH);">
+                <mat-icon>delete</mat-icon>
+            </button>
 
-        <button mat-icon-button class="" aria-label="Download" matTooltip="Download">
-            <mat-icon>file_download</mat-icon>
-        </button>
+            <button mat-icon-button class="" aria-label="Download" matTooltip="Download"
+                (click)="descargar(selected.INFO.PATH,selected.INFO.NAME);">
+                <mat-icon>get_app</mat-icon>
+            </button>
+        </div>
 
-        <button mat-icon-button aria-label="More" matTooltip="More">
-            <mat-icon>more_vert</mat-icon>
-        </button>
     </div>
 
     <div>
@@ -33,10 +33,6 @@
 
         <div class="preview file-icon" fxLayout="row" fxLayoutAlign="center center">
             <mat-icon class="type-icon s-48" [ngClass]="selected.INFO.TYPE=='DOC' ? 'document' : 'folder'"></mat-icon>
-        </div>
-
-        <div class="offline-switch">
-            <mat-slide-toggle [(ngModel)]="selected.offline" labelPosition="before">Available Offline</mat-slide-toggle>
         </div>
 
         <div class="title">Info</div>
@@ -62,34 +58,53 @@
             </tr>
 
 
-            <tr class="Compartir">
-                <th>Compartir</th>
-                <td>
-                    <button mat-fab color="warn" class="add-file-button" (click)="openModal(loading)"
-                        aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </td>
-            </tr>
-            <tr  class="Version">
+            <div *ngIf="selected.INFO.STATET==='ACT'">
+
+                <tr class="Version">
                     <th>Versiones</th>
                     <td>
-                        <button mat-fab color="warn" class="add-file-button" (click)="version(selected.INFO.PATH); openModal(template);  "
-                            aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                        <button mat-fab color="warn" class="add-file-button"
+                            (click)="version(selected.INFO.PATH); openModal(template); " aria-label="Add file"
+                            [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
                             <mat-icon>add</mat-icon>
                         </button>
                     </td>
                 </tr>
                 <tr class="Download">
-                        <th>Descargar</th>
-                        <td>
-                            <button mat-fab color="warn" class="add-file-button" (click)="descargar(selected.INFO.PATH,selected.INFO.NAME)"
-                                aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                                <mat-icon>add</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                        
+                    <th>Descargar</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button"
+                            (click)="descargar(selected.INFO.PATH,selected.INFO.NAME); " aria-label="Add file"
+                            [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>get_app</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </div>
+            <div *ngIf="selected.INFO.STATET==='ICT'">
+
+                <tr class="Restore">
+                    <th>Restaurar</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button" (click)="restaurar(selected.INFO.PATH); "
+                            aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>restore</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="Delete">
+                    <th>Eliminar Definitivamente</th>
+                    <td>
+                        <button mat-fab color="warn" class="add-file-button"
+                            (click)="fisico(selected.INFO.PATH);" aria-label="Add file"
+                            [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </div>
+
+
         </table>
 
 
@@ -98,17 +113,17 @@
 
 
 </div>
-<ng-template   #template>
+<ng-template #template>
 
-    
-<mat-table  #table [dataSource]="dataSourceVersion.Versions" [@animateStagger]="{value:'50'}">
 
-          <!-- NAME Column -->
+    <mat-table #table [dataSource]="dataSourceVersion.Versions" [@animateStagger]="{value:'50'}">
+
+        <!-- NAME Column -->
         <ng-container matColumnDef="VersionId">
             <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.VersionId}}</mat-cell>
         </ng-container>
-    
+
         <!-- TYPE Column -->
         <ng-container matColumnDef="LastModified">
             <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
@@ -116,25 +131,27 @@
         </ng-container>
 
         <ng-container matColumnDef="radio">
-                <mat-header-cell *matHeaderCellDef>Radio</mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                  <mat-radio-group [(ngModel)]="row">
-                    <mat-radio-button [value]="row.IsLatest"></mat-radio-button>
-                  </mat-radio-group>
-                </mat-cell>
-              </ng-container>
-       
+            <mat-header-cell *matHeaderCellDef>Radio</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-radio-group [(ngModel)]="operacionSeleccionada">
+                    <mat-radio-button [value]="row.VersionId"></mat-radio-button>
+                </mat-radio-group>
+            </mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)" (dblclick)="onRowDblclicked(row)"
-            [ngClass]="{'selected' : row == selected}" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)"
+            (dblclick)="onRowDblclicked(row)" [ngClass]="{'selected' : row == selected}" matRipple
+            [@animate]="{value:'*',params:{y:'100%'}}">
         </mat-row>
-        
+
     </mat-table>
     <div class="modal-footer">
-            <button type="button" class="btn btn-primary pull-right" (click)="modalRef.hide()">
-                Guardar
-            </button>
-        </div>
+        <button type="button" class="btn btn-primary pull-right"
+            (click)="cambiarversion(selected.INFO.PATH);modalRef.hide()">
+            Guardar
+        </button>
+    </div>
 </ng-template>
 
 <ng-template #loading>

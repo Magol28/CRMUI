@@ -1,0 +1,14 @@
+{
+    "http://3.91.68.253:3001*": {
+        "target": "http://3.91.68.253:3001",
+        "secure": false,
+        "changeOrigin": true
+
+    },
+    "http://3.95.152.214:8081*": {
+        "target": "http://3.95.152.214:8081",
+        "secure": false,
+        "changeOrigin": true
+
+    }
+}

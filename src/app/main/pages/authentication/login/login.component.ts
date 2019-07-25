@@ -5,7 +5,6 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 import { LoginService } from '../../services/login.service';
 import {Router} from '@angular/router';
-import { stringify } from '@angular/compiler/src/util';
 @Component({
     selector     : 'login',
     templateUrl  : './login.component.html',
@@ -75,7 +74,7 @@ export class LoginComponent implements OnInit
             const info = localStorage.getItem('user');
             // const prueba = (JSON.parse(info));
             // console.log(prueba.empleado.empresa);
-            this.router.navigate(['/apps/security/employees']);
+            this.router.navigate(['/apps/marketing/ReportCampaing']);
         });
          
     }

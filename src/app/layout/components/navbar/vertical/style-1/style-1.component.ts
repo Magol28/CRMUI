@@ -150,4 +150,8 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
     {
         this._fuseSidebarService.getSidebar('navbar').toggleFold();
     }
+    salir(): void{
+        localStorage.clear();
+        this._router.navigate(['/pages/auth/login']);
+    }
 }

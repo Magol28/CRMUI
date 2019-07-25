@@ -1,12 +1,17 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { fuseAnimations } from '@fuse/animations';
 
 import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
+import { SalesService } from 'app/main/apps/scrumboard/services/sales.service';
+
+
 import { List } from 'app/main/apps/scrumboard/list.model';
 
 @Component({
@@ -16,18 +21,32 @@ import { List } from 'app/main/apps/scrumboard/list.model';
     encapsulation: ViewEncapsulation.None,
     animations   : fuseAnimations
 })
+
 export class ScrumboardBoardComponent implements OnInit, OnDestroy
 {
     board: any;
     nombreUsuario = "Selena";
+    sales: any;
+    sale: any;
+    dialogRef: any;
+    form: FormGroup;
+
+    @Input()
+    list;
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    info = localStorage.getItem('user');
+    prueba = (JSON.parse(this.info));
+        
 
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _location: Location,
-        private _scrumboardService: ScrumboardService
+        private _scrumboardService: ScrumboardService,
+        private _getSalesBySeller: SalesService,
+        private _matDialog: MatDialog
+        
     )
     {
         // Set the private defaults
@@ -43,17 +62,27 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        
+        this._getSalesBySeller.getSalesBySeller("1726781584")
+        .subscribe( respuesta =>{               
+            this.sales = filterSales(respuesta.foundSales);
+            console.log(respuesta.foundSales);
+        });
+
         this._scrumboardService.onBoardChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(board => {
                 this.board = board;
-                this.board.lists[0].name = "Habilitado para la venta";  
-                this.board.lists[1].name = "Negociación";        
+                this.board.lists[0].name = "Habilitado para la venta";
+                this.board.lists[1].name = "Negociación";
                 this.board.lists[2].name = "Acuerdo";
-                this.board.lists[3].name = "Listo para Venta";                 
-                this.board.lists[4].name = "Cerrado";                 
+                this.board.lists[3].name = "Listo para Venta";
+                this.board.lists[4].name = "Cerrado";  
             });
+
     }
+
+
 
     /**
      * On destroy
@@ -104,4 +133,38 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
     {
         this._scrumboardService.updateBoard();
     }
+
+    /**
+     * Open card dialog
+     *
+     * @param cardId
+     */
+    openCardDialog(cardId): void
+    {
+        this.dialogRef = this._matDialog.open(ScrumboardBoardComponent, {
+            panelClass: 'scrumboard-card-dialog',
+            data      : {
+                cardId: cardId,
+                listId: this.list.id
+            }
+        });
+        this.dialogRef.afterClosed()
+            .subscribe(response => {
+
+            });
+    }
+}
+
+const phases = [
+    "Habilitado para la venta",  
+    "Negociación",        
+    "Acuerdo",
+    "Listo para Venta",                 
+    "Cerrado",
+]
+const filterSalsesByPhase = (sale,phase) => sale.phase === phase;
+
+const filterSales = (sales) => {
+    const filteredSales = phases.map(phase => sales.filter(sale => filterSalsesByPhase(sale,phase)));
+    return filteredSales;
 }
