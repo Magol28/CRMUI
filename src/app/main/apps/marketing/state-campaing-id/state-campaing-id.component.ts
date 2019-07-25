@@ -84,8 +84,8 @@ export class StateCampaingIdComponent implements OnInit {
                 this.form.setValue({
                     id: arg.id,
                     location: arg.location,
-                    provincia: arg.location.provincia,
-                    canton: arg.location.canton,
+                    provincia: arg.location.province,
+                    canton: arg.location.province,
                     products: arg.products,
                     budget: arg.budget,
                     gender_range: gender,

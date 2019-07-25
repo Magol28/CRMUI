@@ -45,6 +45,8 @@ export class TeleMarketingComponent implements OnInit {
     advisorList = [];
     campaignList = [];
     selected = "";
+    flatError: boolean = false;
+    flatTable: boolean = false;
     opcionSeleccionado: string = "S";
     disableSelect = new FormControl(false);
 
@@ -79,13 +81,24 @@ export class TeleMarketingComponent implements OnInit {
 
     ReportAdvisorCampaign(): void {
         console.log(this.form.value);
-        this._report.getAdvisorCampaign(this.form.value).subscribe(data => {
-            this.dataSource = new MatTableDataSource(data);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+        this._report.getAdvisorCampaign(this.form.value).subscribe(
+            data => {
+                this.dataSource = new MatTableDataSource(data);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
 
-            alert("Consulta Realizada");
-        });
+                if (data.length == 0) {
+                    this.flatError = true;
+                    this.flatTable = false;
+                } else {
+                    this.flatError = false;
+                    this.flatTable = true;
+                }
+            },
+            onError => {
+                this.flatError = true;
+            }
+        );
     }
 
     search(idClient: string): void {

@@ -51,13 +51,17 @@
                                 <mat-icon matSuffix class="secondary-text">comment</mat-icon>
                             </mat-form-field>
                         </div>
+                        <div *ngIf="flatError" class="message-box error">
+                            There are no clients for this campaign!
+                        </div>
+
                         <div fxLayout="row">
                             <button mat-button mat-raised-button color="primary" (click)="search()"
                                 [disabled]="form.invalid"> search campaign
                             </button>
                         </div>
 
-                        <table mat-table [dataSource]="dataSource" matSort>
+                        <table *ngIf="flatTable" mat-table [dataSource]="dataSource" matSort>
                             <!-- Progress Column -->
                             <ng-container matColumnDef="Id">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
@@ -77,17 +81,17 @@
 
                             <ng-container matColumnDef="FullName">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </th>
-                                <td mat-cell *matCellDef="let row"> {{row.full_name}} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="Provincia">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Province </th>
-                                <td mat-cell *matCellDef="let row"> {{row.location.provincia }} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.location.province }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="Earnings">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Earnings </th>
-                                <td mat-cell *matCellDef="let row"> {{row.earnings}} </td>
+                                <td mat-cell *matCellDef="let row"> {{row.salary}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="Gender">
@@ -100,8 +104,7 @@
                                 <td mat-cell *matCellDef="let row"> {{row.birth_date }} </td>
                             </ng-container>
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;"
-                                (click)="search(row.email)">
+                            <tr class="example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;">
                             </tr>
 
                         </table>

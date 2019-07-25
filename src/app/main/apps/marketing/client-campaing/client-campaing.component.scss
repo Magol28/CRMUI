@@ -10,6 +10,7 @@
         .search-wrapper {
             width: 100%;
             max-width: 480px;
+
             border-radius: 28px;
             overflow: hidden;
             @include mat-elevation(1);
@@ -102,4 +103,19 @@
 
 tr.example-element-row:not(.example-expanded-row):hover {
     background: #777;
+}
+
+.mat-cell,
+.mat-footer-cell {
+    font-size: 14px;
+    border-right: 50px !important;
+    padding-right: 50px !important;
+}
+.message-box {
+    padding: 16px;
+    background: #607d8b;
+    border-left: 6px solid #37474f;
+    border-left-color: rgb(55, 71, 79);
+    color: white;
+    margin-bottom: 10px;
 }
