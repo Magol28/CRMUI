@@ -39,7 +39,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id       : 'e-commerce',
-                title    : 'PRODUCTS',
+                title    : 'Products',
                 translate: 'NAV.PRODUCTS',
                 type     : 'collapsable',
                 icon     : 'shopping_cart',
@@ -48,39 +48,17 @@ export const navigation: FuseNavigation[] = [
                         id        : 'products',
                         title     : 'Products',
                         type      : 'item',
-                        url       : '/apps/e-commerce/products',
+                        url       : '/apps/security/products',
                         exactMatch: true
                     },
                     {
-                        id        : 'productDetail',
-                        title     : 'Product Detail',
+                        id        : 'Product',
+                        title     : 'Product ',
                         type      : 'item',
-                        url       : '/apps/e-commerce/products/1/printed-dress',
-                        exactMatch: true
-                    },
-                    {
-                        id        : 'orders',
-                        title     : 'Orders',
-                        type      : 'item',
-                        url       : '/apps/e-commerce/orders',
-                        exactMatch: true
-                    },
-                    {
-                        id        : 'orderDetail',
-                        title     : 'Order Detail',
-                        type      : 'item',
-                        url       : '/apps/e-commerce/orders/1',
+                        url       : '/apps/security/product/new',
                         exactMatch: true
                     }
                 ]
-            },
-            {
-                id       : 'academy',
-                title    : 'Academy',
-                translate: 'NAV.ACADEMY',
-                type     : 'item',
-                icon     : 'school',
-                url      : '/apps/academy'
             },
             {
                 id       : 'file-manager',
@@ -99,21 +77,8 @@ export const navigation: FuseNavigation[] = [
                 url      : '/apps/contacts'
             },
             {
-                id       : 'to-do',
-                title    : 'To-Do',
-                translate: 'NAV.TODO',
-                type     : 'item',
-                icon     : 'check_box',
-                url      : '/apps/todo',
-                badge    : {
-                    title: '3',
-                    bg   : '#FF6F00',
-                    fg   : '#FFFFFF'
-                }
-            },
-            {
-                id       : 'scrumboard',
-                title    : 'Scrumboard',
+                id       : 'Sales',
+                title    : 'Sales',
                 translate: 'NAV.SCRUMBOARD',
                 type     : 'item',
                 icon     : 'assessment',
@@ -144,32 +109,6 @@ export const navigation: FuseNavigation[] = [
                         title: 'Employee',
                         type : 'item',
                         url  : '/apps/security/employee/new'
-                    }
-                ]
-    },
-    {
-            
-                id      : 'Profile',
-                title   : 'Profile',
-                type    : 'collapsable',
-                icon    : 'lock',
-                badge   : {
-                    title: '2',
-                    bg   : '#525e8a',
-                    fg   : '#FFFFFF'
-                },
-                children: [
-                    {
-                        id   : 'Profiles',
-                        title: 'Profiles',
-                        type : 'item',
-                        url  : '/apps/security/profiles'
-                    },
-                    {
-                        id   : 'Profile',
-                        title: 'Profile',
-                        type : 'item',
-                        url  : '/apps/security/profile/new'
                     }
                 ]
     },
