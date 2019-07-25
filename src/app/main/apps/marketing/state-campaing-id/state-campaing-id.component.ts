@@ -71,10 +71,10 @@ export class StateCampaingIdComponent implements OnInit {
                 this.form.controls["canton"].disable();
                 this.form.controls["products"].disable();
                 this.form.controls["budget"].disable();
+                this.form.controls["age_range"].disable();
                 this.form.controls["gender_range"].disable();
                 this.form.controls["name"].disable();
                 this.form.controls["description"].disable();
-                this.form.controls["age_range"].disable();
                 this.form.controls["earning_range"].disable();
                 if (arg.gender_range == "M" || arg.gender_range == "m") {
                     gender = "male";

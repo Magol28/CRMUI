@@ -27,12 +27,7 @@ export class CampaingService {
         return this.http.get(ipProducts + "producto");
     }
 
-    postCampaing(data, advisorList): any {
-        let advisorL = [];
-        for (let i = 0; i < advisorList.length; i++) {
-            advisorL.push(advisorList[i].id);
-        }
-
+    postCampaing(data): any {
         const objeto = {
             location: {
                 province: data.location
@@ -51,7 +46,7 @@ export class CampaingService {
             created_by: 1,
             modified_by: 1,
             stage: data.stage,
-            advisors: advisorL
+            advisors: data.advisor
         };
         console.log("prueba");
         console.log(objeto);
