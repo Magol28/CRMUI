@@ -34,18 +34,16 @@ import { StateCampaingComponent } from "./state-campaing/state-campaing.componen
 import { ClientCampaingService } from "./services/client-campaing.service";
 import { StateCampaingIdComponent } from "./state-campaing-id/state-campaing-id.component";
 import { ChartsModule } from "ng2-charts";
+import { TeleMarketingIdComponent } from "./tele-marketing-id/tele-marketing-id.component";
 
 const routes: Routes = [
     {
-        path: "camp/:id",
-        component: CampaingComponent,
-        resolve: {
-            data: EcommerceOrderService
-        }
-    },
-    {
         path: "telemarketing",
         component: TeleMarketingComponent
+    },
+    {
+        path: "telemarketingDetail/:idClient/:idAdvisor/:idCampaing",
+        component: TeleMarketingIdComponent
     },
     {
         path: "campaing",
@@ -79,7 +77,8 @@ const routes: Routes = [
         ReportCampaingComponent,
         ClientCampaingComponent,
         StateCampaingComponent,
-        StateCampaingIdComponent
+        StateCampaingIdComponent,
+        TeleMarketingIdComponent
     ],
     imports: [
         RouterModule.forChild(routes),

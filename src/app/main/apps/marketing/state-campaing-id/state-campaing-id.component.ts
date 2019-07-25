@@ -18,12 +18,17 @@ import { fuseAnimations } from "@fuse/animations";
     encapsulation: ViewEncapsulation.None
 })
 export class StateCampaingIdComponent implements OnInit {
-    selected = "Unavailable";
+    selected = "";
+    opcionSeleccionado: string = "S";
     disableSelect = new FormControl(false);
     form: FormGroup;
     resources: any[];
     selectedOptions = [];
     selectedOption;
+    flatCampaign: boolean = false;
+    flatEmail: boolean = false;
+    flatCampaignError: boolean = false;
+    flatEmailError: boolean = false;
 
     constructor(
         private activateR: ActivatedRoute,
@@ -58,6 +63,7 @@ export class StateCampaingIdComponent implements OnInit {
             // tslint:disable-next-line:no-unused-expression
             const idCampaing = params["id"];
             var gender = "";
+            //this.selected = "S";
             const data = this._campaing.getID(idCampaing).subscribe(arg => {
                 this.form.controls["id"].disable();
                 this.form.controls["location"].disable();
@@ -65,21 +71,25 @@ export class StateCampaingIdComponent implements OnInit {
                 this.form.controls["canton"].disable();
                 this.form.controls["products"].disable();
                 this.form.controls["budget"].disable();
+                this.form.controls["age_range"].disable();
                 this.form.controls["gender_range"].disable();
                 this.form.controls["name"].disable();
                 this.form.controls["description"].disable();
-                this.form.controls["age_range"].disable();
                 this.form.controls["earning_range"].disable();
                 if (arg.gender_range == "M" || arg.gender_range == "m") {
                     gender = "male";
                 } else {
                     gender = "female";
                 }
+                console.log(this.selected);
+
+                this.selected = arg.stage;
+
                 this.form.setValue({
                     id: arg.id,
                     location: arg.location,
-                    provincia: arg.location.provincia,
-                    canton: arg.location.canton,
+                    provincia: arg.location.province,
+                    canton: arg.location.province,
                     products: arg.products,
                     budget: arg.budget,
                     gender_range: gender,
@@ -96,5 +106,42 @@ export class StateCampaingIdComponent implements OnInit {
     onNgModelChange($event): void {
         console.log($event);
         this.selectedOption = $event;
+    }
+    sendEmail(): void {
+        this._campaing.getEmail(this.form.value.id).subscribe(
+            data => {
+                this.flatEmail = true;
+                this.flatEmailError = false;
+
+                this.flatCampaign = false;
+                this.flatCampaignError = false;
+            },
+            error => {
+                this.flatEmail = false;
+                this.flatEmailError = true;
+
+                this.flatCampaign = false;
+                this.flatCampaignError = false;
+            }
+        );
+    }
+
+    updateState(): void {
+        this._campaing.putStage(this.form.value, this.selected).subscribe(
+            data => {
+                this.flatCampaign = true;
+                this.flatCampaignError = false;
+
+                this.flatEmail = false;
+                this.flatEmailError = false;
+            },
+            error => {
+                this.flatCampaign = false;
+                this.flatCampaignError = true;
+
+                this.flatEmail = false;
+                this.flatEmailError = false;
+            }
+        );
     }
 }

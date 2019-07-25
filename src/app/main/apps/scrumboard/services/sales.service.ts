@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 })
 export class SalesService {
 
+
   /* _url = "http://localhost:3000/"; */
   _url = "http://3.91.68.253:3000/";
 

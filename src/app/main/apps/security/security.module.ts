@@ -34,42 +34,69 @@ import { EmployeeService } from './services/employee.service';
 import { UserService } from './services/user.service';
 import { ProfileService } from './services/profile.service';
 import { AuthGuard } from '../../../guards/auth.guard';
+import { ProductComponent } from './product/product.component';
+import { ProductsComponent } from './products/products.component';
 const routes: Routes = [
     {
         path     : 'resources',
         component: ResourcesComponent,
-        data: { roles: ['prueba'] }
+        data: { roles: ['resource'] }
     },
     {
         path     : 'resource/:id',
-        component: ResourcesComponent
+        component: ResourcesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Security'] }
     },
     {
         path     : 'profile/:id',
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Security'] }
     },
     {
         path     : 'profiles',
         component: ProfilesComponent,
         canActivate: [AuthGuard],
-        data: { roles: ['profile'] }
+        data: { roles: ['Security'] }
     },
     {
         path     : 'employee/:id',
-        component: EmployeeComponent
+        component: EmployeeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Security'] }
     },
     {
         path     : 'employees',
-        component: EmployeesComponent
+        component: EmployeesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Security'] }
     }
     ,
     {
         path     : 'user/:id',
-        component: UserComponent 
+        component: UserComponent ,
+        canActivate: [AuthGuard],
+        data: { roles: ['Security'] }
     },
     {
         path     : 'users',
-        component: UsersComponent
+        component: UsersComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Security'] }
+    }
+    ,
+    {
+        path     : 'product/:id',
+        component: ProductComponent ,
+        canActivate: [AuthGuard],
+        data: { roles: ['Productos'] }
+    },
+    {
+        path     : 'products',
+        component: ProductsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Productos'] }
     }
     
 ];
@@ -82,7 +109,9 @@ const routes: Routes = [
         EmployeesComponent,
         EmployeeComponent,
         UserComponent,
-        UsersComponent
+        UsersComponent,
+        ProductComponent,
+        ProductsComponent
     ],
     imports     : [
         RouterModule.forChild(routes),

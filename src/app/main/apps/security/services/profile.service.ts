@@ -17,10 +17,26 @@ export class ProfileService {
     return this.http.get(this.url + '/' + id);
   }
 
-  post(data): any {
-    return this.http.post(data, 'd');
+  post(nombre, descripcion, estado , recursos): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const user = {
+      nombre,
+      descripcion,
+      estado,
+      recursos
+    };
+    return this.http.post(this.url + '/add', user, { headers });
   }
-  put(data): any {
-    return this.http.put(data, 'd');
+  put(nombre, descripcion, estado , recursos): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const user = {
+      nombre,
+      descripcion,
+      estado,
+      recursos
+    };
+    return this.http.put(this.url + '/update', user, { headers });
   }
   }

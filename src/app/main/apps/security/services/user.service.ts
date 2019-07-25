@@ -14,13 +14,34 @@ export class UserService {
     return this.http.get(this.url + '/getAll');
   }
   getByCedula(cedula: string): any {
-    return this.http.get('http://3.95.152.214:8081/employee/' + cedula);
+    return this.http.get(this.url + '/' + cedula);
   }
 
-  post(data): any {
-    return this.http.post(data, 'd');
+  post(nombre, password, cedula , id): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const user = {
+      nombre,
+      password,
+      empleado: { cedula },
+      perfil: {  nombre: id}
+    };
+    console.log(this.url + '/add');
+    console.log(user);
+    return this.http.post(this.url + '/add', user, { headers });
   }
-  put(data): any {
-    return this.http.put(data, 'd');
+  put(nombre, password, cedula , id): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    const user = {
+      nombre,
+      password,
+      empleado: { cedula },
+      perfil: { nombre: id}
+    };
+    console.log(this.url + '/add');
+    console.log(user);
+    return this.http.put(this.url + '/update', user, { headers });
   }
+  
 }

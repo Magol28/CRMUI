@@ -26,27 +26,27 @@ const routes = [
     },
     {
         path: "academy",
-        loadChildren: "./academy/academy.module#AcademyModule"
+        loadChildren: './academy/academy.module#AcademyModule'
     },
     {
-        path: "todo",
-        loadChildren: "./todo/todo.module#TodoModule"
+        path: 'todo',
+        loadChildren: './todo/todo.module#TodoModule'
     },
     {
-        path: "file-manager",
-        loadChildren: "./file-manager/file-manager.module#FileManagerModule"
+        path: 'file-manager',
+        loadChildren: './file-manager/file-manager.module#FileManagerModule'
     },
     {
         path        : 'scrumboard',
         loadChildren: './scrumboard/scrumboard.module#ScrumboardModule'
     },
     {
-        path: "client",
-        loadChildren: "./clients/client.module#AppClientModule"
+        path: 'client',
+        loadChildren: './clients/client.module#AppClientModule'
     },
     {
-        path: "security",
-        loadChildren: "./security/security.module#SecurityModule"
+        path: 'security',
+        loadChildren: './security/security.module#SecurityModule'
     },
     {
         path        : 'scrumboard',
@@ -55,6 +55,10 @@ const routes = [
     {
         path        : 'dashboards/project',
         loadChildren: './dashboards/project/project.module#ProjectDashboardModule'
+    },
+    {
+        path: 'marketing',
+        loadChildren: './marketing/marketing.module#MarketingModule'
     }
 ];
 

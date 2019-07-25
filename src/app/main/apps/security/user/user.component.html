@@ -10,6 +10,9 @@
             </div>
             <div class="h1 mt-16">User management</div>
         </div>
+        <button mat-raised-button (click)="guardar()" class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>Guardar</span>
+            </button>
     </div>
     <!-- / HEADER -->
 
@@ -42,15 +45,6 @@
                     </mat-form-field>
 
                 </div>
-                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="pl-4">
-                    <mat-form-field>
-                        <mat-label class="h1">State</mat-label>
-                        <mat-select [(value)]="selected">
-                            <mat-option value="available">Available</mat-option>
-                            <mat-option value="Unavailable">Unavailable</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
 
             </form>
 
@@ -61,22 +55,29 @@
                 <div class="h2 mb-24">Profile and employee assignment <span><mat-icon matSuffix class="secondary-text">supervised_user_circle</mat-icon></span></div>
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="pl-4">
-                    <mat-form-field>
-                        <mat-label class="h1">Profile</mat-label>
-                        <mat-select [(value)]="selected">
-                            <mat-option value="available">Available</mat-option>
-                            <mat-option value="Unavailable">Unavailable</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <h1>Profiles</h1>
+                    <p></p>
+                    <form [formGroup]="profileForm">
+                        <select formControlName="countryControl">
+                                          <option  [value]="country" *ngFor="let country of profiles"> 
+                                              {{country}}
+                                            </option>
+                                        </select>
+                    </form>
                 </div>
+
+
                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="pl-4">
-                    <mat-form-field>
-                        <mat-label class="h1">Employee</mat-label>
-                        <mat-select [(value)]="selected">
-                            <mat-option value="available">Available</mat-option>
-                            <mat-option value="Unavailable">Unavailable</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <h1>Employee</h1>
+                    <p></p>
+
+                    <form [formGroup]="employeForm">
+                        <select formControlName="countryControl">
+                                      <option  #myselect [value]="country" *ngFor="let country of employees"> 
+                                          {{country}}
+                                        </option>
+                                    </select>
+                    </form>
                 </div>
 
             </div>

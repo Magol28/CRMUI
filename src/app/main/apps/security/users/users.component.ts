@@ -16,7 +16,7 @@ import { UserService } from '../services/user.service';
   encapsulation: ViewEncapsulation.None
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = [ 'nombre', 'password', 'empleado', 'perfil'];
+  displayedColumns: string[] = [ 'nombre', 'perfil', 'empleado'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -26,8 +26,15 @@ export class UsersComponent implements OnInit {
               private router: Router) {
     // Create 100 users
     this._employee.getAll().subscribe(data => {
-      console.log(data);
-      this.dataSource = new MatTableDataSource(data);
+      const info = localStorage.getItem('user');
+      const prueba = (JSON.parse(info));
+      const _info = [];
+      data.forEach(item => {
+        if (item.empleado.empresa.ruc === prueba.empleado.empresa.ruc) {
+          _info.push(item);
+      }
+      });
+      this.dataSource = new MatTableDataSource(_info);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
      });
