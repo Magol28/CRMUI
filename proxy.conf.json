@@ -1,6 +1,6 @@
 {
-    "http://192.168.100.8:3001*": {
-        "target": "http://192.168.100.8:3001",
+    "http://3.91.68.253:3001*": {
+        "target": "http://3.91.68.253:3001",
         "secure": false,
         "changeOrigin": true
 

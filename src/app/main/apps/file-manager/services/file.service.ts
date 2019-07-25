@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 export class FileService {
   info = localStorage.getItem('user');
   prueba = (JSON.parse(this.info));
-  ip='192.168.100.8';
+  ip='3.91.68.253';
  
   url = 'http://'+this.ip+':3001/documentfolder/'+this.prueba.empleado.nombre;
   constructor(public http: HttpClient) { }
