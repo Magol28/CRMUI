@@ -4,11 +4,11 @@
   <div class="header accent p-24 h-160" fxLayout="row" fxLayoutAlign="start center">
     <div fxLayout="column" fxLayoutAlign="center start">
       <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon class="secondary-text s-18">home</mat-icon>
+        <mat-icon class="secondary-text s-18">email</mat-icon>
         <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
         <span class="secondary-text">Campaing</span>
       </div>
-      <div class="h1 mt-16">Campaing Detail</div>
+      <div class="h1 mt-16">Campaign Detail and send email</div>
     </div>
   </div>
 
@@ -118,8 +118,28 @@
             <mat-icon matSuffix class="secondary-text">view_agenda</mat-icon>
           </mat-form-field>
         </div>
+        <div *ngIf="flatCampaign" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <div class="message-box success">
+            Modified campaign status!
+          </div>
+        </div>
+        <div *ngIf="flatCampaignError" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <div class="message-box error">
+            Error updating campaign status!
+          </div>
+        </div>
+        <div *ngIf="flatEmail" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <div class="message-box success">
+            Correct mailing!
+          </div>
+        </div>
+        <div *ngIf="flatEmailError" fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+          <div class="message-box error">
+            Incorrect mailing!
+          </div>
+        </div>
         <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="1 0 auto">
-          <button mat-button mat-raised-button color="primary" (click)="sendeEmail()">Send Email Campaing</button>
+          <button mat-button mat-raised-button color="primary" (click)="sendEmail()">Send Email Campaing</button>
         </div>
 
         <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="1 0 auto">
