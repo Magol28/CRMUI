@@ -6,8 +6,8 @@ import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 })
 export class SalesService {
 
-  _url = "http://localhost:3000/";
-  /*_url = "http://192.168.100.8:3000/";*/
+  /* _url = "http://localhost:3000/"; */
+  _url = "http://192.168.1.120:3000/";
 
 
   constructor(public http: HttpClient) { }
@@ -99,5 +99,14 @@ export class SalesService {
     const url = this._url+'services';
     return this.http.post(url, data, {headers});
   }
+
+  postCotizacion(id:String, data): any {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+      console.log(data);
+    const url = this._url+'sales/'+id+'/quotations'
+    return this.http.post(url, data, {headers});
+  }
+
 
 }

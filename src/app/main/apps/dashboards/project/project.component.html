@@ -30,7 +30,7 @@
 
                     <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                         [@animateStagger]="{value:'50'}">
-
+                    
                         <!-- WIDGET 1 -->
                         <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
                             fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
@@ -233,7 +233,8 @@
                     <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                         [@animateStagger]="{value:'50'}">
 
-                        <div style="display: flex; flex-direction: column">
+                        <!-- <div style="display: flex; flex-direction: column"> -->
+                            <!-- FORM -->
                             <div style="width: 100%">
                                 <form [formGroup]="form" name="form" class="add-card-form" fxLayout="column">
 
@@ -243,8 +244,7 @@
                                     </mat-form-field>
 
                                     <div class="pl-8" fxLayout="row" fxLayoutAlign="space-between center">
-
-                                        <button type="submit" (click)="addTask()" class="add-button mat-accent"
+                                        <button mat-raised-button color="primary" type="submit" (click)="addTask()" class="add-button mat-accent"
                                             aria-label="add">
                                             <span>Add</span>
                                         </button>
@@ -252,12 +252,14 @@
                                     </div>
                                 </form>
                             </div>
+                            <!-- / FORM -->
 
-                            <div>
+                            <!-- <div> -->
                                 <!-- WIDGET 1 -->
                                 <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
-                                    fxFlex="100"
+                                    fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
                                     *ngFor="let task of tasks, let i=index">
+                                    
 
                                     <!-- Front -->
                                     <div class="fuse-widget-front">
@@ -271,7 +273,7 @@
 
                                         <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
                                             <div class="light-blue-fg font-size-40 line-height-72">
-                                                Tarea {{i+1}}
+                                                Task {{i+1}}
                                             </div>
                                             <div class="h3 secondary-text font-weight-500"> {{task.realized}}
                                             </div>
@@ -297,8 +299,8 @@
                                 </fuse-widget>
                                 <!-- / WIDGET 1 -->
 
-                            </div>
-                        </div>
+                            <!-- </div> -->
+                        <!-- </div> -->
                         <!-- / WIDGET GROUP -->
                     </div>
 
@@ -309,7 +311,6 @@
                     <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                         [@animateStagger]="{value:'50'}">
 
-                        <div style="display: flex; flex-direction: column">
                             <div style="width: 100%">
                                 <form [formGroup]="form1" name="form1" class="add-card-form" fxLayout="column">
 
@@ -321,8 +322,8 @@
                                         <input #nameInput matInput formControlName="description1"
                                             placeholder="descripcion" autocomplete="off" required>
                                     </mat-form-field>
-                                    <mat-form-field fxFlex floatLabel="never">
-                                        <input #nameInput matInput formControlName="date" placeholder="date"
+                                    <mat-form-field  fxFlex floatLabel="never">
+                                        <input type="date" #nameInput matInput formControlName="date" placeholder="date"
                                             autocomplete="off" required>
                                     </mat-form-field>
                                     <mat-form-field fxFlex floatLabel="never">
@@ -344,7 +345,7 @@
 
                                     <div class="pl-8" fxLayout="row" fxLayoutAlign="space-between center">
 
-                                        <button type="submit" (click)="addMeeting()" class="add-button mat-accent"
+                                        <button mat-raised-button color="primary" type="submit" (click)="addMeeting()" class="add-button mat-accent"
                                             aria-label="add">
                                             <span>Add</span>
                                         </button>
@@ -353,7 +354,6 @@
                                 </form>
                             </div>
 
-                            <div>
                                 <!-- WIDGET 1 -->
                                 <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
                                     fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
@@ -411,9 +411,9 @@
                                 </fuse-widget>
                                 <!-- / WIDGET 1 -->
 
-                            </div>
+                            
                             <!-- / WIDGET GROUP -->
-                        </div>
+                        
                     </div>
 
                 </mat-tab>
@@ -423,8 +423,7 @@
                     <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                         [@animateStagger]="{value:'50'}">
 
-                        <div style="display: flex; flex-direction: column">
-                            <div style="width: 75%">
+                            <div style="width: 100%">
                                 <form [formGroup]="form2" name="form2" class="add-card-form" fxLayout="column">
 
                                     <mat-form-field fxFlex floatLabel="never">
@@ -436,7 +435,7 @@
                                             placeholder="descripcion" autocomplete="off" required>
                                     </mat-form-field>
                                     <mat-form-field fxFlex floatLabel="never">
-                                        <input #nameInput matInput formControlName="date2" placeholder="date"
+                                        <input type="date" matInput formControlName="date2" placeholder="date"
                                             autocomplete="off" required>
                                     </mat-form-field>
                                     <mat-form-field fxFlex floatLabel="never">
@@ -454,7 +453,7 @@
 
                                     <div class="pl-8" fxLayout="row" fxLayoutAlign="space-between center">
 
-                                        <button type="submit" (click)="addCall()" class="add-button mat-accent"
+                                        <button mat-raised-button color="primary" type="submit" (click)="addCall()" class="add-button mat-accent"
                                             aria-label="add">
                                             <span>Add</span>
                                         </button>
@@ -463,7 +462,6 @@
                                 </form>
                             </div>
 
-                            <div>
                                 <!-- WIDGET 1 -->
                                 <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
                                     fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
@@ -511,8 +509,8 @@
                                 </fuse-widget>
 
                                 <!-- / WIDGET 1 -->
-                            </div>
-                        </div>
+                            
+                        
 
                     </div>
                     <!-- / WIDGET GROUP -->
@@ -520,51 +518,86 @@
                 </mat-tab>
 
                 <mat-tab label="Quotations">
-
+                    <!--  WIDGET GROUP -->
                     <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                         [@animateStagger]="{value:'50'}">
 
-                        <!-- WIDGET 1 -->
-                        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
-                            fxFlex="100"
-                            *ngFor="let quote of quotations, let i=index">
+                            <div style="width: 75%">
+                                <form [formGroup]="form3" name="form3" class="add-card-form" fxLayout="column">
+                                    <mat-form-field fxFlex floatLabel="never">
+                                        <input #nameInput matInput formControlName="service" placeholder="service"
+                                            autocomplete="off" required>
+                                    </mat-form-field>
+                                    <mat-form-field fxFlex floatLabel="never">
+                                        <input #nameInput matInput formControlName="amount"
+                                            placeholder="amount" autocomplete="off" required>
+                                    </mat-form-field>
+                                    <mat-form-field fxFlex floatLabel="never">
+                                        <input #nameInput matInput formControlName="service1" placeholder="service"
+                                            autocomplete="off" required>
+                                    </mat-form-field>
+                                    <mat-form-field fxFlex floatLabel="never">
+                                        <input #nameInput matInput formControlName="amount1"
+                                            placeholder="amount" autocomplete="off" required>
+                                    </mat-form-field>
+                                    <div class="pl-8" fxLayout="row" fxLayoutAlign="space-between center">
 
-                            <!-- Front -->
-                            <div class="fuse-widget-front">
-                                <div class="pl-16 pr-8 py-16 h-52" fxLayout="row" fxLayoutAlign="space-between center">
+                                        <button mat-raised-button color="primary" type="submit" (click)="addQuote()" class="add-button mat-accent"
+                                            aria-label="add">
+                                            <span>Add</span>
+                                        </button>
 
-                                    <button mat-icon-button fuseWidgetToggle aria-label="more">
-                                        <mat-icon>more_vert</mat-icon>
-                                    </button>
-                                </div>
-
-                                <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
-                                    <div class="light-blue-fg font-size-35 line-height-72">
-                                        Quote {{i+1}}
                                     </div>
-                                    <div class="h3 secondary-text font-weight-500"> {{quote.offers.length}}
+                                </form>
+                            </div>
+
+                                <!-- WIDGET 1 -->
+                                <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
+                                    fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
+                                    *ngFor="let quote of quotations, let i=index">
+
+                                    <!-- Front -->
+                                    <div class="fuse-widget-front">
+                                        <div class="pl-16 pr-8 py-16 h-52" fxLayout="row" fxLayoutAlign="space-between center">
+                                    
+                                            <button mat-icon-button fuseWidgetToggle aria-label="more">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                        </div>
+                                        
+                                    
+                                        <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                                            <div class="light-blue-fg font-size-35 line-height-72">
+                                                Quote {{i+1}}
+                                            </div>
+                                            <div class="h3 secondary-text font-weight-500"> {{quote.offers.length}}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <!-- / Front -->
 
+                                    <!-- Back -->
+                                    <div class="fuse-widget-back p-16 pt-32">
+                                        <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
+                                            aria-label="Flip widget">
+                                            <mat-icon class="s-16">close</mat-icon>
+                                        </button>
 
-                            </div>
-                            <!-- / Front -->
+                                        <div>
+                                            Description: {{call.description}}
+                                        </div>
+                                        <div>
+                                            Observation: {{call.observation}}
+                                        </div>
 
-                            <!-- Back -->
-                            <div class="fuse-widget-back p-16 pt-32">
-                                <button mat-icon-button fuseWidgetToggle class="fuse-widget-flip-button"
-                                    aria-label="Flip widget">
-                                    <mat-icon class="s-16">close</mat-icon>
-                                </button>
+                                    </div>
+                                    <!-- / Back -->
 
-                                <div>
-                                    dkfsldf {{quote.creationdate}}
-                                </div>
-                            </div>
-                            <!-- / Back -->
+                                </fuse-widget>
 
-                        </fuse-widget>
-                        <!-- / WIDGET 1 -->
+                                <!-- / WIDGET 1 -->
+                            
+                        
 
                     </div>
                     <!-- / WIDGET GROUP -->
@@ -576,7 +609,6 @@
                         <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                             [@animateStagger]="{value:'50'}">
     
-                            <div style="display: flex; flex-direction: column">
                                 <div style="width: 100%">
                                     <form [formGroup]="form4" name="form4" class="add-card-form" fxLayout="column">
     
@@ -594,7 +626,7 @@
                                         </mat-form-field>
                                         <div class="pl-8" fxLayout="row" fxLayoutAlign="space-between center">
     
-                                            <button type="submit" (click)="addService()" class="add-button mat-accent"
+                                            <button  mat-raised-button color="primary" type="submit" (click)="addService()" class="add-button mat-accent"
                                                 aria-label="add">
                                                 <span>Add</span>
                                             </button>
@@ -603,7 +635,6 @@
                                     </form>
                                 </div>
     
-                                <div>
                                     <!-- WIDGET 1 -->
                                     <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column"
                                         fxFlex="100"
@@ -651,15 +682,13 @@
                                     </fuse-widget>
     
                                     <!-- / WIDGET 1 -->
-                                </div>
-                            </div>
+                                
+                            
     
                         </div>
                         <!-- / WIDGET GROUP -->
     
-                    </mat-tab>
-
-
+                </mat-tab>
 
             </mat-tab-group>
 

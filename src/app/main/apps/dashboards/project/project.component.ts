@@ -67,6 +67,14 @@ export class ProjectDashboardComponent implements OnInit
             phone: [''],
             state: ['']
         });
+
+        this.form3 = this._formBuilder.group({
+            services: [''],
+            amount: [''],
+            services1: [''],
+            amount1: ['']
+        });
+
         this.form4 = this._formBuilder.group({
             idService: [''],
             description4: [''],
@@ -133,7 +141,7 @@ export class ProjectDashboardComponent implements OnInit
             {meeting: {            
                 topic: this.form1.getRawValue().topic,
                 description: this.form1.getRawValue().description1,
-                date: new Date(),
+                date: this.form1.getRawValue().date,
                 assistants: [this.form1.getRawValue().assistants,this.form1.getRawValue().assistants],
                 duration: this.form1.getRawValue().duration,
                 place: this.form1.getRawValue().place,
@@ -190,6 +198,63 @@ export class ProjectDashboardComponent implements OnInit
 
             });      
     }
+
+    addQuote(): void
+    {            
+        console.log("entro por fin");
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];            
+            console.log(cedula);
+            let id1 = "5d1975fddc397631d863fedc";
+            let id2 = "5d34ed1d466f52392414d545";
+            for(var i=0; i<this.services.length; i++){
+                console.log(this.services[i]._id);
+                if(this.services[i].idService == this.form3.getRawValue().service){
+                    id1 = this.services[i]._id;
+                }
+                if(this.services[i].idService == this.form3.getRawValue().service1){
+                    id2 = this.services[i]._id;
+                }
+            }
+            const data = 
+            {quotation: {            
+                offers: [{
+                    services: [
+                        {
+                            _id: id1,
+                            amount: this.form3.getRawValue().amount,
+                        },
+                        {
+                            _id: id2,
+                            amount: this.form3.getRawValue().amount1,
+                        }
+                    ]
+                }]     
+            },
+
+            company: [{
+                name: "Suso",
+                ruc: "17104141484",
+                address: "Sangolqui",
+                phone: "0993848556",
+                mail: "cudiaza@gmail.com"
+            },
+            {
+                name: "Multiservicios Industriales",
+                ruc: "1708467524",
+                address: "Amaguania",
+                phone: "0997097891",
+                mail: "cudiaza@gmail.com"
+            }]
+
+        };
+            
+            this._sales.postCotizacion(cedula, data).subscribe(data => {
+                console.log(data);
+            });
+        });        
+    }
+
 }
 
 
