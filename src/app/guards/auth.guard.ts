@@ -19,12 +19,10 @@ export class AuthGuard implements CanActivate {
             if (recursos.some(e => e.nombre === route.data.roles[0])) {
                 return true;
             } else {
-                this.router.navigate(['/pages/auth/login']);
+                this.router.navigate(['/apps/marketing/ReportCampaing']);
                 return false;
              }
-                
-
-            return true;
+            
         }
 
         // not logged in so redirect to login page with the return url

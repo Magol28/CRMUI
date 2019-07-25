@@ -169,7 +169,7 @@ export const navigation: FuseNavigation[] = [
                         id   : 'Profile',
                         title: 'Profile',
                         type : 'item',
-                        url  : '/apps/security/profiles/new'
+                        url  : '/apps/security/profile/new'
                     }
                 ]
     },
@@ -198,7 +198,53 @@ export const navigation: FuseNavigation[] = [
                         url  : '/apps/security/user/new'
                     }
                 ]
-    }
+    },
+    {
+            
+        id      : 'Marketing',
+        title   : 'Marketing',
+        type    : 'collapsable',
+        icon    : 'lock',
+        badge   : {
+            title: '4',
+            bg   : '#525e8a',
+            fg   : '#FFFFFF'
+        },
+        children: [
+            {
+                id   : 'Telemarketing',
+                title: 'Telemarketing',
+                type : 'item',
+                url  : '/apps/marketing/telemarketing'
+            },
+            {
+                id   : 'Campaing',
+                title: 'Campaing',
+                type : 'item',
+                url  : '/apps/marketing/campaing'
+            },
+            {
+                id   : 'clientCampaing',
+                title: 'Client Campain',
+                type : 'item',
+                url  : '/apps/marketing/clientCampaing'
+            },
+            {
+                id   : 'ReportCampaing',
+                title: 'Report Campaing',
+                type : 'item',
+                url  : '/apps/marketing/ReportCampaing'
+            },
+            {
+                id   : 'stateCampaing',
+                title: 'State Campaing',
+                type : 'item',
+                url  : '/apps/marketing/stateCampaing'
+            }
+
+            
+        ]
+}
         
     
 ];
