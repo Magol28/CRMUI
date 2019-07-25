@@ -1,19 +1,11 @@
-import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import * as shape from 'd3-shape';
-
-import { fuseAnimations } from '@fuse/animations';
-
-import { ProjectDashboardService } from 'app/main/apps/dashboards/project/project.service';
-import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { fuseAnimations } from '@fuse/animations';
 import { SalesService } from '../../scrumboard/services/sales.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-
-const { getSalesById } = SalesService.prototype;
+/* import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
+import { ScrumboardCardDialogComponent } from 'app/main/apps/scrumboard/board/dialogs/card/card.component';  */
 
 @Component({
     selector     : 'project-dashboard',
@@ -24,198 +16,179 @@ const { getSalesById } = SalesService.prototype;
 })
 export class ProjectDashboardComponent implements OnInit
 {
-
-    displayedColumns: string[] = [ 'creation-date', 'num-offers', 'isValid'];
-    dataSource: MatTableDataSource<any>;
-  
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
-    
-    nom : String;
-    projects: any[];
-    selectedProject: any;
-    meetings:any [];
+    form: FormGroup;
+    form1: FormGroup;
+    form2: FormGroup;
+    form3: FormGroup;
+    form4: FormGroup;
 
     tasks=[];
-    meeting=[];
+    meetings=[];
     communications=[];
     quotations=[];
-    
-    dialogRef: any;
-
-    widgets: any;
-    widget5: any = {};
-    widget6: any = {};
-    widget7: any = {};
-    widget8: any = {};
-    widget9: any = {};
-    widget11: any = {};
-
-    dateNow = Date.now();
-
-    @Input()
-    list;
+    services=[];
+    calls=[];
+    mails=[];
 
     /**
      * Constructor
      *
-     * @param {FuseSidebarService} _fuseSidebarService
-     * @param {ProjectDashboardService} _projectDashboardService
+     * @param {FormBuilder} _formBuilder
      */
     constructor(
-        private _fuseSidebarService: FuseSidebarService,
-        private _projectDashboardService: ProjectDashboardService,
-        private router : ActivatedRoute,
-        private router2 : Router,
-        private getSales : SalesService,
-        //private _matDialog: MatDialog
-    )
+        private activateR: ActivatedRoute,
+        private _formBuilder: FormBuilder,
+        private _sales: SalesService
+        )
     {
-        
-
-        /**
-         * Widget 7
-         */
-        this.widget7 = {
-            currentRange: 'T'
-        };
-
-        /**
-         * Widget 8
-         */
-        this.widget8 = {
-            legend       : false,
-            explodeSlices: false,
-            labels       : true,
-            doughnut     : false,
-            gradient     : false,
-            scheme       : {
-                domain: ['#f44336', '#9c27b0', '#03a9f4', '#e91e63', '#ffc107']
-            },
-            onSelect     : (ev) => {
-                console.log(ev);
-            }
-        };
-
-        /**
-         * Widget 9
-         */
-        this.widget9 = {
-            currentRange  : 'TW',
-            xAxis         : false,
-            yAxis         : false,
-            gradient      : false,
-            legend        : false,
-            showXAxisLabel: false,
-            xAxisLabel    : 'Days',
-            showYAxisLabel: false,
-            yAxisLabel    : 'Isues',
-            scheme        : {
-                domain: ['#42BFF7', '#C6ECFD', '#C7B42C', '#AAAAAA']
-            },
-            curve         : shape.curveBasis
-        };
-
-        setInterval(() => {
-            this.dateNow = Date.now();
-        }, 1000);
-
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * On init
-     */
     ngOnInit(): void
     {
-        this.projects = this._projectDashboardService.projects;
-        this.router.params.subscribe(params => {
-            const id = params['id'];
-            this.getSales.getSalesById(id)
-                .subscribe(data => {
-                    alert(data.sale.name);
-                    this.selectedProject = data.sale;
-                    this.widgets = this._projectDashboardService.widgets;
-                });
-                this.getSales.getMeetingsBySale(id).subscribe(data=>{
-                    console.log(data.tasks)
-                   this.meeting=data.tasks;
-                })
-                this.getSales.getCommunicationsBySale(id).subscribe(data=>{
-                    console.log(data.tasks)
-                   this.communications=data.tasks;
-                })
-                this.getSales.getQuotationsBySale(id).subscribe(data=>{
-                    console.log(data)
-                   this.quotations=data;
-                })
+        this.form = this._formBuilder.group({           
+            description: ['']
         });
 
-        /**
-         * Widget 11
-         */
-        this.widget11.onContactsChanged = new BehaviorSubject({});
-        this.widget11.onContactsChanged.next(this.widgets.widget11.table.rows);
-        this.widget11.dataSource = new FilesDataSource(this.widget11);
+        this.form1 = this._formBuilder.group({
+            topic: [''],
+            description1: [''],
+            date: [''],
+            assistants: [''],
+            duration: [''],
+            place: [''],
+            observation: ['']
+        });
 
-        this.router.params.subscribe(data => {
-            this.nom = data['id'];
+        this.form2 = this._formBuilder.group({
+            subject: [''],
+            description2: [''],
+            date2: [''],
+            observation2: [''],
+            phone: [''],
+            state: ['']
+        });
+        this.form4 = this._formBuilder.group({
+            idService: [''],
+            description4: [''],
+            unitValue: ['']
+        });
+        
+
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];
+            this._sales.getTaskBySale(cedula).subscribe(data=>{
+                console.log(data.tasks)
+               this.tasks=data.tasks;
+            })
+            this._sales.getMeetingsBySale(cedula).subscribe(data=>{
+                console.log(data.tasks)
+               this.meetings=data.tasks;
+            })
+            this._sales.getCommunicationsBySale(cedula).subscribe(data=>{
+                console.log(data.tasks)
+               this.communications=data.tasks;
+            })
+            this._sales.getCallsBySale(cedula).subscribe(data=>{
+                console.log(data.communication)
+               this.calls=data.communication;
+            })
+            this._sales.getQuotationsBySale(cedula).subscribe(data=>{
+                console.log(data.quotations)
+               this.quotations=data.quotations;
+            })
+            this._sales.getServices(cedula).subscribe(data=>{
+                console.log(data.services)
+               this.services=data.services;
+            })
+            
         });
     }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-    
+    addTask(): void
+    {            
+        console.log("entro por fin");
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];
+            console.log(cedula);
+            const data = 
+            {task: {            
+                description: this.form.getRawValue().description,
+                realized: true
+            }};
+            
+            this._sales.postTask(cedula, data).subscribe(data => {
+                console.log(data);
 
-    /**
-     * Toggle the sidebar
-     *
-     * @param name
-     */
-    toggleSidebar(name): void
-    {
-        this._fuseSidebarService.getSidebar(name).toggleOpen();
+            });
+        });        
     }
 
-    informacionCard (id: number){
-        this.router2.navigate(['/apps/dashboards/project/info','Silvi']);
-    };
+    addMeeting(): void
+    {            
+        console.log("entro por fin");
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];
+            console.log(cedula);
+            const data = 
+            {meeting: {            
+                topic: this.form1.getRawValue().topic,
+                description: this.form1.getRawValue().description1,
+                date: new Date(),
+                assistants: [this.form1.getRawValue().assistants,this.form1.getRawValue().assistants],
+                duration: this.form1.getRawValue().duration,
+                place: this.form1.getRawValue().place,
+                observation: this.form1.getRawValue().observation
+            }};
+            
+            this._sales.postMeeting(cedula, data).subscribe(data => {
+                console.log(data);
 
-    
-
-}
-
-export class FilesDataSource extends DataSource<any>
-{
-    /**
-     * Constructor
-     *
-     * @param _widget11
-     */
-    constructor(private _widget11)
-    {
-        super();
+            });
+        });        
     }
 
-    /**
-     * Connect function called by the table to retrieve one stream containing the data to render.
-     *
-     * @returns {Observable<any[]>}
-     */
-    connect(): Observable<any[]>
-    {
-        return this._widget11.onContactsChanged;
+    addCall(): void
+    {            
+        console.log("entro por fin");
+        this.activateR.params.subscribe(params => {
+            const cedula = params['id'];
+            console.log(cedula);
+            const data = 
+            {communication: {            
+                subject: this.form2.getRawValue().subject,
+                description: this.form2.getRawValue().description2,
+                date: new Date(),
+                type: "call",
+                place: this.form2.getRawValue().place,
+                observation: this.form2.getRawValue().observation2,
+                call: {
+                    phone: this.form2.getRawValue().phone,
+                    state: this.form2.getRawValue().state
+                }
+            }};
+            
+            this._sales.postCall(cedula, data).subscribe(data => {
+                console.log(data);
+
+            });
+        });        
     }
 
-    /**
-     * Disconnect
-     */
-    disconnect(): void
-    {
+    addService(): void
+    {            
+        console.log("entro por fin");
+            const data = 
+            {service: 
+                {            
+                idService: this.form4.getRawValue().idService,
+                description: this.form4.getRawValue().description4,
+                unitValue: this.form4.getRawValue().unitValue
+            }};
+            
+            this._sales.postService(data).subscribe(data => {
+                console.log(data);
+
+            });      
     }
 }
 
