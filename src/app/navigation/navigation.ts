@@ -23,7 +23,7 @@ export const navigation: FuseNavigation[] = [
                     },
                     {
                         id   : 'project',
-                        title: 'Project',
+                        title: 'Actividades Venta',
                         type : 'item',
                         url  : '/apps/dashboards/project'
                     }
@@ -69,8 +69,10 @@ export const navigation: FuseNavigation[] = [
                 url      : '/apps/file-manager'
             },
             {
+
                 id       : 'Sales',
                 title    : 'Sales',
+              
                 translate: 'NAV.SCRUMBOARD',
                 type     : 'item',
                 icon     : 'assessment',
