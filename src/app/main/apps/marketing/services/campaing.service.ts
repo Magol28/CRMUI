@@ -9,7 +9,7 @@ import { ipOracle, ipProducts } from "../utils";
 export class CampaingService {
     info = localStorage.getItem("user");
     prueba = JSON.parse(this.info);
-    ip = "25.76.59.152";
+    ip = "3.91.68.253";
     public dt;
 
     url =
