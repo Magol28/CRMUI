@@ -80,6 +80,7 @@ export class FileManagerComponent implements OnInit, OnDestroy {
       this.animal = result;
     });
   }
+  
   /**
    * On init
    */

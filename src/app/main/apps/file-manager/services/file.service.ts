@@ -9,9 +9,15 @@ import { Subscription } from 'rxjs';
 export class FileService {
   info = localStorage.getItem('user');
   prueba = (JSON.parse(this.info));
+
+  //ip='25.76.59.152';
+  //ip='192.168.100.8';
+  //ip='54.242.242.56';
   ip='3.91.68.253';
+  port='3001';
+
  
-  url = 'http://'+this.ip+':3001/documentfolder/'+this.prueba.empleado.nombre;
+  url = 'http://'+this.ip+':'+this.port+'/documentfolder/'+this.prueba.empleado.nombre;
   constructor(public http: HttpClient) { }
   public dt;
   public datePipe;
@@ -58,6 +64,9 @@ export class FileService {
         console.log(event);
         if(event.type===HttpEventType.UploadProgress){
           console.log('Upload Progress: '+Math.round(event.loaded/event.total)*100+'%');
+          if(Math.round(event.loaded/event.total)*100==100){
+            window.location.reload();
+          }
         }else if(event.type===HttpEventType.Response){
           console.log(event);
         }
@@ -68,7 +77,7 @@ export class FileService {
 
  obtener():any {
     
-    return this.http.get('http://'+this.ip+':3001/documentfolder/'+this.prueba.empleado.empresa.ruc+'/state/ACT', {reportProgress:true,observe:'events'}).subscribe(
+    return this.http.get('http://'+this.ip+':'+this.port+'/documentfolder/'+this.prueba.empleado.empresa.ruc+'/state/ACT', {reportProgress:true,observe:'events'}).subscribe(
       event=>{
         console.log(event);
         
@@ -82,7 +91,7 @@ export class FileService {
     return new Promise((resolve, reject) => {
 
       const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-      this.http.get('http://'+this.ip+':3001/documentfolderversion/'+version+'/'+this.prueba.empleado.nombre, { headers: header })
+      this.http.get('http://'+this.ip+':'+this.port+'/documentfolderversion/'+version+'/'+this.prueba.empleado.nombre, { headers: header })
           .subscribe((response: any) => {
             console.log('versiones');
               console.log(response.Versions);
@@ -93,7 +102,7 @@ export class FileService {
   }
   eliminar(del:String,statet:string):Promise<any> {
     console.log(del);
-    var url='http://'+this.ip+':3001/documentfolder/remove/'+del+'/state/'+statet;
+    var url='http://'+this.ip+':'+this.port+'/documentfolder/remove/'+del+'/state/'+statet;
     console.log(url);
     return new Promise((resolve, reject) => {
 
@@ -102,6 +111,9 @@ export class FileService {
           .subscribe((response: any) => {
             console.log('versiones');
               console.log(response.Versions);
+              if(response!=[]){
+                window.location.reload();
+              }
               resolve(response);
           }, reject);
   });
@@ -109,7 +121,7 @@ export class FileService {
   }
   fisico(del:String):Promise<any> {
     console.log(del);
-    var url='http://'+this.ip+':3001/documentfolder/'+del+'/'+this.prueba.empleado.nombre;
+    var url='http://'+this.ip+':'+this.port+'/documentfolder/'+del+'/'+this.prueba.empleado.nombre;
     console.log(url);
     return new Promise((resolve, reject) => {
 
@@ -118,6 +130,9 @@ export class FileService {
           .subscribe((response: any) => {
             console.log('versiones');
               console.log(response.Versions);
+              if(response!=[]){
+                window.location.reload();
+              }
               resolve(response);
           }, reject);
   });
@@ -128,7 +143,7 @@ export class FileService {
     console.log(path);
     
     return new Promise((resolve, reject) => {
-      var url='http://'+this.ip+':3001/documentfolder/'+path+'/versionActive/'+id;
+      var url='http://'+this.ip+':'+this.port+'/documentfolder/'+path+'/versionActive/'+id;
       console.log(url);
       const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
       this.http.put(url, { headers: header })
@@ -180,7 +195,7 @@ export class FileService {
       if (i < (Path.length-2))
       auxPath += '/';
   }
-    data.append('PATH_FATHER',auxPath);
+    data.append('PATH_FATHER',PathFather);
     console.log('Nombre del Archivo')
     console.log(nombre)
     console.log('Path del Archivo')
@@ -189,6 +204,9 @@ export class FileService {
       event=>{
         if(event.type===HttpEventType.UploadProgress){
           console.log('Upload Progress: '+Math.round(event.loaded/event.total)*100+'%');
+          if(Math.round(event.loaded/event.total)*100==100){
+            window.location.reload();
+          }
         }else if(event.type===HttpEventType.Response){
           console.log(event);
         }
