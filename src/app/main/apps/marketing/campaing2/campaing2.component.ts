@@ -119,13 +119,11 @@ export class Campaing2Component implements OnInit {
             console.log(this.productsList);
             console.log(this.form.value);
 
-            this._campaing
-                .postCampaing(this.form.value, this.advisorList)
-                .subscribe(data => {
-                    this.flatCampaign = true;
-                    this.flatErrorAge = false;
-                    this.flatErrorBuget = false;
-                });
+            this._campaing.postCampaing(this.form.value).subscribe(data => {
+                this.flatCampaign = true;
+                this.flatErrorAge = false;
+                this.flatErrorBuget = false;
+            });
         }
     }
 }

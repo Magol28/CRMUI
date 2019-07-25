@@ -24,7 +24,7 @@ export class StateCampaingService {
     getEmail(id: String): any {
         console.log(id);
         return this.http.get(
-            ipOracle + "campaign-send-email/?campaign_id" + id
+            ipOracle + "campaign-send-email/?campaign_id=" + id
         );
     }
 
