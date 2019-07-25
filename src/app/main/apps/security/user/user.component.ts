@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Subject } from 'rxjs';
-import { ResourceService } from '../services/resource.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile.service';
 import { EmployeeService } from '../services/employee.service';
@@ -49,9 +48,16 @@ export class UserComponent implements OnInit, OnDestroy {
     });
     this._employee.getAll()
       .subscribe(arg => {
+        const info = localStorage.getItem('user');
+        const prueba = (JSON.parse(info));
+        
         this.empleados = arg;
         arg.forEach(element => {
-          this.employees.push(element.nombre);
+          if (element.empresa.ruc === prueba.empleado.empresa.ruc) {
+            this.employees.push(element.nombre);
+          }
+          
+         
         });
          
       });
@@ -60,6 +66,7 @@ export class UserComponent implements OnInit, OnDestroy {
       .subscribe((arg) => {
         this.perfiles = arg;
         arg.forEach(element => {
+          
           this.profiles.push(element.nombre);
         });
          

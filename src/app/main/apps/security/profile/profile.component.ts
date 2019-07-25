@@ -72,6 +72,17 @@ export class ProfileComponent implements OnInit, OnDestroy
           
           this.resources = erg;
           return;
+        } else {
+          this.falt = false;
+          erg.forEach(item => {
+            this.recursos.push({
+              id: item.id,
+              nombre: item.nombre,
+              isvalid: false
+            });
+          });
+          
+          this.resources = erg;
         }
         this._profile.getByCedula(id).subscribe(arg => {
           this.form.setValue({
@@ -80,13 +91,6 @@ export class ProfileComponent implements OnInit, OnDestroy
           });
 
           this.selectedOptions = arg.recursos;
-          erg.forEach(item => {
-            this.recursos.push({
-              id: item.id,
-              nombre: item.nombre,
-              isvalid: false
-            });
-          });
           
           const x = this.recursos.length;
           console.log(x);

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scr
 import { ScrumboardService } from 'app/main/apps/scrumboard/scrumboard.service';
 import { Card } from 'app/main/apps/scrumboard/card.model';
 import { ScrumboardCardDialogComponent } from 'app/main/apps/scrumboard/board/dialogs/card/card.component';
+
 
 @Component({
     selector     : 'scrumboard-board-list',
@@ -43,7 +44,8 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _scrumboardService: ScrumboardService,
-        private _matDialog: MatDialog
+        private _matDialog: MatDialog,
+        private _goToBoard: Router
     )
     {
         // Set the private defaults
@@ -60,10 +62,10 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         this._scrumboardService.onBoardChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(board => {
-                this.board = board;
-            });
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(board => {
+            this.board = board;
+        });
     }
 
     /**
@@ -151,12 +153,27 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     }
 
     /**
+     * Open card sale
+     *
+     * @param cardId
+     */
+    openCardSale(card): void
+    {
+        this._goToBoard.navigate(['/apps/dashboards/project/info/' + card._id]);
+    }
+
+    /**
      * On drop
      *
      * @param ev
+     * @param card
      */
-    onDrop(ev): void
+    onDrop(ev,card): void
     {
+        console.log(card);
         this._scrumboardService.updateBoard();
     }
 }
+
+
+

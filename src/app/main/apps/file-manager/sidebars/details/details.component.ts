@@ -21,7 +21,10 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     modalRef: BsModalRef;
     dataSource: FilesDataSource | null;
     dataSourceVersion: any | null;
+    operacionSeleccionada: string = '';
     displayedColumns = ['VersionId', 'LastModified','radio'];
+    info = localStorage.getItem('user');
+  prueba = (JSON.parse(this.info));
     
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -52,6 +55,9 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     
         
     }
+    refresh(): void {
+        window.location.reload();
+    }
     /**
      * On init
      */
@@ -63,7 +69,7 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
             .subscribe(selected => {
                 this.selected = selected;
             });
-        
+            
           
     }
     
@@ -78,13 +84,14 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
     async descargar(path:String,nombre:String): Promise<void> {
             var nom:string=''+nombre;
             var aux = path.split('/');
-            var PATH: string = "http://25.76.59.152:3000/documentfolder/";
+            var PATH: string = "http://3.91.68.253:3001/documentfolder/";
             for (var i = 0; i < aux.length; i++) {
                 PATH += aux[i];
                 if (i < (aux.length-1))
                     PATH += '%2F';
             }
-            PATH+='/alex';
+            PATH+='/'+this.prueba.empleado.nombre;
+            console.log(PATH);
             const blob = await this._fileService.descarga(PATH);
             let dataType = blob.type;
             let binaryData = [];
@@ -98,6 +105,20 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
 
         
     }
+    cambiarversion(dato:String){
+        var aux=dato.split('/');
+        dato="";
+        for(var i=0;i<aux.length;i++){
+            dato+=aux[i];
+            if(i<(aux.length-1))
+            dato+='%2F';
+        }
+        
+        this._fileService.cambiarversion(dato,this.operacionSeleccionada);
+        console.log("datos versionado")
+       
+        console.log(this.operacionSeleccionada);
+    }
     async version(dato:String):Promise<void>{
         var aux=dato.split('/');
         dato="";
@@ -110,6 +131,52 @@ export class FileManagerDetailsSidebarComponent implements OnInit, OnDestroy {
         this.dataSourceVersion =await this._fileService.versiones(dato);
         await console.log("datos vrsion")
         await       console.log(this.dataSourceVersion)
+              
+
+    }
+    
+    async eliminar(dato:String):Promise<void>{
+        var aux=dato.split('/');
+        dato="";
+        for(var i=0;i<aux.length;i++){
+            dato+=aux[i];
+            if(i<(aux.length-1))
+            dato+='%2F';
+        }
+        
+        this._fileService.eliminar(dato,'ICT');
+        await console.log("datos eliminados")
+       
+              
+
+    }
+    async restaurar(dato:String):Promise<void>{
+        var aux=dato.split('/');
+        dato="";
+        for(var i=0;i<aux.length;i++){
+            dato+=aux[i];
+            if(i<(aux.length-1))
+            dato+='%2F';
+        }
+        
+        this._fileService.eliminar(dato,'ACT');
+        await console.log("datos eliminados")
+        
+              
+
+    }
+    async fisico(dato:String):Promise<void>{
+        var aux=dato.split('/');
+        dato="";
+        for(var i=0;i<aux.length;i++){
+            dato+=aux[i];
+            if(i<(aux.length-1))
+            dato+='%2F';
+        }
+        
+        this._fileService.fisico(dato);
+        await console.log("datos eliminados")
+       
               
 
     }
