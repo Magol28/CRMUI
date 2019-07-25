@@ -9,7 +9,9 @@ import { ProductService } from '../services/product.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
+  animations   : fuseAnimations,
+  encapsulation: ViewEncapsulation.None
 })
 export class ProductsComponent implements OnInit {
   displayedColumns: string[] = [ 'nombre', 'category', 'description', 'price'];
