@@ -8,7 +8,7 @@ import { HttpClient, HttpParams  } from '@angular/common/http';
 })
 export class ProductService {
  // tslint:disable-next-line:typedef
-  url = 'http://25.64.247.201:5002/api/producto';
+  url = 'http://54.175.94.199:5002/api/producto';
   constructor(private http: HttpClient) { }
  getAll(): any {
    return this.http.get(this.url );

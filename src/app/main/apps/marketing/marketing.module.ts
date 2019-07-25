@@ -38,18 +38,11 @@ import { TeleMarketingIdComponent } from "./tele-marketing-id/tele-marketing-id.
 
 const routes: Routes = [
     {
-        path: "camp/:id",
-        component: CampaingComponent,
-        resolve: {
-            data: EcommerceOrderService
-        }
-    },
-    {
         path: "telemarketing",
         component: TeleMarketingComponent
     },
     {
-        path: "telemarketingDetail/:idClient/:idCampaing/:idAdvisor",
+        path: "telemarketingDetail/:idClient/:idAdvisor/:idCampaing",
         component: TeleMarketingIdComponent
     },
     {

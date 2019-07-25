@@ -8,7 +8,8 @@ import { HttpClient, HttpParams  } from '@angular/common/http';
 export class RegisterService {
 
  // tslint:disable-next-line:typedef
- url = 'http://3.95.152.214:8081/company';
+  url = 'http://3.95.152.214:8081/company';
+// url = 'http://192.168.1.123:8081/company';
  constructor(public http: HttpClient) { }
   post(data): any {
     const headers = new HttpHeaders()

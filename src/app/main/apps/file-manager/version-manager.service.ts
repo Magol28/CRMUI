@@ -80,7 +80,9 @@ export class VersionManagerService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
+
             this._httpClient.get('http://'+ip+':'+port+'/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ICT', { headers: header })
+
                 .subscribe((response: any) => {
                     console.log('entro a la version')
                     console.log(response.Versions);

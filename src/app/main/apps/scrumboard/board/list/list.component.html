@@ -2,13 +2,9 @@
 
     <!-- LIST HEADER -->
     <div class="list-header" fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-
-        <scrumboard-board-edit-list-name
-            fxFlex="1 0 auto"
-            [list]="list"
-            (listNameChanged)="onListNameChanged($event)">
-        </scrumboard-board-edit-list-name>
-
+        <div>
+            <h2>{{list[0].phase}}</h2>
+        </div>
         <div fxFlex="0 1 auto">
             <button mat-icon-button class="list-header-option-button" [matMenuTriggerFor]="listMenu">
                 <mat-icon>more_vert</mat-icon>
@@ -23,16 +19,15 @@
 
     <!-- LIST CONTENT -->
     <div class="list-content" fxLayout="column">
-
         <div class="list-cards ngx-dnd-container"
-             [model]="list.idCards" ngxDroppable="card" (out)="onDrop($event)"
+             [model]="list.sales" ngxDroppable="card" (out)="onDrop($event)"
              fusePerfectScrollbar #listScroll>
             <scrumboard-board-card ngxDraggable
-                                   (click)="openCardDialog(cardId)"
+                                   (click)="openCardSale(card)"
                                    class="scrumboard-board-card ngx-dnd-item"
-                                   *ngFor="let cardId of list.idCards"
-                                   [model]="cardId"
-                                   [cardId]="cardId">
+                                   *ngFor="let card of list"
+                                   [model]="card"
+                                   [cardId]="card">
             </scrumboard-board-card>
         </div>
     </div>

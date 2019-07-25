@@ -12,9 +12,17 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = localStorage.getItem('user');
         if (currentUser) {
-            console.log(route.data);
-
-            return true;
+            const prueba = (JSON.parse(currentUser));
+            const recursos = prueba.perfil.recursos;
+            console.log(recursos);
+            console.log(route.data.roles);
+            if (recursos.some(e => e.nombre === route.data.roles[0])) {
+                return true;
+            } else {
+                this.router.navigate(['/apps/marketing/ReportCampaing']);
+                return false;
+             }
+            
         }
 
         // not logged in so redirect to login page with the return url

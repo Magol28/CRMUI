@@ -9,10 +9,12 @@ import { Subscription } from 'rxjs';
 export class FileService {
   info = localStorage.getItem('user');
   prueba = (JSON.parse(this.info));
+
   ip='25.76.59.152';
   //ip='192.168.100.8';
   //ip='54.242.242.56';
   port='3000';
+
  
   url = 'http://'+this.ip+':'+this.port+'/documentfolder/'+this.prueba.empleado.nombre;
   constructor(public http: HttpClient) { }

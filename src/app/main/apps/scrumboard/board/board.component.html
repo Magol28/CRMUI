@@ -9,15 +9,17 @@
                 [@animate]="{value:'*',params:{x:'50px'}}">Bienvenido, {{nombreUsuario}}  !
             </span>
 
+
             <div class="header-content" fxLayout="row wrap" fxLayoutAlign="space-between" fxFlex="1 0 auto">
 
                 <!-- BOARD SELECTION BUTTON -->
                 <div fxLayout="row" fxLayoutAlign="center center" fxFlexOrder="2" fxFlexOrder.gt-xs="1">
                     <button mat-raised-button class="header-boards-button"
                             [ngClass]="board.settings.color+'-800'"
-                            routerLink="/apps/scrumboard/boards"
+                            routerLink="/apps/scrumboard/dialogs/card"
                             aria-label="boards button">
-                        <mat-icon class="mr-8">assessment</mat-icon>
+                            <mat-icon class="mr-8">assessment</mat-icon>
+                            
                         <span>BOARDS</span>
                     </button>
                 </div>
@@ -58,14 +60,13 @@
 
             <!-- BOARD -->
             <div class="board-content ngx-dnd-container p-16 p-md-24" fxLayout="row"
-                 ngxDroppable="list" [model]="board.lists" (out)="onDrop($event)"
+                 ngxDroppable="list" [model]="sales" (out)="onDrop($event)"
                  [@animateStagger]="{value:'50'}">
-
                 <!-- LIST -->
                 <scrumboard-board-list
                     class="scrumboard-board-list list-wrapper ngx-dnd-item"
                     ngxDraggable
-                    *ngFor="let list of board.lists"
+                    *ngFor="let list of sales"
                     [model]="list"
                     [list]="list"
                     [@animate]="{value:'*',params:{duration:'350ms',x:'100%'}}">

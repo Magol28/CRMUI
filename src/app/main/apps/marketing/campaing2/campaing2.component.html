@@ -29,7 +29,7 @@
         <div class="content">
           <mat-tab-group fxLayout="column" fxFlex>
 
-            <mat-tab label="Order Details">
+            <mat-tab label="Campaign Creation">
 
               <div class="order-details tab-content p-24" fusePerfectScrollbar>
 
@@ -73,10 +73,19 @@
 
                       <div fxFlex fxLayout="column">
                         <div fxLayout="row" fxLayoutAlign="space-between">
+                          <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                            <mat-label>Budget</mat-label>
+                            <input type="number" matInput formControlName="budgetCampa" required>
+                            <mat-icon matSuffix class="secondary-text">drag_handle</mat-icon>
+                            <mat-error>Budget is required!</mat-error>
+                          </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="space-between">
                           <mat-form-field class="example-full-width" appearance="outline" floatLabel="always"
                             fxFlex="40">
 
-                            <mat-label>Age</mat-label>
+                            <mat-label>Minimum Age</mat-label>
                             <input type="number" formControlName="ageStart" matInput placeholder="">
                             <mat-icon matSuffix class="secondary-text">drag_handle
                             </mat-icon>
@@ -85,7 +94,7 @@
 
                           <mat-form-field class="example-full-width" appearance="outline" floatLabel="always"
                             fxFlex="40">
-                            <mat-label>Age</mat-label>
+                            <mat-label>Maximun Age</mat-label>
                             <input type="number" formControlName="ageEnd" matInput placeholder="">
                             <mat-icon matSuffix class="secondary-text">drag_handle
                             </mat-icon>
@@ -98,20 +107,20 @@
                           <mat-form-field class="example-full-width" appearance="outline" floatLabel="always"
                             fxFlex="40">
 
-                            <mat-label>Buget</mat-label>
+                            <mat-label>Lower Salary</mat-label>
                             <input type="number" formControlName="bugetStart" matInput placeholder="">
                             <mat-icon matSuffix class="secondary-text">drag_handle
                             </mat-icon>
-                            <mat-error>Age is required!</mat-error>
+                            <mat-error>Salary is required!</mat-error>
                           </mat-form-field>
 
                           <mat-form-field class="example-full-width" appearance="outline" floatLabel="always"
                             fxFlex="40">
-                            <mat-label>Buget</mat-label>
+                            <mat-label>Maximun Salary</mat-label>
                             <input type="number" formControlName="bugetEnd" matInput placeholder="">
                             <mat-icon matSuffix class="secondary-text">drag_handle
                             </mat-icon>
-                            <mat-error>Buget is required!</mat-error>
+                            <mat-error>Salary is required!</mat-error>
                           </mat-form-field>
                         </div>
 
@@ -119,9 +128,9 @@
                           <section class="example-section">
                             <label class="example-margin">Gender:</label>
                             <mat-radio-group formControlName="rdGender">
-                              <mat-radio-button class="example-margin" value=1>Female
+                              <mat-radio-button class="example-margin" value="F">Female
                               </mat-radio-button>
-                              <mat-radio-button class="example-margin" value=2>Male
+                              <mat-radio-button class="example-margin" value="M">Male
                               </mat-radio-button>
                             </mat-radio-group>
                           </section>
@@ -129,8 +138,8 @@
                         </div>
                         <div fxLayout="row" fxLayoutAlign="space-between">
                           <mat-form-field>
-                            <mat-label>Toppings</mat-label>
-                            <mat-select multiple>
+                            <mat-label>Location</mat-label>
+                            <mat-select formControlName="location">
                               <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
                             </mat-select>
                           </mat-form-field>
@@ -143,28 +152,69 @@
                     <mat-expansion-panel>
 
                       <mat-expansion-panel-header>
-                        <mat-panel-title>Model Campaign</mat-panel-title>
+                        <mat-panel-title>Stage Campaign</mat-panel-title>
                       </mat-expansion-panel-header>
+                      <div fxFlex fxLayout="column">
+                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="pl-4">
+                          <mat-form-field>
+                            <mat-label class="h1">Stage</mat-label>
+                            <mat-select formControlName="stage">
+                              <mat-option value="S">Start</mat-option>
+                              <mat-option value="ST">Stopped</mat-option>
+                              <mat-option value="R">Removed</mat-option>
+                              <mat-option value="C">Completed</mat-option>
+                              <mat-option value="P">Pending</mat-option>
+                              <mat-option value="LB">Limited by budget</mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix class="secondary-text">comment</mat-icon>
+                          </mat-form-field>
+                        </div>
 
-                      <div fxLayout="row" fxLayoutAlign="space-between">
-                        <mat-form-field>
-                          <mat-label>Advisor</mat-label>
-                          <mat-select multiple>
-                            <mat-option *ngFor="let advisor of advisorList" [value]="advisor.id">{{advisor.user_name}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                          <mat-form-field>
+                            <mat-label>Advisor</mat-label>
+                            <mat-select multiple formControlName="advisor">
+                              <mat-option *ngFor="let advisor of advisorList" [value]="advisor.id">{{advisor.user_name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
 
-                      <div fxLayout="row" fxLayoutAlign="space-between">
-                        <mat-form-field>
-                          <mat-label>Products</mat-label>
-                          <mat-select multiple>
-                            <mat-option *ngFor="let product of productsList" [value]="product.cod_producto">
-                              {{product.nombre}}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="space-between">
+                          <mat-form-field>
+                            <mat-label>Products</mat-label>
+                            <mat-select multiple formControlName="products">
+                              <mat-option *ngFor="let product of productsList" [value]="product.cod_producto">
+                                {{product.nombre}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="pl-4">
+                          <mat-form-field>
+                            <mat-label class="h1">campaign files</mat-label>
+                            <mat-select formControlName="filesCampaign">
+                              <mat-option
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampVacaciones.html/Alex%20Mejia">
+                                Holiday Campaigns</mat-option>
+                              <mat-option
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampFiesta.html/Alex%20Mejia">
+                                Party Campaign</mat-option>
+                              <mat-option
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampMaquillaje.html/Alex%20Mejia">
+                                Makeup Campaign</mat-option>
+                              <mat-option
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampVentas.html/Alex%20Mejia">
+                                Sale Campaign</mat-option>
+                              <mat-option
+                                value="documentfolder/1102096321001%2FNuevo%2FCampania%2FcampEducation.html/Alex%20Mejia">
+                                Education Campaign</mat-option>
+
+                            </mat-select>
+                            <mat-icon matSuffix class="secondary-text">insert_drive_file</mat-icon>
+                          </mat-form-field>
+                        </div>
                       </div>
                     </mat-expansion-panel>
 
@@ -177,6 +227,19 @@
                         [disabled]="form.invalid"> Create
                         Campaing</button>
                     </div>
+                  </mat-accordion>
+
+                  <mat-accordion>
+                    <div *ngIf="flatCampaign" class="message-box success">
+                      Correct data, Campaign created!
+                    </div>
+                    <div *ngIf="flatErrorAge" class="message-box success">
+                      Error exceeds the age limit!
+                    </div>
+                    <div *ngIf="flatErrorBuget" class="message-box success">
+                      Error exceeds the limit in Budget!
+                    </div>
+
                   </mat-accordion>
 
                 </div>

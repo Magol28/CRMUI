@@ -55,8 +55,7 @@ export class RegisterComponent implements OnInit, OnDestroy
             razonSocial: ['', Validators.required],
             direccion: ['', Validators.required],
             telefono           : ['', Validators.required],
-            email          : ['', [Validators.required]],
-            password       : ['', Validators.required],
+            email          : ['', [Validators.required]]
         });
     }
 
@@ -79,7 +78,7 @@ export class RegisterComponent implements OnInit, OnDestroy
         };
         console.log(objeto);
         this._register.post(objeto).subscribe(error => {
-            
+            alert('successful');
         });
     }
 }

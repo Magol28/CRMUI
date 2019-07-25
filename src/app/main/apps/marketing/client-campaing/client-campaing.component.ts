@@ -38,7 +38,8 @@ export class ClientCampaingComponent implements OnInit {
     firstFormGroup: FormGroup;
     secondFormGroup: FormGroup;
     resources: any[];
-
+    flatError: boolean;
+    flatTable: boolean;
     campaignList = [];
     selected = "";
     opcionSeleccionado: string = "S";
@@ -64,6 +65,8 @@ export class ClientCampaingComponent implements OnInit {
 
     // tslint:disable-next-line:typedef
     ngOnInit() {
+        this.flatError = false;
+        this.flatTable = false;
         this.form = this._formBuilder.group({
             campaing: ["", Validators.required]
         });
@@ -79,6 +82,12 @@ export class ClientCampaingComponent implements OnInit {
     }
     search(): void {
         this._employee.getAll(this.form.value.campaing).subscribe(data => {
+            if (data.length == 0) {
+                this.flatError = true;
+                this.flatTable = false;
+            } else {
+                this.flatTable = true;
+            }
             console.log(data);
             for (let i = 0; i < data.length; i++) {
                 if (data[i].gender === "M" || data[i].gender === "m") {

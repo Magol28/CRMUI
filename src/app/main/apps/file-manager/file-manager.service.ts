@@ -62,6 +62,7 @@ export class FileManagerService implements Resolve<any>
 
             const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
             this._httpClient.get('http://'+ip+':'+port+'/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ACT', { headers: header })
+
                 .subscribe((response: any) => {
                     this.onFilesChanged.next(response.Items);
                     this.onFileSelected.next(response.Items[0]);

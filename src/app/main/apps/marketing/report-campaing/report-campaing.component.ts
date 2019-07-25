@@ -37,6 +37,8 @@ export class ReportCampaingComponent implements OnInit {
     public barChartDataLocation: ChartDataSets[] = [
         { data: [], label: "Campains" }
     ];
+    flatErrorLocation: boolean = false;
+    flatErrorClient: boolean = false;
 
     constructor(private _campaing: ReportService, private router: Router) {
         this._campaing.getClient().subscribe(data => {
@@ -45,25 +47,45 @@ export class ReportCampaingComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._campaing.getClient().subscribe(data => {
-            console.log(data);
-            let dataCliente = [];
-            for (let i = 0; i < data.length; i++) {
-                dataCliente.push(data[i].total_campaigns);
-                this.barChartLabels.push(data[i].full_name);
+        this._campaing.getClient().subscribe(
+            data => {
+                console.log(data);
+                let dataCliente = [];
+                if (data.length == 0) {
+                    this.flatErrorClient = true;
+                } else {
+                    this.flatErrorClient = false;
+                }
+                for (let i = 0; i < data.length; i++) {
+                    dataCliente.push(data[i].total_campaigns);
+                    this.barChartLabels.push(data[i].name);
+                }
+                this.barChartData[0].data = dataCliente;
+            },
+            error => {
+                this.flatErrorClient = true;
             }
-            this.barChartData[0].data = dataCliente;
-        });
+        );
 
-        this._campaing.getLocation().subscribe(data => {
-            console.log(data);
-            let dataPronvice = [];
-            for (let i = 0; i < data.length; i++) {
-                dataPronvice.push(data[i].ammount);
-                this.barChartLabelsLocation.push(data[i].province);
+        this._campaing.getLocation().subscribe(
+            data => {
+                console.log(data);
+                if (data.length == 0) {
+                    this.flatErrorLocation = true;
+                } else {
+                    this.flatErrorLocation = false;
+                }
+                let dataPronvice = [];
+                for (let i = 0; i < data.length; i++) {
+                    dataPronvice.push(data[i].ammount);
+                    this.barChartLabelsLocation.push(data[i].province);
+                }
+                this.barChartDataLocation[0].data = dataPronvice;
+            },
+            error => {
+                this.flatErrorLocation = true;
             }
-            this.barChartDataLocation[0].data = dataPronvice;
-        });
+        );
     }
 
     public chartClicked({

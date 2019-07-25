@@ -103,3 +103,16 @@
 tr.example-element-row:not(.example-expanded-row):hover {
     background: #777;
 }
+
+select {
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    font-size: 20px
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+    padding: 7px;
+}
