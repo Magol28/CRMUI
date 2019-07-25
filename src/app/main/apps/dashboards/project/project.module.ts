@@ -16,6 +16,7 @@ import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 
 import { ProjectDashboardComponent } from 'app/main/apps/dashboards/project/project.component';
 import { ProjectDashboardService } from 'app/main/apps/dashboards/project/project.service';
+import { MatInputModule } from '@angular/material';
 
 const routes: Routes = [
     {
@@ -47,7 +48,8 @@ const routes: Routes = [
 
         FuseSharedModule,
         FuseSidebarModule,
-        FuseWidgetModule
+        FuseWidgetModule,
+        MatInputModule
     ],
     providers   : [
         ProjectDashboardService

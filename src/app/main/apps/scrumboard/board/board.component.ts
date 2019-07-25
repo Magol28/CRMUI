@@ -25,7 +25,7 @@ import { List } from 'app/main/apps/scrumboard/list.model';
 export class ScrumboardBoardComponent implements OnInit, OnDestroy
 {
     board: any;
-    nombreUsuario = "Selena";
+    nombreUsuario = "Cristina";
     sales: any;
     sale: any;
     dialogRef: any;
@@ -34,11 +34,9 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
     @Input()
     list;
 
+    cedula= "1726781584";
     // Private
     private _unsubscribeAll: Subject<any>;
-    info = localStorage.getItem('user');
-    prueba = (JSON.parse(this.info));
-        
 
     constructor(
         private _activatedRoute: ActivatedRoute,
@@ -62,8 +60,7 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        
-        this._getSalesBySeller.getSalesBySeller("1726781584")
+        this._getSalesBySeller.getSalesBySeller(this.cedula)
         .subscribe( respuesta =>{               
             this.sales = filterSales(respuesta.foundSales);
             console.log(respuesta.foundSales);
@@ -74,9 +71,9 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
             .subscribe(board => {
                 this.board = board;
                 this.board.lists[0].name = "Habilitado para la venta";
-                this.board.lists[1].name = "Negociación";
+                this.board.lists[1].name = "Negociacion";
                 this.board.lists[2].name = "Acuerdo";
-                this.board.lists[3].name = "Listo para Venta";
+                this.board.lists[3].name = "Listo para venta";
                 this.board.lists[4].name = "Cerrado";  
             });
 
@@ -129,8 +126,9 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
      *
      * @param ev
      */
-    onDrop(ev): void
+    onDrop(ev, card): void
     {
+        console.log(card);
         this._scrumboardService.updateBoard();
     }
 
@@ -157,9 +155,9 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
 
 const phases = [
     "Habilitado para la venta",  
-    "Negociación",        
+    "Negociacion",        
     "Acuerdo",
-    "Listo para Venta",                 
+    "Listo para venta",                 
     "Cerrado",
 ]
 const filterSalsesByPhase = (sale,phase) => sale.phase === phase;
