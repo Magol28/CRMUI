@@ -508,14 +508,15 @@
                                             aria-label="Flip widget">
                                             <mat-icon class="s-16">close</mat-icon>
                                         </button>
-
+                                        <div>
+                                            Subject: {{call.subject}}
+                                        </div>
                                         <div>
                                             Description: {{call.description}}
                                         </div>
                                         <div>
                                             Observation: {{call.observation}}
                                         </div>
-
                                     </div>
                                     <!-- / Back -->
 
@@ -611,9 +612,6 @@
                                         <div>
                                             Date: {{mail.date}}
                                         </div>
-                                        <div>
-                                            To: {{mail.to}}
-                                        </div>
 
                                     </div>
                                     <!-- / Back -->
@@ -634,7 +632,7 @@
                     <div class="widget-group p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom
                         [@animateStagger]="{value:'50'}">
 
-                            <div style="width: 75%">
+                            <div style="width: 100%">
                                 <form [formGroup]="form3" name="form3" class="add-card-form" fxLayout="column">
                                     <mat-form-field fxFlex floatLabel="never">
                                         <input #nameInput matInput formControlName="service" placeholder="service"
@@ -696,10 +694,7 @@
                                         </button>
 
                                         <div>
-                                            Description: {{call.description}}
-                                        </div>
-                                        <div>
-                                            Observation: {{call.observation}}
+                                            Description: {{quote.description}}
                                         </div>
 
                                     </div>

@@ -155,7 +155,7 @@ export class ProjectDashboardComponent implements OnInit
                 topic: this.form1.getRawValue().topic,
                 description: this.form1.getRawValue().description1,
                 date: this.form1.getRawValue().date,
-                assistants: [this.form1.getRawValue().assistants,this.form1.getRawValue().assistants],
+                assistants: [this.form1.getRawValue().assistants],
                 duration: this.form1.getRawValue().duration,
                 place: this.form1.getRawValue().place,
                 observation: this.form1.getRawValue().observation
@@ -269,7 +269,8 @@ export class ProjectDashboardComponent implements OnInit
                             amount: this.form3.getRawValue().amount1,
                         }
                     ]
-                }]     
+                }],
+                description: "cotizacion"     
             },
 
             company: [{
@@ -284,7 +285,7 @@ export class ProjectDashboardComponent implements OnInit
                 ruc: "1708467524",
                 address: "Amaguania",
                 phone: "0997097891",
-                mail: "cudiaza@gmail.com"
+                mail: "marcelo96mh@hotmail.com"
             }]
 
         };
