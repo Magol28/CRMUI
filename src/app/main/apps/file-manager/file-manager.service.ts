@@ -54,10 +54,15 @@ export class FileManagerService implements Resolve<any>
     getFiles(aux:String): Promise<any> {
         var info = localStorage.getItem('user');
         var prueba = (JSON.parse(info));
+        var ip='25.76.59.152';
+        //var ip='192.168.100.8';
+        //var ip='54.242.242.56';
+        var port='3000';
         return new Promise((resolve, reject) => {
 
             const header = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', dataType: 'jsonp' });
-            this._httpClient.get('http://3.91.68.253:3001/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ACT', { headers: header })
+            this._httpClient.get('http://'+ip+':'+port+'/documentfolder/'+prueba.empleado.empresa.ruc+'/state/ACT', { headers: header })
+
                 .subscribe((response: any) => {
                     this.onFilesChanged.next(response.Items);
                     this.onFileSelected.next(response.Items[0]);
